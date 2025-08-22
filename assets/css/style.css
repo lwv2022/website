@@ -1,5 +1,5 @@
 :root{
-  --bg:#ffffff; --text:#1e293b; --muted:#64748b; --accent:#00b4a6; --accent-ink:#ffffff; 
+  --bg:#ffffff; --text:#1e293b; --muted:#64748b; --accent:#22b9e8; --accent-ink:#ffffff; 
   --card:#f8fafc; --border:#e2e8f0; --shadow:0 8px 24px rgba(2,6,23,.08);
 }
 
@@ -31,7 +31,7 @@ a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
 .pricing .tier{padding:22px;border-radius:16px;border:1px solid var(--border);background:#fff;box-shadow:var(--shadow)}
 .tier h3{margin:.2rem 0}
 .tier .price{font-size:28px;font-weight:800}
-.badge{display:inline-block;padding:4px 10px;border-radius:999px;background:#e6f7f5;color:#00695c;font-size:12px;font-weight:700}
+.badge{display:inline-block;padding:4px 10px;border-radius:999px;background:#e6f7ff;color:#1565c0;font-size:12px;font-weight:700}
 .list{margin:10px 0 0;padding:0 0 0 18px}
 .notice{font-size:14px;color:var(--muted)}
 .form{display:grid;gap:14px;max-width:560px}
