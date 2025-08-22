@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Contact — Legacy West Ventures</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+<header class="header">
+  <div class="container nav">
+    <a class="logo" href="/">Legacy West Ventures</a>
+    <ul>
+      <li><a href="/iot-connectivity.html">IoT Connectivity</a></li>
+      <li><a class="btn" href="#contact">Request a Quote</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="contact" class="section">
+  <div class="container">
+    <span class="kicker">Contact</span>
+    <h1 class="h2">Ready to connect your systems?</h1>
+    <p class="muted">Tell us about your project. We'll respond with the best package for your needs.</p>
+
+    <!-- Option A: Formspree (replace YOUR_FORM_ID) -->
+    <form class="form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <input name="name" placeholder="Your name" required>
+      <input name="company" placeholder="Company" required>
+      <input name="email" type="email" placeholder="Email" required>
+      <input name="phone" placeholder="Phone">
+      <textarea name="needs" rows="5" placeholder="Project needs (sites, devices, timelines)"></textarea>
+      <button class="btn" type="submit">Send</button>
+    </form>
+
+    <p class="notice">Prefer email? Write us at <a href="mailto:sales@legacywestventures.com">sales@legacywestventures.com</a>.</p>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">© <span id="y"></span> Legacy West Ventures</div>
+</footer>
+<script>document.getElementById('y').textContent = new Date().getFullYear()</script>
+</body>
+</html>
