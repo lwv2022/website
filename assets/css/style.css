@@ -21,6 +21,7 @@ a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
 .hero p.lead{font-size:20px;color:var(--muted);max-width:720px}
 .grid{display:grid;gap:20px}
 .cards-3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.cards-4{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
 .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;box-shadow:var(--shadow)}
 .section{padding:48px 0}
 .kicker{color:var(--accent);font-weight:700;font-size:12px;letter-spacing:.16em;text-transform:uppercase}
