@@ -31,7 +31,7 @@ We deliver turnkey IoT networking — enterprise‑grade LTE gateway, secure con
 
 **Setup fee:** $65 per modem/line. Hardware priced separately. Shipping and taxes not included.
 
-**Modem leasing option:** Add $20-$30/mo to lease hardware as part of your service plan. After 1-year term, monthly rate drops by the leasing amount.
+**Modem financing option:** Add $20-$30/mo to subsidize hardware cost into your service plan. After 1-year term, monthly rate drops by the subsidy amount.
 
 ---
 
