@@ -20,6 +20,7 @@ a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
 .hero h1{font-size:44px;line-height:1.1;margin:0 0 12px}
 .hero p.lead{font-size:20px;color:var(--muted);max-width:720px}
 .grid{display:grid;gap:20px}
+.cards-2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
 .cards-3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
 .cards-4{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
 .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;box-shadow:var(--shadow)}
