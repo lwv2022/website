@@ -56,7 +56,7 @@ Legacy West Ventures provides IoT connectivity, smart building automation, wirel
 
 ### Key Service Areas
 1. **IoT Solutions**: Smart building automation, industrial IoT, connectivity services
-2. **Lighting Controls**: Daintree/Current, Enlighted, TruBlu & Silvair platforms
+2. **Lighting Controls**: Daintree/Current, mwLink (TruBlu/Casambi), Bluetooth mesh platforms
 3. **Custom Software**: Dashboards, APIs, OpenADR implementation  
 4. **Agriculture**: Greenhouse automation, climate control, fertigation systems
 
