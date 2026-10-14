@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="../assets/css/style.css">
 <script defer src="../assets/js/main.js"></script>
 <style>
-  .hero-solution { background: linear-gradient(135deg, #14532d 0%, #166534 100%); color: #fff; padding: 80px 0; }
+  .hero-solution { background: linear-gradient(100deg, rgba(20,83,45,.92) 0%, rgba(22,101,52,.72) 60%, rgba(20,83,45,.45) 100%), url(../images/grow/greenhouse-lettuce.jpg) center/cover no-repeat; color: #fff; padding: 96px 0; }
   .hero-solution .kicker { color: #86efac; }
   .hero-solution h1 { font-size: 48px; line-height: 1.1; margin: 0 0 20px; }
   .hero-solution .lead { font-size: 20px; color: rgba(255,255,255,0.85); max-width: 640px; }
@@ -59,6 +59,10 @@
   .spot ul { margin: 0 0 24px; padding-left: 20px; color: rgba(255,255,255,0.9); }
   .spot ul li { margin-bottom: 8px; }
   .spot .btn { background: #fff; color: #0f172a; align-self: flex-start; margin-top: auto; }
+  .photo-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); }
+  .photo-card img { width: 100%; height: 200px; object-fit: cover; display: block; }
+  .photo-card .body { padding: 20px 24px 24px; }
+  .photo-card h3 { margin: 0 0 8px; font-size: 18px; }
 </style>
 </head>
 <body>
@@ -74,7 +78,6 @@
       <li><a href="./robotics.html">Robotics</a></li>
       <li><a href="../iot-sensors.html">Sensors</a></li>
       <li><a href="../iot-connectivity.html">Connectivity</a></li>
-      <li><a href="../contact.html">Contact</a></li>
       <li><a class="btn" href="../contact.html">Get Started</a></li>
     </ul>
   </nav>
@@ -284,17 +287,20 @@
       <h2 class="h2">Purpose-Built for How You Grow</h2>
       
       <div class="grid cards-3" style="margin-top: 32px;">
-        <div class="card">
-          <h3>🌿 Indoor Vertical Farms</h3>
-          <p class="muted">Multi-tier rack automation with zone-level control. LED integration, airflow management, and high-density sensor networks.</p>
+        <div class="photo-card">
+          <img src="../images/grow/vertical-farm-racks.jpg" alt="Vertical farm racks of leafy greens under LED grow lights" loading="lazy">
+          <div class="body"><h3>🌿 Indoor Vertical Farms</h3>
+          <p class="muted" style="margin:0">Multi-tier rack automation with room-level control. LED dimming, airflow management and wired sensors on every level.</p></div>
         </div>
-        <div class="card">
-          <h3>🏠 Greenhouses</h3>
-          <p class="muted">Roof vent control, shade cloth automation, evaporative cooling, and supplemental lighting. Integration with existing structures.</p>
+        <div class="photo-card">
+          <img src="../images/grow/greenhouse-lettuce.jpg" alt="Greenhouse with long rows of lettuce" loading="lazy">
+          <div class="body"><h3>🏠 Greenhouses</h3>
+          <p class="muted" style="margin:0">Ventilation, cooling, dehumidification and supplemental lighting on sensor rules, with weather alongside the room data.</p></div>
         </div>
-        <div class="card">
-          <h3>🌱 Propagation & Clone Rooms</h3>
-          <p class="muted">Tight environmental control for sensitive starts. Misting schedules, dome humidity, and transition staging.</p>
+        <div class="photo-card">
+          <img src="../images/grow/rack-seedlings.jpg" alt="Indoor grow rack with seedlings under white LED lighting" loading="lazy">
+          <div class="body"><h3>🌱 Pods, Containers &amp; Clone Rooms</h3>
+          <p class="muted" style="margin:0">Tight day and night targets for sensitive starts and self-contained pods. One GCU per room, mini-split HVAC driven directly.</p></div>
         </div>
       </div>
     </div>
