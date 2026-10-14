@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>GCU Cloud — Grow Room Monitoring and Control from Anywhere — Legacy West Ventures</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="GCU Cloud connects to every Greenhouse Control Unit so you can watch, adjust and keep records for your grow rooms from a phone or computer. Grow programs, email alerts, crop photos and nightly AI Insights, hosted by Legacy West Ventures.">
+<link rel="canonical" href="https://www.legacywestventures.com/solutions/gcu-cloud.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Legacy West Ventures">
+<meta property="og:title" content="GCU Cloud — Grow Room Monitoring and Control from Anywhere">
+<meta property="og:description" content="Watch, adjust and keep records for your grow rooms from a phone or computer. Grow programs, email alerts, crop photos and nightly AI Insights.">
+<meta property="og:url" content="https://www.legacywestventures.com/solutions/gcu-cloud.html">
+<meta property="og:image" content="https://www.legacywestventures.com/images/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon.png">
+<link rel="shortcut icon" href="../favicon.png">
+
+<link rel="stylesheet" href="../assets/css/style.css">
+<script defer src="../assets/js/main.js"></script>
+<style>
+  .hero-solution { background: linear-gradient(135deg, #0c4a6e 0%, #0284c7 100%); color: #fff; padding: 80px 0; }
+  .hero-solution .kicker { color: #bae6fd; }
+  .hero-solution h1 { font-size: 48px; line-height: 1.1; margin: 0 0 20px; }
+  .hero-solution .lead { font-size: 20px; color: rgba(255,255,255,0.88); max-width: 640px; }
+  .hero-solution .btn.ghost { color: #fff; border-color: rgba(255,255,255,0.4); }
+  .hero-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: center; }
+  @media(max-width:860px) { .hero-grid { grid-template-columns: 1fr; } }
+  .stats-row { display: flex; gap: 32px 40px; margin-top: 36px; flex-wrap: wrap; }
+  .stat { text-align: left; }
+  .stat-number { font-size: 48px; font-weight: 800; color: #bae6fd; }
+  .stat-label { font-size: 14px; color: rgba(255,255,255,0.75); }
+
+  /* Illustrative phone card */
+  .phone { background: #0f172a; border-radius: 28px; padding: 14px; box-shadow: 0 24px 48px rgba(2,6,23,.35); max-width: 320px; margin: 0 auto; }
+  .screen { background: #fff; color: #0f172a; border-radius: 18px; padding: 16px; }
+  .screen .site { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+  .screen .room { display: flex; justify-content: space-between; align-items: center; margin: 8px 0 12px; font-weight: 700; }
+  .screen .ok { font-size: 11px; font-weight: 700; color: #0369a1; background: #e0f2fe; padding: 3px 10px; border-radius: 999px; }
+  .screen .warn { font-size: 11px; font-weight: 700; color: #92400e; background: #fef3c7; padding: 3px 10px; border-radius: 999px; }
+  .screen .tiles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .screen .tile { background: #f8fafc; border: 1px solid var(--border); border-radius: 10px; padding: 10px; }
+  .screen .tile .v { font-size: 20px; font-weight: 800; line-height: 1.1; }
+  .screen .tile .l { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+  .screen .tile svg { width: 100%; height: 20px; margin-top: 6px; }
+  .screen .alert { margin-top: 12px; background: #fef3c7; border: 1px solid #fcd34d; border-radius: 10px; padding: 10px; font-size: 12px; color: #78350f; }
+  .screen .ctl { display: flex; gap: 6px; margin-top: 12px; }
+  .screen .ctl span { flex: 1; text-align: center; font-size: 12px; font-weight: 700; padding: 8px 0; border-radius: 8px; border: 1px solid var(--border); color: var(--muted); }
+  .screen .ctl span.on { background: #0284c7; color: #fff; border-color: #0284c7; }
+  .mock-note { font-size: 12px; color: rgba(255,255,255,0.7); margin-top: 10px; text-align: center; }
+
+  .solution-section { padding: 64px 0; }
+  .solution-section:nth-child(even) { background: #f8fafc; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+  @media(max-width:768px) { .two-col { grid-template-columns: 1fr; } }
+  .capability-list { list-style: none; padding: 0; margin: 24px 0; }
+  .capability-list li { padding: 12px 0 12px 28px; border-bottom: 1px solid var(--border); position: relative; }
+  .capability-list li:last-child { border-bottom: none; }
+  .check { color: #0284c7; font-weight: bold; position: absolute; left: 0; }
+  .feature-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
+  .feature-card h3 { margin: 0 0 12px; display: flex; align-items: center; gap: 10px; font-size: 18px; }
+  .feature-card .icon { font-size: 24px; }
+  .feature-card ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 14px; }
+  .feature-card ul li { margin-bottom: 6px; }
+  .callout { background: #fffbeb; border: 1px solid #fcd34d; border-radius: 16px; padding: 24px 28px; margin-top: 32px; }
+  .callout h3 { margin: 0 0 8px; color: #92400e; }
+  .callout p { margin: 0; color: #78350f; }
+  .dark-section { background: linear-gradient(135deg, #0c4a6e 0%, #075985 100%); color: #fff; padding: 64px 0; }
+  .dark-section .kicker { color: #bae6fd; }
+  .dark-section .h2 { color: #fff; }
+  .dark-card { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); border-radius: 12px; padding: 24px; }
+  .dark-card h4 { color: #fff; margin: 0 0 8px; }
+  .dark-card p { color: rgba(255,255,255,0.8); margin: 0; font-size: 14px; }
+  .quote { background: rgba(255,255,255,0.08); border-left: 4px solid #bae6fd; padding: 12px 16px; border-radius: 8px; font-style: italic; color: rgba(255,255,255,0.9); margin: 0 0 12px; font-size: 15px; }
+  .faq dt { font-weight: 700; margin-top: 18px; }
+  .faq dd { margin: 6px 0 0; color: var(--muted); }
+  .cta-section { background: linear-gradient(135deg, #0c4a6e 0%, #0284c7 100%); color: #fff; padding: 64px 0; text-align: center; }
+  .cta-section h2 { color: #fff; margin-bottom: 16px; }
+  .cta-section p { color: rgba(255,255,255,0.88); margin-bottom: 24px; }
+</style>
+</head>
+<body>
+<header class="header">
+  <nav class="container nav" aria-label="Main">
+    <a class="logo" href="../"><img src="../images/Legacy West Ventures (2021) - Rev3 - HOZ - Color_med.png" alt="Legacy West Ventures" height="48"></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <ul id="nav-menu">
+      <li><a href="../services.html">Services</a></li>
+      <li><a href="./smart-buildings.html">Smart Buildings</a></li>
+      <li><a href="./indoor-agriculture.html">Agriculture</a></li>
+      <li><a href="./gcu-platform.html">GCU Platform</a></li>
+      <li><a href="./robotics.html">Robotics</a></li>
+      <li><a href="../iot-sensors.html">Sensors</a></li>
+      <li><a href="../iot-connectivity.html">Connectivity</a></li>
+      <li><a href="../contact.html">Contact</a></li>
+      <li><a class="btn" href="../contact.html">Get Started</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section class="hero-solution">
+    <div class="container hero-grid">
+      <div>
+        <span class="kicker">Cloud Solution · GCU Platform</span>
+        <h1>GCU Cloud</h1>
+        <p class="lead">Where you watch, adjust and keep records for your grow rooms. Your GCU runs each room on site. GCU Cloud connects to every one of them so you and your team can see what is happening, change how it runs and hear about problems, from a phone or a computer, wherever you are.</p>
+        <p style="margin-top:28px"><a class="btn" href="../contact.html" style="background:#fff;color:#0c4a6e">Get Started</a> <a class="btn ghost" href="https://gcu.legacywestventures.com" rel="noopener">Sign in</a></p>
+        <div class="stats-row">
+          <div class="stat"><div class="stat-number">0</div><div class="stat-label">Software to install</div></div>
+          <div class="stat"><div class="stat-number">5 yr</div><div class="stat-label">History kept for every room</div></div>
+          <div class="stat"><div class="stat-number">24/7</div><div class="stat-label">Hosted, monitored and backed up</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="phone" aria-hidden="true">
+          <div class="screen">
+            <div class="site">North Farm · 6 rooms</div>
+            <div class="room"><span>Room 3 · Veg day 11</span><span class="warn">Check CO₂</span></div>
+            <div class="tiles">
+              <div class="tile"><div class="v">640</div><div class="l">CO₂ ppm</div><svg viewBox="0 0 100 20" preserveAspectRatio="none"><polyline fill="none" stroke="#f59e0b" stroke-width="2" points="0,6 20,7 40,6 55,12 70,15 85,16 100,17"/></svg></div>
+              <div class="tile"><div class="v">75°</div><div class="l">Temp</div><svg viewBox="0 0 100 20" preserveAspectRatio="none"><polyline fill="none" stroke="#0284c7" stroke-width="2" points="0,10 20,9 40,11 60,10 80,9 100,10"/></svg></div>
+              <div class="tile"><div class="v">64%</div><div class="l">RH</div><svg viewBox="0 0 100 20" preserveAspectRatio="none"><polyline fill="none" stroke="#0284c7" stroke-width="2" points="0,8 20,9 40,10 60,9 80,11 100,10"/></svg></div>
+              <div class="tile"><div class="v">0.98</div><div class="l">VPD</div><svg viewBox="0 0 100 20" preserveAspectRatio="none"><polyline fill="none" stroke="#0284c7" stroke-width="2" points="0,12 20,11 40,12 60,10 80,11 100,11"/></svg></div>
+            </div>
+            <div class="alert">CO₂ sensor stopped changing at 2:10 pm. Backup sensor reads 1,150 ppm.</div>
+            <div class="ctl"><span>Off</span><span>On</span><span class="on">Auto</span></div>
+          </div>
+        </div>
+        <div class="mock-note">Illustration of a room in GCU Cloud on a phone.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="solution-section">
+    <div class="container">
+      <div class="two-col">
+        <div>
+          <span class="kicker">What You Can See</span>
+          <h2 class="h2">Your Whole Site at a Glance</h2>
+          <ul class="capability-list">
+            <li><span class="check">✓</span> One card per GCU: CO<sub>2</sub>, temperature, humidity, VPD and light, each with a 24-hour trend and marked when outside your limits</li>
+            <li><span class="check">✓</span> The level of each light and the state of every relay and HVAC unit</li>
+            <li><span class="check">✓</span> A one-line status such as "all good" or "sensor not answering", with the reason</li>
+            <li><span class="check">✓</span> Rooms grouped by site, with the local weather alongside</li>
+            <li><span class="check">✓</span> Charts from 8 hours to 30 days or any dates you choose, with sensors and equipment together so you can see cause and effect</li>
+            <li><span class="check">✓</span> Primary and backup sensors side by side, so a drifting sensor stands out</li>
+            <li><span class="check">✓</span> Device health: connection, signal, sensor wiring, firmware version and clock</li>
+          </ul>
+        </div>
+        <div>
+          <span class="kicker">What You Can Control</span>
+          <h2 class="h2">Changes That Are Confirmed, Not Hoped For</h2>
+          <ul class="capability-list">
+            <li><span class="check">✓</span> Set any output to Off, On or Auto, and set light levels</li>
+            <li><span class="check">✓</span> Every change goes to the GCU and comes back confirmed within seconds</li>
+            <li><span class="check">✓</span> HVAC and mini-splits: power, mode, temperature and fan speed</li>
+            <li><span class="check">✓</span> Schedules with gradual sunrise and sunset for lights</li>
+            <li><span class="check">✓</span> Sensor rules that run a fan, cooler or dehumidifier to hold a reading in range, shown as a table or a diagram</li>
+            <li><span class="check">✓</span> Timed runs for irrigation and other outputs, with a guard on how long any output may stay on</li>
+            <li><span class="check">✓</span> Outputs held on by a physical switch at the panel are shown as such</li>
+          </ul>
+        </div>
+      </div>
+      <div class="callout">
+        <h3>Your rooms keep running even if the internet goes down.</h3>
+        <p>Every automation decision is made by the GCU on site. GCU Cloud sets up the rules and shows you what is happening. If the connection drops, the GCU carries on with the same schedules, rules and grow program, and the cloud picks up again when it reconnects.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="solution-section">
+    <div class="container">
+      <span class="kicker">Grow Programs and Records</span>
+      <h2 class="h2">Run the Crop, Not Just the Room</h2>
+      <div class="grid cards-3" style="margin-top:32px">
+        <div class="feature-card">
+          <h3><span class="icon">🌱</span> Grow Programs</h3>
+          <ul>
+            <li>Build a program stage by stage: days, light hours and level, day and night climate targets</li>
+            <li>Start from ready-made Clone, Veg, Flower and Full-cycle programs, or save your own</li>
+            <li>Pause, resume, skip a stage or end a program at any time</li>
+            <li>The GCU runs the program itself, day by day, even when offline</li>
+          </ul>
+        </div>
+        <div class="feature-card">
+          <h3><span class="icon">📒</span> Crop Records</h3>
+          <ul>
+            <li>Record when plants go in: cultivar, count and source</li>
+            <li>Record the harvest with yield and notes</li>
+            <li>A history of every crop in every room</li>
+          </ul>
+        </div>
+        <div class="feature-card">
+          <h3><span class="icon">📷</span> Photos</h3>
+          <ul>
+            <li>Take photos from your phone; each is filed by crop day and stage</li>
+            <li>A reminder shows when a photo is due</li>
+            <li>Photos stay with the crop they belong to</li>
+          </ul>
+        </div>
+        <div class="feature-card">
+          <h3><span class="icon">🔔</span> Email Alerts</h3>
+          <ul>
+            <li>You choose who is emailed and which GCUs each alert covers</li>
+            <li>One email when a problem starts and one when it clears, not a flood</li>
+            <li>GCU offline, sensor or module not answering, a GCU alarm, equipment held on by a switch, a grow stage change</li>
+            <li>Sensor readings outside your site's limits</li>
+          </ul>
+        </div>
+        <div class="feature-card">
+          <h3><span class="icon">🔍</span> Daily Insights</h3>
+          <ul>
+            <li>A sensor that has gone silent or stopped changing</li>
+            <li>Equipment running flat out while the room still misses its target</li>
+            <li>Rooms in the same space drifting apart</li>
+            <li>A CO<sub>2</sub> sensor due for calibration, or a watering that did not happen</li>
+          </ul>
+        </div>
+        <div class="feature-card">
+          <h3><span class="icon">👥</span> Your Team</h3>
+          <ul>
+            <li>Invite staff by email; Viewer, Operator and Admin levels</li>
+            <li>Two-step sign-in with an authenticator app</li>
+            <li>An activity log of who changed what, and when</li>
+            <li>Friendly names for every output, so "Exhaust fan" reads as "Exhaust fan"</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark-section">
+    <div class="container">
+      <span class="kicker">AI Insights</span>
+      <h2 class="h2">An AI Review of Every Room, Every Night</h2>
+      <p style="color:rgba(255,255,255,0.85);max-width:720px">Each night, AI reviews the day for every room: the readings, how hard each piece of equipment worked, which schedules and rules were in charge, what your team changed, the weather outside and your grow program's targets. It adds what it finds to your Insights page with the evidence behind each point, and a short weekly summary tells you what to look at first.</p>
+      <div class="grid cards-2" style="margin-top:28px">
+        <div>
+          <p class="quote">"The dehumidifier ran 40% longer this week to hold the same humidity. Worth checking the filter or coil."</p>
+          <p class="quote">"The exhaust fan runs during CO<sub>2</sub> enrichment every morning, so most of the CO<sub>2</sub> is vented."</p>
+          <p class="quote">"Temperature jumps 6°F in the 20 minutes after lights-on. A longer sunrise ramp would soften it."</p>
+          <p style="font-size:13px;color:rgba(255,255,255,0.65);margin:0">Examples of the kind of finding it looks for. What it reports depends on your rooms.</p>
+        </div>
+        <div class="grid" style="gap:12px">
+          <div class="dark-card"><h4>AI suggests; it never acts</h4><p>It does not change settings, schedules or equipment. Your GCU keeps making every control decision.</p></div>
+          <div class="dark-card"><h4>Only real numbers</h4><p>Every finding is checked against your data before you see it. If it cannot be backed up, it is not shown.</p></div>
+          <div class="dark-card"><h4>Your data stays yours</h4><p>Data sent for review is not used to train models. Prefer not to use it? We will switch it off for your site.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="solution-section">
+    <div class="container">
+      <div class="two-col">
+        <div>
+          <span class="kicker">Managed for You</span>
+          <h2 class="h2">We Run the Service, You Run the Grow</h2>
+          <ul class="capability-list">
+            <li><span class="check">✓</span> Hosting, security updates, backups and monitoring of GCU Cloud</li>
+            <li><span class="check">✓</span> New features as they are released</li>
+            <li><span class="check">✓</span> Setting up and connecting your GCUs, including site address and time zone</li>
+            <li><span class="check">✓</span> Firmware versions tracked for every GCU, with updates rolled out from the admin page</li>
+            <li><span class="check">✓</span> All traffic encrypted; each GCU has its own credentials and can only reach its own data</li>
+            <li><span class="check">✓</span> Your site's data kept separate from every other customer's; nightly backups we have tested restoring</li>
+          </ul>
+        </div>
+        <div>
+          <span class="kicker">Good to Know</span>
+          <h2 class="h2">Common Questions</h2>
+          <dl class="faq">
+            <dt>What do I need?</dt>
+            <dd>A GCU with an internet connection, by Wi-Fi or through your site router. We can supply a <a href="../iot-connectivity.html">managed LTE gateway</a> for sites without one. Anyone on your team can sign in from a web browser.</dd>
+            <dt>How are alerts sent?</dt>
+            <dd>By email, to the people you choose, per GCU.</dd>
+            <dt>Can I change settings at the GCU itself?</dt>
+            <dd>Yes. The GCU's own local page still works on your site network, and GCU Cloud shows any changes made there.</dd>
+            <dt>Can I run it on site instead?</dt>
+            <dd>Yes. <a href="./gcu-manager.html">GCU Manager</a> is the same platform on a server at your facility.</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="container">
+      <h2 class="h2">Put Your Rooms in GCU Cloud</h2>
+      <p>Already have GCUs? We connect them for you. Starting fresh? We will quote the controllers, sensors and connectivity to go with it.</p>
+      <a class="btn" href="../contact.html" style="background:#fff;color:#0c4a6e">Get Started</a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <div>© 2020–<span id="y"></span> Legacy West Ventures</div>
+    </div>
+    <div class="social-links">
+      <a href="https://www.linkedin.com/company/lwviot" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:info@legacywestventures.com">Contact</a>
+    </div>
+  </div>
+</footer>
+<script>document.getElementById('y').textContent = new Date().getFullYear()</script>
+</body>
+</html>

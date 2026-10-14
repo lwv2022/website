@@ -59,6 +59,8 @@ input,textarea{width:100%;padding:12px 14px;border:1px solid var(--border);borde
 .nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 .btn:focus-visible,.nav a:focus-visible,.nav-toggle:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 
+@media(min-width:961px) and (max-width:1320px){.nav ul{gap:14px}.nav a{font-size:15px;white-space:nowrap}.nav a.logo img{max-width:210px}}
+
 /* --- Small screens --- */
 @media(max-width:960px){
   .nav{height:64px}

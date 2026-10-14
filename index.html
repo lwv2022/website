@@ -20,6 +20,20 @@
 <link rel="shortcut icon" href="./favicon.png">
 
 <link rel="stylesheet" href="./assets/css/style.css">
+<style>
+  /* GCU Manager / GCU Cloud spotlight */
+  .spotlight { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 32px; }
+  @media(max-width:860px) { .spotlight { grid-template-columns: 1fr; } }
+  .spot { border-radius: 20px; padding: 36px; color: #fff; display: flex; flex-direction: column; box-shadow: var(--shadow); }
+  .spot.manager { background: linear-gradient(135deg, #1e293b 0%, #334155 100%); }
+  .spot.cloud { background: linear-gradient(135deg, #0c4a6e 0%, #0284c7 100%); }
+  .spot .kicker { color: rgba(255,255,255,0.75); }
+  .spot h3 { font-size: 28px; margin: 8px 0 6px; color: #fff; }
+  .spot .tag { font-size: 15px; color: rgba(255,255,255,0.85); margin: 0 0 18px; }
+  .spot ul { margin: 0 0 24px; padding-left: 20px; color: rgba(255,255,255,0.9); }
+  .spot ul li { margin-bottom: 8px; }
+  .spot .btn { background: #fff; color: #0f172a; align-self: flex-start; margin-top: auto; }
+</style>
 <script defer src="./assets/js/main.js"></script>
 <script type="application/ld+json">
 {
@@ -43,6 +57,7 @@
       <li><a href="./services.html">Services</a></li>
       <li><a href="./solutions/smart-buildings.html">Smart Buildings</a></li>
       <li><a href="./solutions/indoor-agriculture.html">Agriculture</a></li>
+      <li><a href="./solutions/gcu-platform.html">GCU Platform</a></li>
       <li><a href="./solutions/robotics.html">Robotics</a></li>
       <li><a href="./iot-sensors.html">Sensors</a></li>
       <li><a href="./iot-connectivity.html">Connectivity</a></li>
@@ -78,9 +93,44 @@
         <div class="card">
           <span class="badge">Agriculture Tech</span>
           <h3>Grow & Greenhouse Automation</h3>
-          <p class="muted">Advanced climate control, fertigation management, and precision agriculture systems for controlled environment operations.</p>
+          <p class="muted">Our own GCU platform: a controller in every room, with <a href="./solutions/gcu-manager.html">GCU Manager</a> on site or <a href="./solutions/gcu-cloud.html">GCU Cloud</a> online to watch, adjust and keep records.</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="section" id="gcu">
+    <div class="container">
+      <span class="kicker">Our Platform</span>
+      <h2 class="h2">GCU Manager and GCU Cloud</h2>
+      <p class="muted" style="max-width:720px">A Greenhouse Control Unit runs each room on its own. Then choose how your team watches over it: on a server at your facility, or from anywhere in the cloud. Same grow programs, same alerts, same records.</p>
+      <div class="spotlight">
+        <div class="spot manager">
+          <span class="kicker">On-Site Solution</span>
+          <h3>GCU Manager</h3>
+          <p class="tag">A server at your facility. Your data never leaves the building.</p>
+          <ul>
+            <li>Every room on one screen, with or without internet</li>
+            <li>Grow programs, harvest records, crop photos and a nightly AI review</li>
+            <li>Proven on a 76-room cultivation facility</li>
+            <li>Integrator API for the software you already use</li>
+          </ul>
+          <a class="btn" href="./solutions/gcu-manager.html">Explore GCU Manager →</a>
+        </div>
+        <div class="spot cloud">
+          <span class="kicker">Cloud Solution</span>
+          <h3>GCU Cloud</h3>
+          <p class="tag">Nothing to install. Sign in from a phone, tablet or computer.</p>
+          <ul>
+            <li>Plain-language status and 24-hour trends for every room</li>
+            <li>Control equipment, schedules, rules and HVAC, confirmed by the GCU</li>
+            <li>Email alerts, daily insights and nightly AI Insights</li>
+            <li>Hosted, secured, backed up and updated by us</li>
+          </ul>
+          <a class="btn" href="./solutions/gcu-cloud.html">Explore GCU Cloud →</a>
+        </div>
+      </div>
+      <p style="margin-top:20px"><a href="./solutions/gcu-platform.html">See the whole GCU platform, including the hardware we build →</a></p>
     </div>
   </section>
 
@@ -91,7 +141,7 @@
       <div class="grid cards-4">
         <div class="card">
           <h3>Controlled Environment Agriculture</h3>
-          <p class="muted">Comprehensive automation for greenhouses, vertical farms, and indoor growing operations with precision climate and fertigation control.</p>
+          <p class="muted">Grow rooms, pods and container farms run by our GCU platform: climate, lighting, CO<sub>2</sub> and irrigation in every room, watched from GCU Manager on site or GCU Cloud online.</p>
         </div>
         <div class="card">
           <h3>Warehouses & Distribution</h3>

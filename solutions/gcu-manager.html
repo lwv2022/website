@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>GCU Manager — On-Site Grow Management Server — Legacy West Ventures</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="GCU Manager is the on-site server for indoor agriculture: every grow room on one screen, grow programs, harvest records, crop photos, AI review and an integrator API, running on your own network.">
+<link rel="canonical" href="https://www.legacywestventures.com/solutions/gcu-manager.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Legacy West Ventures">
+<meta property="og:title" content="GCU Manager — On-Site Grow Management Server">
+<meta property="og:description" content="Every grow room on one screen, grow programs, harvest records, crop photos, AI review and an integrator API, running on your own network.">
+<meta property="og:url" content="https://www.legacywestventures.com/solutions/gcu-manager.html">
+<meta property="og:image" content="https://www.legacywestventures.com/images/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon.png">
+<link rel="shortcut icon" href="../favicon.png">
+
+<link rel="stylesheet" href="../assets/css/style.css">
+<script defer src="../assets/js/main.js"></script>
+<style>
+  .hero-solution { background: linear-gradient(135deg, #0f172a 0%, #334155 100%); color: #fff; padding: 80px 0; }
+  .hero-solution .kicker { color: #5eead4; }
+  .hero-solution h1 { font-size: 48px; line-height: 1.1; margin: 0 0 20px; }
+  .hero-solution .lead { font-size: 20px; color: rgba(255,255,255,0.85); max-width: 640px; }
+  .hero-solution .btn.ghost { color: #fff; border-color: rgba(255,255,255,0.4); }
+  .hero-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: center; }
+  @media(max-width:860px) { .hero-grid { grid-template-columns: 1fr; } }
+  .stats-row { display: flex; gap: 32px 40px; margin-top: 36px; flex-wrap: wrap; }
+  .stat { text-align: left; }
+  .stat-number { font-size: 48px; font-weight: 800; color: #5eead4; }
+  .stat-label { font-size: 14px; color: rgba(255,255,255,0.7); }
+
+  /* Illustrative room card */
+  .mock { background: #fff; color: #0f172a; border-radius: 16px; padding: 18px; box-shadow: 0 24px 48px rgba(2,6,23,.35); }
+  .mock .title { display: flex; justify-content: space-between; align-items: center; font-weight: 700; margin-bottom: 12px; }
+  .mock .ok { font-size: 12px; font-weight: 700; color: #0f766e; background: #ccfbf1; padding: 3px 10px; border-radius: 999px; }
+  .mock .tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .mock .tile { background: #f8fafc; border: 1px solid var(--border); border-radius: 10px; padding: 10px 8px; text-align: center; }
+  .mock .tile .v { font-size: 20px; font-weight: 800; line-height: 1.1; }
+  .mock .tile .l { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+  .mock .tile svg { width: 100%; height: 22px; margin-top: 6px; }
+  .mock .row { display: flex; justify-content: space-between; font-size: 13px; color: var(--muted); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--border); }
+  .mock .row b { color: #0f172a; }
+  .mock-note { font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 10px; text-align: center; }
+
+  .solution-section { padding: 64px 0; }
+  .solution-section:nth-child(even) { background: #f8fafc; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+  @media(max-width:768px) { .two-col { grid-template-columns: 1fr; } }
+  .capability-list { list-style: none; padding: 0; margin: 24px 0; }
+  .capability-list li { padding: 12px 0 12px 28px; border-bottom: 1px solid var(--border); position: relative; }
+  .capability-list li:last-child { border-bottom: none; }
+  .check { color: #14b8a6; font-weight: bold; position: absolute; left: 0; }
+  .cross { color: #ef4444; font-weight: bold; }
+  .feature-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
+  .feature-card h3 { margin: 0 0 12px; display: flex; align-items: center; gap: 10px; font-size: 18px; }
+  .feature-card .icon { font-size: 24px; }
+  .feature-card ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 14px; }
+  .feature-card ul li { margin-bottom: 6px; }
+  .tech-stack { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+  .tech-tag { background: #f1f5f9; color: #334155; padding: 6px 14px; border-radius: 999px; font-size: 13px; font-weight: 600; }
+  .dark-section { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #fff; padding: 64px 0; }
+  .dark-section .kicker { color: #5eead4; }
+  .dark-section .h2 { color: #fff; }
+  .dark-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15); border-radius: 12px; padding: 24px; }
+  .dark-card h4 { color: #fff; margin: 0 0 8px; }
+  .dark-card p { color: rgba(255,255,255,0.75); margin: 0; font-size: 14px; }
+  .faq dt { font-weight: 700; margin-top: 18px; }
+  .faq dd { margin: 6px 0 0; color: var(--muted); }
+  .cta-section { background: linear-gradient(135deg, #0f172a 0%, #334155 100%); color: #fff; padding: 64px 0; text-align: center; }
+  .cta-section h2 { color: #fff; margin-bottom: 16px; }
+  .cta-section p { color: rgba(255,255,255,0.85); margin-bottom: 24px; }
+</style>
+</head>
+<body>
+<header class="header">
+  <nav class="container nav" aria-label="Main">
+    <a class="logo" href="../"><img src="../images/Legacy West Ventures (2021) - Rev3 - HOZ - Color_med.png" alt="Legacy West Ventures" height="48"></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <ul id="nav-menu">
+      <li><a href="../services.html">Services</a></li>
+      <li><a href="./smart-buildings.html">Smart Buildings</a></li>
+      <li><a href="./indoor-agriculture.html">Agriculture</a></li>
+      <li><a href="./gcu-platform.html">GCU Platform</a></li>
+      <li><a href="./robotics.html">Robotics</a></li>
+      <li><a href="../iot-sensors.html">Sensors</a></li>
+      <li><a href="../iot-connectivity.html">Connectivity</a></li>
+      <li><a href="../contact.html">Contact</a></li>
+      <li><a class="btn" href="../contact.html">Get Started</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section class="hero-solution">
+    <div class="container hero-grid">
+      <div>
+        <span class="kicker">On-Site Solution · GCU Platform</span>
+        <h1>GCU Manager</h1>
+        <p class="lead">A grow management server that lives at your facility. Every room on one screen, grow programs that run themselves, harvest records, crop photos and a nightly AI review. Your data stays on your network, and nothing stops when the internet does.</p>
+        <p style="margin-top:28px"><a class="btn" href="../contact.html">Request a Demo</a> <a class="btn ghost" href="./gcu-cloud.html">Prefer the cloud version?</a></p>
+        <div class="stats-row">
+          <div class="stat"><div class="stat-number">76</div><div class="stat-label">Rooms on one Manager today</div></div>
+          <div class="stat"><div class="stat-number">0</div><div class="stat-label">Internet needed to keep growing</div></div>
+          <div class="stat"><div class="stat-number">1</div><div class="stat-label">Compact appliance on your rack</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="mock" aria-hidden="true">
+          <div class="title"><span>POD-14 · Flower day 23</span><span class="ok">All good</span></div>
+          <div class="tiles">
+            <div class="tile"><div class="v">1,180</div><div class="l">CO₂ ppm</div><svg viewBox="0 0 100 22" preserveAspectRatio="none"><polyline fill="none" stroke="#14b8a6" stroke-width="2" points="0,16 15,14 30,15 45,9 60,8 75,10 90,7 100,8"/></svg></div>
+            <div class="tile"><div class="v">77°</div><div class="l">Temp</div><svg viewBox="0 0 100 22" preserveAspectRatio="none"><polyline fill="none" stroke="#22b9e8" stroke-width="2" points="0,12 15,11 30,13 45,12 60,10 75,11 90,12 100,11"/></svg></div>
+            <div class="tile"><div class="v">58%</div><div class="l">RH</div><svg viewBox="0 0 100 22" preserveAspectRatio="none"><polyline fill="none" stroke="#22b9e8" stroke-width="2" points="0,8 15,10 30,9 45,12 60,11 75,13 90,12 100,12"/></svg></div>
+            <div class="tile"><div class="v">1.21</div><div class="l">Leaf VPD</div><svg viewBox="0 0 100 22" preserveAspectRatio="none"><polyline fill="none" stroke="#14b8a6" stroke-width="2" points="0,14 15,12 30,13 45,10 60,11 75,9 90,10 100,10"/></svg></div>
+          </div>
+          <div class="row"><span>Lights <b>100%</b></span><span>Dehum <b>Auto · on</b></span><span>CO₂ <b>Auto</b></span><span>Photo <b>due today</b></span></div>
+        </div>
+        <div class="mock-note">Illustration of a room card in GCU Manager.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="solution-section">
+    <div class="container">
+      <div class="two-col">
+        <div>
+          <span class="kicker">Why On Site</span>
+          <h2 class="h2">Built for Facilities That Cannot Depend on the Internet</h2>
+          <p class="muted">Large grows run on cellular links, shared Wi-Fi and networks nobody is paid to maintain. GCU Manager sits on your LAN, next to the rooms it watches, so the dashboard, alerts and grow programs work whether or not the outside world is reachable.</p>
+          <ul class="capability-list">
+            <li><span class="check">✓</span> Runs on a compact, solid-state appliance mounted at your site</li>
+            <li><span class="check">✓</span> Readings, photos and records stay on your premises</li>
+            <li><span class="check">✓</span> Nightly backups to removable media, plus an encrypted offsite copy</li>
+            <li><span class="check">✓</span> Remote support from us over an encrypted tunnel, only when you want it</li>
+            <li><span class="check">✓</span> Security patches applied automatically, with a page that shows what is pending</li>
+          </ul>
+        </div>
+        <div>
+          <span class="kicker">What Growers Get</span>
+          <h2 class="h2">One Screen for the Whole Farm</h2>
+          <ul class="capability-list">
+            <li><span class="check">✓</span> Fleet view: every room's CO<sub>2</sub>, temperature, humidity, leaf VPD and light with a plain-language status</li>
+            <li><span class="check">✓</span> Room pages with equipment state, config cards and history charts</li>
+            <li><span class="check">✓</span> Off / On / Auto control of every output, confirmed by the GCU</li>
+            <li><span class="check">✓</span> Setpoints, schedules and sensor rules edited in place</li>
+            <li><span class="check">✓</span> Empty-room sleep that quiets alerts and CO<sub>2</sub> between crops</li>
+            <li><span class="check">✓</span> Built for phones in the grow room, not just desks in the office</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="solution-section">
+    <div class="container">
+      <span class="kicker">Grow Management</span>
+      <h2 class="h2">From Clone to Harvest, Recorded</h2>
+      <div class="grid cards-3" style="margin-top:32px">
+        <div class="feature-card">
+          <h3><span class="icon">🌱</span> Grow Programs</h3>
+          <ul>
+            <li>Programs of up to twelve stages: days, light hours and level, day and night targets for temperature, humidity, CO<sub>2</sub> and VPD</li>
+            <li>Start a room on a program from a date and it steps through on its own</li>
+            <li>Pause, resume, skip a stage or end early at any time</li>
+            <li>Stage-change emails to the people who need them</li>
+          </ul>
+        </div>
+        <div class="feature-card">
+          <h3><span class="icon">🧺</span> Harvests</h3>
+          <ul>
+            <li>A ledger of every crop in every room, from planting to harvest</li>
+            <li>Wet and dry weights, cultivar and notes</li>
+            <li>A report card for each harvest: how the environment tracked each stage's targets</li>
+            <li>Compare rooms and crops over time</li>
+          </ul>
+        </div>
+        <div class="feature-card">
+          <h3><span class="icon">📷</span> Crop Photos</h3>
+          <ul>
+            <li>Take a photo from your phone; it is filed by room, crop day and stage</li>
+            <li>A reminder when a photo is due</li>
+            <li>Photos follow the crop, so history stays with the harvest it belongs to</li>
+            <li>Optional AI read of each photo against the room's conditions</li>
+          </ul>
+        </div>
+        <div class="feature-card">
+          <h3><span class="icon">🔔</span> Alerts That Respect Your Inbox</h3>
+          <ul>
+            <li>One email when a problem starts, one when it clears</li>
+            <li>Offline rooms, silent sensors, out-of-range readings, equipment held on by a panel switch</li>
+            <li>A daily summary instead of a stream, if you prefer</li>
+            <li>Sensor health shown on every reading, so a dead probe is never mistaken for a good number</li>
+          </ul>
+        </div>
+        <div class="feature-card">
+          <h3><span class="icon">💧</span> Irrigation</h3>
+          <ul>
+            <li>Watering runs from your irrigation controller shown against each room</li>
+            <li>Missed or short waterings flagged alongside the climate data</li>
+            <li>Timed runs and an on-time guard on GCU-driven valves</li>
+          </ul>
+        </div>
+        <div class="feature-card">
+          <h3><span class="icon">🛠️</span> Fleet Operations</h3>
+          <ul>
+            <li>Firmware manager: see every room's version and update in batches</li>
+            <li>Onboarding of new rooms from the page</li>
+            <li>Users with Viewer, Operator and Admin roles, invites and an activity log</li>
+            <li>System page: storage, backups, OS updates and host health</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark-section">
+    <div class="container">
+      <span class="kicker">AI Review</span>
+      <h2 class="h2">An Agronomist's Second Look, Every Night</h2>
+      <p style="color:rgba(255,255,255,0.8);max-width:720px">Each night GCU Manager reviews every room: the readings, how hard each piece of equipment worked, which rules were in charge, what your team changed and the program's targets. Findings land on the Insights page with the evidence behind them, and a morning brief tells you what to look at first.</p>
+      <div class="grid cards-3" style="margin-top:32px">
+        <div class="dark-card"><h4>Grounded in your data</h4><p>Every finding is checked against the numbers before you see it. If it cannot be backed up, it is not shown.</p></div>
+        <div class="dark-card"><h4>Suggests, never acts</h4><p>The AI does not change settings, schedules or equipment. The GCU in the room keeps making every control decision.</p></div>
+        <div class="dark-card"><h4>Your verdict counts</h4><p>Thumbs up or down on any insight. Your feedback tunes what the review raises next time.</p></div>
+        <div class="dark-card"><h4>Help assistant</h4><p>Ask how a feature works or what a reading means, right from the page.</p></div>
+        <div class="dark-card"><h4>Photo analysis</h4><p>Optional: each day's photo compared with earlier ones and with the room's conditions.</p></div>
+        <div class="dark-card"><h4>Private by design</h4><p>Data sent for review is not used to train models. Switch the review off for your site at any time.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="solution-section">
+    <div class="container">
+      <div class="two-col">
+        <div>
+          <span class="kicker">For Integrators</span>
+          <h2 class="h2">An API Your Other Software Can Read</h2>
+          <p class="muted">Consultants, ERP systems and analytics partners can pull rooms, history, harvests, photos and watering records through a versioned, read-only API. Tokens are issued and revoked by your admin, rate-limited, and never give a third party control of a room.</p>
+          <div class="tech-stack">
+            <span class="tech-tag">REST / JSON</span>
+            <span class="tech-tag">Bearer tokens</span>
+            <span class="tech-tag">OpenAPI</span>
+            <span class="tech-tag">Postman collection</span>
+            <span class="tech-tag">Self-documenting</span>
+          </div>
+        </div>
+        <div>
+          <span class="kicker">Under the Hood</span>
+          <h2 class="h2">Serious Software on a Small Box</h2>
+          <ul class="capability-list">
+            <li><span class="check">✓</span> Time-series database on solid-state storage, sized for years of readings</li>
+            <li><span class="check">✓</span> Containerised services that restart themselves</li>
+            <li><span class="check">✓</span> Restore drills, not just backups</li>
+            <li><span class="check">✓</span> Works with GCUs on wired or Wi-Fi networks and across site routers</li>
+            <li><span class="check">✓</span> Optional public address through our secure gateway for off-site viewing</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="solution-section">
+    <div class="container">
+      <span class="kicker">Good to Know</span>
+      <h2 class="h2">Common Questions</h2>
+      <dl class="faq">
+        <dt>What do I need on site?</dt>
+        <dd>A network the GCUs can reach, a shelf or rack spot and a power outlet. We ship the appliance configured, and a two-page field guide covers the install.</dd>
+        <dt>Can I still see it from home?</dt>
+        <dd>Yes. We can publish your Manager behind a secure gateway so your team signs in from anywhere, while the data itself stays at the facility.</dd>
+        <dt>How is it different from GCU Cloud?</dt>
+        <dd>Same GCUs, same grow programs and alerts. GCU Manager runs on your premises and is the right fit for large fleets, data-residency needs and poor connectivity. <a href="./gcu-cloud.html">GCU Cloud</a> is hosted by us and has nothing to install.</dd>
+        <dt>Who supports it?</dt>
+        <dd>We do. Updates, monitoring and help come from the people who built it, under a service agreement sized to your facility.</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="container">
+      <h2 class="h2">See GCU Manager on Your Rooms</h2>
+      <p>Tell us how many rooms you run and how your site is networked. We will walk you through a live Manager and scope the install.</p>
+      <a class="btn" href="../contact.html" style="background:#fff;color:#0f172a">Request a Demo</a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <div>© 2020–<span id="y"></span> Legacy West Ventures</div>
+    </div>
+    <div class="social-links">
+      <a href="https://www.linkedin.com/company/lwviot" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:info@legacywestventures.com">Contact</a>
+    </div>
+  </div>
+</footer>
+<script>document.getElementById('y').textContent = new Date().getFullYear()</script>
+</body>
+</html>

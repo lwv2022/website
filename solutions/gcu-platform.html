@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>GCU Platform — Grow Room Automation by Legacy West Ventures</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="The GCU platform for indoor agriculture: a Greenhouse Control Unit that runs each room on its own, with GCU Manager on site or GCU Cloud online to watch, adjust and keep records.">
+<link rel="canonical" href="https://www.legacywestventures.com/solutions/gcu-platform.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Legacy West Ventures">
+<meta property="og:title" content="GCU Platform — Grow Room Automation by Legacy West Ventures">
+<meta property="og:description" content="A Greenhouse Control Unit that runs each room on its own, with GCU Manager on site or GCU Cloud online to watch, adjust and keep records.">
+<meta property="og:url" content="https://www.legacywestventures.com/solutions/gcu-platform.html">
+<meta property="og:image" content="https://www.legacywestventures.com/images/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon.png">
+<link rel="shortcut icon" href="../favicon.png">
+
+<link rel="stylesheet" href="../assets/css/style.css">
+<script defer src="../assets/js/main.js"></script>
+<style>
+  .hero-solution { background: linear-gradient(135deg, #0f172a 0%, #134e4a 100%); color: #fff; padding: 80px 0; }
+  .hero-solution .kicker { color: #5eead4; }
+  .hero-solution h1 { font-size: 48px; line-height: 1.1; margin: 0 0 20px; }
+  .hero-solution .lead { font-size: 20px; color: rgba(255,255,255,0.85); max-width: 680px; }
+  .hero-solution .btn.ghost { color: #fff; border-color: rgba(255,255,255,0.4); }
+  .solution-section { padding: 64px 0; }
+  .solution-section:nth-child(even) { background: #f8fafc; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+  @media(max-width:768px) { .two-col { grid-template-columns: 1fr; } }
+  .capability-list { list-style: none; padding: 0; margin: 24px 0; }
+  .capability-list li { padding: 12px 0 12px 28px; border-bottom: 1px solid var(--border); position: relative; }
+  .capability-list li:last-child { border-bottom: none; }
+  .check { color: #14b8a6; font-weight: bold; position: absolute; left: 0; }
+
+  /* Spotlight: the two ways to run the platform */
+  .spotlight { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 32px; }
+  @media(max-width:860px) { .spotlight { grid-template-columns: 1fr; } }
+  .spot { border-radius: 20px; padding: 36px; color: #fff; display: flex; flex-direction: column; box-shadow: var(--shadow); }
+  .spot.manager { background: linear-gradient(135deg, #1e293b 0%, #334155 100%); }
+  .spot.cloud { background: linear-gradient(135deg, #0c4a6e 0%, #0284c7 100%); }
+  .spot .kicker { color: rgba(255,255,255,0.75); }
+  .spot h3 { font-size: 30px; margin: 8px 0 6px; color: #fff; }
+  .spot .tag { font-size: 15px; color: rgba(255,255,255,0.85); margin: 0 0 18px; }
+  .spot ul { margin: 0 0 24px; padding-left: 20px; color: rgba(255,255,255,0.9); }
+  .spot ul li { margin-bottom: 8px; }
+  .spot .btn { background: #fff; color: #0f172a; align-self: flex-start; margin-top: auto; }
+
+  .compare { width: 100%; border-collapse: collapse; margin-top: 24px; font-size: 15px; }
+  .compare th, .compare td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .compare th { background: var(--card); font-weight: 700; }
+  .compare td:first-child { font-weight: 600; color: #0f172a; width: 24%; }
+  @media(max-width:640px) { .compare { font-size: 14px; } .compare th, .compare td { padding: 10px 8px; } }
+
+  .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 32px; }
+  .product-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 24px; display: flex; flex-direction: column; }
+  .product-card .img { background: #f1f5f9; border-radius: 12px; padding: 16px; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; min-height: 180px; }
+  .product-card .img img { max-height: 180px; width: auto; }
+  .product-card h4 { margin: 0 0 4px; font-size: 18px; color: #0f172a; }
+  .product-card .model { color: var(--accent); font-weight: 700; font-size: 13px; letter-spacing: .04em; margin-bottom: 12px; }
+  .product-card .features { font-size: 14px; color: var(--muted); margin: 0; padding-left: 18px; }
+  .product-card .features li { margin-bottom: 6px; }
+  .product-card .use-case { font-size: 13px; color: #0f172a; font-weight: 600; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
+  .render-note { font-size: 12px; color: var(--muted); margin-top: 8px; }
+  .badge.new { background: #ccfbf1; color: #0f766e; }
+
+  .step { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 24px; }
+  .step .num { display: inline-flex; width: 32px; height: 32px; border-radius: 50%; background: #14b8a6; color: #fff; align-items: center; justify-content: center; font-weight: 800; margin-bottom: 12px; }
+  .step h3 { margin: 0 0 8px; font-size: 18px; }
+
+  .cta-section { background: linear-gradient(135deg, #0f172a 0%, #134e4a 100%); color: #fff; padding: 64px 0; text-align: center; }
+  .cta-section h2 { color: #fff; margin-bottom: 16px; }
+  .cta-section p { color: rgba(255,255,255,0.85); margin-bottom: 24px; }
+</style>
+</head>
+<body>
+<header class="header">
+  <nav class="container nav" aria-label="Main">
+    <a class="logo" href="../"><img src="../images/Legacy West Ventures (2021) - Rev3 - HOZ - Color_med.png" alt="Legacy West Ventures" height="48"></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <ul id="nav-menu">
+      <li><a href="../services.html">Services</a></li>
+      <li><a href="./smart-buildings.html">Smart Buildings</a></li>
+      <li><a href="./indoor-agriculture.html">Agriculture</a></li>
+      <li><a href="./gcu-platform.html">GCU Platform</a></li>
+      <li><a href="./robotics.html">Robotics</a></li>
+      <li><a href="../iot-sensors.html">Sensors</a></li>
+      <li><a href="../iot-connectivity.html">Connectivity</a></li>
+      <li><a href="../contact.html">Contact</a></li>
+      <li><a class="btn" href="../contact.html">Get Started</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section class="hero-solution">
+    <div class="container">
+      <span class="kicker">Grow Room Automation</span>
+      <h1>The GCU Platform</h1>
+      <p class="lead">A Greenhouse Control Unit in every room that runs lights, climate, CO<sub>2</sub> and irrigation on its own. Then choose how you watch over it: <strong>GCU Manager</strong> on a server at your facility, or <strong>GCU Cloud</strong> from anywhere.</p>
+      <p style="margin-top:28px"><a class="btn" href="./gcu-manager.html">GCU Manager</a> <a class="btn ghost" href="./gcu-cloud.html">GCU Cloud</a></p>
+    </div>
+  </section>
+
+  <section class="solution-section">
+    <div class="container">
+      <span class="kicker">Two Ways to Run It</span>
+      <h2 class="h2">Same Platform. On Site or in the Cloud.</h2>
+      <p class="muted" style="max-width:720px">Both products talk to the same GCUs, run the same grow programs and send the same alerts. The difference is where the software lives and who looks after it.</p>
+
+      <div class="spotlight">
+        <div class="spot manager">
+          <span class="kicker">On-Site Solution</span>
+          <h3>GCU Manager</h3>
+          <p class="tag">A server at your facility. Your data never leaves the building.</p>
+          <ul>
+            <li>Runs on a compact appliance on your own network, with or without internet</li>
+            <li>Built for large fleets: proven on a 76-room cultivation facility</li>
+            <li>Grow programs, harvest records, crop photos and AI review of every room</li>
+            <li>Integrator API for the software you already use</li>
+            <li>Nightly local backups plus an encrypted offsite copy</li>
+          </ul>
+          <a class="btn" href="./gcu-manager.html">Explore GCU Manager →</a>
+        </div>
+        <div class="spot cloud">
+          <span class="kicker">Cloud Solution</span>
+          <h3>GCU Cloud</h3>
+          <p class="tag">Nothing to install. Sign in from a phone, tablet or computer.</p>
+          <ul>
+            <li>Every room on one screen, with plain-language status and 24-hour trends</li>
+            <li>Control equipment, schedules, sensor rules and HVAC with confirmation from the GCU</li>
+            <li>Grow programs, crop records and photos, email alerts and daily insights</li>
+            <li>AI Insights: a nightly review of each room with the evidence behind every finding</li>
+            <li>Hosted, secured, backed up and updated by us</li>
+          </ul>
+          <a class="btn" href="./gcu-cloud.html">Explore GCU Cloud →</a>
+        </div>
+      </div>
+
+      <table class="compare" aria-label="GCU Manager compared with GCU Cloud">
+        <thead>
+          <tr><th></th><th>GCU Manager</th><th>GCU Cloud</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Where it runs</td><td>An appliance on your site network</td><td>Our hosted service</td></tr>
+          <tr><td>Internet required</td><td>No. Remote access is optional</td><td>Yes, for the GCUs to report in</td></tr>
+          <tr><td>Where your data lives</td><td>On your premises, backed up locally and offsite</td><td>In our secure, tenant-isolated service</td></tr>
+          <tr><td>Who maintains it</td><td>We support it remotely over an encrypted link</td><td>We run it entirely</td></tr>
+          <tr><td>Best for</td><td>Large facilities, data-residency needs, unreliable internet</td><td>One site or many, fast rollout, no IT on site</td></tr>
+          <tr><td>Grow programs, alerts, photos, AI review</td><td>Included</td><td>Included</td></tr>
+          <tr><td>Integrator API</td><td>Yes, with self-documenting reference</td><td>On request</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="solution-section">
+    <div class="container">
+      <div class="two-col">
+        <div>
+          <span class="kicker">How It Works</span>
+          <h2 class="h2">The Room Runs Itself. The Software Watches.</h2>
+          <p class="muted">Every control decision is made by the GCU in the room, not by a server somewhere else. GCU Manager and GCU Cloud configure the rules, record what happens and show it to your team. If the network drops, the room carries on exactly as programmed.</p>
+          <ul class="capability-list">
+            <li><span class="check">✓</span> Schedules with sunrise and sunset ramps for lights</li>
+            <li><span class="check">✓</span> Sensor rules that hold temperature, humidity, CO<sub>2</sub> and VPD in range</li>
+            <li><span class="check">✓</span> Grow programs that step through Clone, Veg and Flower on their own</li>
+            <li><span class="check">✓</span> Timed irrigation runs with an on-time guard on every output</li>
+            <li><span class="check">✓</span> Primary and backup sensors, so a drifting probe stands out</li>
+            <li><span class="check">✓</span> Local alarm flasher and sounder when a room needs a person</li>
+          </ul>
+        </div>
+        <div class="grid" style="gap:16px">
+          <div class="step"><span class="num">1</span><h3>Sense</h3><p class="muted" style="margin:0">CO<sub>2</sub>, temperature, humidity, light and leaf wetness arrive over a wired RS-485 Modbus bus. No batteries, no wireless dropouts.</p></div>
+          <div class="step"><span class="num">2</span><h3>Decide</h3><p class="muted" style="margin:0">The GCU compares readings with the program for today and switches lights, fans, cooling, dehumidifiers, CO<sub>2</sub> and valves.</p></div>
+          <div class="step"><span class="num">3</span><h3>Report</h3><p class="muted" style="margin:0">Readings and every state change stream to GCU Manager or GCU Cloud, where your team sees, adjusts and keeps records.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="solution-section">
+    <div class="container">
+      <span class="kicker">Hardware We Build</span>
+      <h2 class="h2">Designed and Assembled by Legacy West Ventures</h2>
+      <p class="muted" style="max-width:720px">Purpose-built for grow rooms: sealed enclosures, wired field buses, and firmware we update ourselves. Every device is serviced and supported by the people who designed it.</p>
+
+      <div class="product-grid">
+        <div class="product-card">
+          <div class="img"><img src="../images/products/gcu-controller.png" alt="GCU controller in its sealed enclosure with clear lid"></div>
+          <h4>GCU</h4>
+          <div class="model">GREENHOUSE CONTROL UNIT</div>
+          <ul class="features">
+            <li>Runs schedules, sensor rules and grow programs on its own</li>
+            <li>RS-485 Modbus bus for sensors, I/O modules and IR blasters</li>
+            <li>Two 0-10 V dimming outputs for grow lights</li>
+            <li>On-board alarm flasher and sounder</li>
+            <li>Battery-backed clock, 24 VDC, single sealed M12 connection</li>
+            <li>Sealed enclosure with clear lid for high-humidity rooms</li>
+            <li>Local web page on site, Wi-Fi or wired network to the software</li>
+          </ul>
+          <div class="use-case">→ One per room, pod or container</div>
+          <div class="render-note">Engineering render of the current enclosure.</div>
+        </div>
+
+        <div class="product-card">
+          <div class="img">
+            <svg width="200" height="150" viewBox="0 0 200 150" role="img" aria-label="DIN-rail I/O module with four relays and two dimming channels">
+              <rect x="10" y="20" width="180" height="110" rx="10" fill="#334155"/>
+              <rect x="22" y="32" width="156" height="60" rx="6" fill="#1e293b"/>
+              <g fill="#14b8a6"><rect x="32" y="42" width="26" height="40" rx="3"/><rect x="66" y="42" width="26" height="40" rx="3"/><rect x="100" y="42" width="26" height="40" rx="3"/><rect x="134" y="42" width="26" height="40" rx="3"/></g>
+              <g fill="#22b9e8"><circle cx="40" cy="110" r="5"/><circle cx="60" cy="110" r="5"/></g>
+              <g fill="#94a3b8"><rect x="80" y="104" width="12" height="12" rx="2"/><rect x="98" y="104" width="12" height="12" rx="2"/><rect x="116" y="104" width="12" height="12" rx="2"/><rect x="134" y="104" width="12" height="12" rx="2"/><rect x="152" y="104" width="12" height="12" rx="2"/></g>
+              <rect x="0" y="136" width="200" height="8" rx="2" fill="#cbd5e1"/>
+            </svg>
+          </div>
+          <h4>LWV-IO-4R2D <span class="badge new">New</span></h4>
+          <div class="model">GCU I/O MODULE</div>
+          <ul class="features">
+            <li>Four 10 A relays for fans, pumps, CO<sub>2</sub> valves and dehumidifiers</li>
+            <li>Two 0-10 V dimming outputs, sink or source, set in software</li>
+            <li>Comms watchdog with a safe state per channel if the bus goes quiet</li>
+            <li>Supply voltage, relay cycle counts and bus errors reported to the GCU</li>
+            <li>35 mm DIN-rail module, 24 VDC, firmware updates over RS-485</li>
+          </ul>
+          <div class="use-case">→ Switch it. Dim it. One DIN-rail module per room</div>
+        </div>
+
+        <div class="product-card">
+          <div class="img"><img src="../images/products/rs485-ir-blaster.png" alt="RS485 IR blaster in its sealed enclosure with clear lid"></div>
+          <h4>RS485 IR Blaster</h4>
+          <div class="model">MINI-SPLIT HVAC CONTROL</div>
+          <ul class="features">
+            <li>Lets the GCU set power, mode, temperature and fan on a mini-split</li>
+            <li>Carrier, Samsung and Midea protocols built in</li>
+            <li>Wired to the GCU bus: no Wi-Fi, no cloud account on the unit</li>
+            <li>Built-in light and temperature sensors for a second reading at the head</li>
+            <li>Firmware updates over the same cable</li>
+          </ul>
+          <div class="use-case">→ One per mini-split head, usually two per container</div>
+          <div class="render-note">Engineering render of the sealed enclosure.</div>
+        </div>
+
+        <div class="product-card">
+          <div class="img">
+            <svg width="200" height="150" viewBox="0 0 200 150" role="img" aria-label="Sensors and accessories">
+              <rect x="20" y="30" width="70" height="90" rx="10" fill="#e2e8f0" stroke="#94a3b8"/>
+              <circle cx="55" cy="60" r="14" fill="#14b8a6"/>
+              <rect x="35" y="86" width="40" height="8" rx="4" fill="#94a3b8"/>
+              <rect x="35" y="100" width="28" height="8" rx="4" fill="#cbd5e1"/>
+              <rect x="110" y="50" width="70" height="50" rx="8" fill="#334155"/>
+              <g fill="#22b9e8"><circle cx="128" cy="75" r="6"/><circle cx="145" cy="75" r="6"/><circle cx="162" cy="75" r="6"/></g>
+              <path d="M90 75 H110" stroke="#94a3b8" stroke-width="4"/>
+            </svg>
+          </div>
+          <h4>Sensors &amp; Accessories</h4>
+          <div class="model">MODBUS FIELD DEVICES</div>
+          <ul class="features">
+            <li>CO<sub>2</sub>, temperature and humidity multi-sensor with calibration support</li>
+            <li>Leaf wetness and light-level sensors</li>
+            <li>Relay enclosures, power supplies and sealed M12 cable assemblies</li>
+            <li>Managed LTE gateway for sites without internet (see <a href="../iot-connectivity.html">Connectivity</a>)</li>
+          </ul>
+          <div class="use-case">→ Specified per room during design</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="solution-section">
+    <div class="container">
+      <span class="kicker">Where It Is Running</span>
+      <h2 class="h2">Container Farms, Pods and Grow Rooms</h2>
+      <div class="grid cards-3" style="margin-top:24px">
+        <div class="card">
+          <h3>76-room cultivation facility</h3>
+          <p class="muted">GCU Manager on site with a GCU in every pod: grow programs, harvest records, photos and AI review, all on the customer's own network.</p>
+        </div>
+        <div class="card">
+          <h3>Container farm fleets</h3>
+          <p class="muted">GCU Cloud watching containers across several sites, with mini-splits driven by RS485 IR blasters and alerts to the grower's phone.</p>
+        </div>
+        <div class="card">
+          <h3>Research and licensed grows</h3>
+          <p class="muted">Rooms that need tight day and night targets, VPD control and an audit trail of who changed what, and when.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="container">
+      <h2 class="h2">Which One Fits Your Facility?</h2>
+      <p>Tell us about your rooms, your network and how your team works. We will recommend GCU Manager, GCU Cloud, or a mix, and quote the whole system.</p>
+      <a class="btn" href="../contact.html" style="background:#fff;color:#0f172a">Talk to Us</a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <div>© 2020–<span id="y"></span> Legacy West Ventures</div>
+    </div>
+    <div class="social-links">
+      <a href="https://www.linkedin.com/company/lwviot" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:info@legacywestventures.com">Contact</a>
+    </div>
+  </div>
+</footer>
+<script>document.getElementById('y').textContent = new Date().getFullYear()</script>
+</body>
+</html>

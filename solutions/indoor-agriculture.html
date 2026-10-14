@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <title>Indoor Agriculture Automation — Legacy West Ventures</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Complete greenhouse and indoor farm automation: climate control, fertigation, lighting, and environmental monitoring. From sensor to software, we build the whole system.">
+<meta name="description" content="Grow room automation built by Legacy West Ventures: a Greenhouse Control Unit in every room, GCU Manager on site or GCU Cloud online, and the sensors, I/O and HVAC control to go with them.">
 <link rel="canonical" href="https://www.legacywestventures.com/solutions/indoor-agriculture.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Legacy West Ventures">
 <meta property="og:title" content="Indoor Agriculture Automation — Legacy West Ventures">
-<meta property="og:description" content="Complete greenhouse and indoor farm automation: climate control, fertigation, lighting, and environmental monitoring. From sensor to software, we build the whole system.">
+<meta property="og:description" content="Grow room automation built by Legacy West Ventures: a Greenhouse Control Unit in every room, GCU Manager on site or GCU Cloud online, and the sensors, I/O and HVAC control to go with them.">
 <meta property="og:url" content="https://www.legacywestventures.com/solutions/indoor-agriculture.html">
 <meta property="og:image" content="https://www.legacywestventures.com/images/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -46,6 +46,19 @@
   .cta-section p { color: rgba(255,255,255,0.85); margin-bottom: 24px; }
   .tech-stack { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
   .tech-tag { background: #ecfdf5; color: #166534; padding: 6px 14px; border-radius: 999px; font-size: 13px; font-weight: 600; }
+
+  /* GCU Manager / GCU Cloud spotlight */
+  .spotlight { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 32px; }
+  @media(max-width:860px) { .spotlight { grid-template-columns: 1fr; } }
+  .spot { border-radius: 20px; padding: 36px; color: #fff; display: flex; flex-direction: column; box-shadow: var(--shadow); }
+  .spot.manager { background: linear-gradient(135deg, #1e293b 0%, #334155 100%); }
+  .spot.cloud { background: linear-gradient(135deg, #0c4a6e 0%, #0284c7 100%); }
+  .spot .kicker { color: rgba(255,255,255,0.75); }
+  .spot h3 { font-size: 28px; margin: 8px 0 6px; color: #fff; }
+  .spot .tag { font-size: 15px; color: rgba(255,255,255,0.85); margin: 0 0 18px; }
+  .spot ul { margin: 0 0 24px; padding-left: 20px; color: rgba(255,255,255,0.9); }
+  .spot ul li { margin-bottom: 8px; }
+  .spot .btn { background: #fff; color: #0f172a; align-self: flex-start; margin-top: auto; }
 </style>
 </head>
 <body>
@@ -57,6 +70,7 @@
       <li><a href="../services.html">Services</a></li>
       <li><a href="./smart-buildings.html">Smart Buildings</a></li>
       <li><a href="./indoor-agriculture.html">Agriculture</a></li>
+      <li><a href="./gcu-platform.html">GCU Platform</a></li>
       <li><a href="./robotics.html">Robotics</a></li>
       <li><a href="../iot-sensors.html">Sensors</a></li>
       <li><a href="../iot-connectivity.html">Connectivity</a></li>
@@ -71,7 +85,7 @@
     <div class="container">
       <span class="kicker">Controlled Environment Agriculture</span>
       <h1>Indoor Farm &<br>Greenhouse Automation</h1>
-      <p class="lead">We build complete automation systems for indoor agriculture — from environmental sensors to fertigation controls to custom dashboards. One integrator, one system, one throat to choke.</p>
+      <p class="lead">We build the whole system for indoor agriculture — the controller in every room, the sensors and I/O around it, and the software your team watches it with: <strong>GCU Manager</strong> on site or <strong>GCU Cloud</strong> online. One integrator, one system, one throat to choke.</p>
       
       <div class="stats-row">
         <div class="stat">
@@ -109,7 +123,7 @@
         <div>
           <span class="kicker">Our Solution</span>
           <h2 class="h2">Unified Control, Single Source of Truth</h2>
-          <p class="muted">We design and deploy integrated automation systems where everything works together — climate, irrigation, fertigation, lighting, and monitoring — all visible and controllable from one interface.</p>
+          <p class="muted">We design and deploy integrated automation systems where everything works together — climate, lighting, CO<sub>2</sub>, irrigation and monitoring — all visible and controllable from one interface.</p>
           
           <ul class="capability-list">
             <li><span class="check">✓</span> One dashboard for entire operation</li>
@@ -123,68 +137,103 @@
     </div>
   </section>
 
+  <section class="solution-section" id="gcu">
+    <div class="container">
+      <span class="kicker">Our Platform</span>
+      <h2 class="h2">GCU Manager and GCU Cloud</h2>
+      <p class="muted" style="max-width:720px">A Greenhouse Control Unit runs each room on its own. Then choose how your team watches over it: on a server at your facility, or from anywhere in the cloud. Same grow programs, same alerts, same records.</p>
+      <div class="spotlight">
+        <div class="spot manager">
+          <span class="kicker">On-Site Solution</span>
+          <h3>GCU Manager</h3>
+          <p class="tag">A server at your facility. Your data never leaves the building.</p>
+          <ul>
+            <li>Every room on one screen, with or without internet</li>
+            <li>Grow programs, harvest records, crop photos and a nightly AI review</li>
+            <li>Proven on a 76-room cultivation facility</li>
+            <li>Integrator API for the software you already use</li>
+          </ul>
+          <a class="btn" href="./gcu-manager.html">Explore GCU Manager →</a>
+        </div>
+        <div class="spot cloud">
+          <span class="kicker">Cloud Solution</span>
+          <h3>GCU Cloud</h3>
+          <p class="tag">Nothing to install. Sign in from a phone, tablet or computer.</p>
+          <ul>
+            <li>Plain-language status and 24-hour trends for every room</li>
+            <li>Control equipment, schedules, rules and HVAC, confirmed by the GCU</li>
+            <li>Email alerts, daily insights and nightly AI Insights</li>
+            <li>Hosted, secured, backed up and updated by us</li>
+          </ul>
+          <a class="btn" href="./gcu-cloud.html">Explore GCU Cloud →</a>
+        </div>
+      </div>
+      <p style="margin-top:20px"><a href="./gcu-platform.html">See the whole GCU platform, including the hardware we build →</a></p>
+    </div>
+  </section>
+
   <section class="solution-section">
     <div class="container">
-      <span class="kicker">Subsystems We Integrate</span>
+      <span class="kicker">What the GCU Controls</span>
       <h2 class="h2">Everything Your Grow Needs, Working Together</h2>
       
       <div class="grid cards-3" style="margin-top: 32px;">
         <div class="subsystem-card">
           <h3><span class="icon">🌡️</span> Climate Control</h3>
-          <p class="muted">Temperature, humidity, CO2, and VPD management with precision HVAC integration. Day/night transitions, ramping, and setpoint scheduling.</p>
+          <p class="muted">Temperature, humidity, CO<sub>2</sub> and VPD held in range by sensor rules with deadbands. Day and night targets, mini-split HVAC driven directly by the GCU, dehumidification and CO<sub>2</sub> enrichment.</p>
           <div class="tech-stack">
-            <span class="tech-tag">HVAC</span>
+            <span class="tech-tag">Mini-split HVAC</span>
             <span class="tech-tag">Dehumidification</span>
             <span class="tech-tag">CO2 Injection</span>
           </div>
         </div>
         
         <div class="subsystem-card">
-          <h3><span class="icon">💧</span> Fertigation</h3>
-          <p class="muted">Nutrient mixing, pH/EC control, and precision irrigation scheduling. Zone-based dosing with recipe management and tank monitoring.</p>
+          <h3><span class="icon">💡</span> Lighting Control</h3>
+          <p class="muted">0-10 V dimming of LED fixtures with gradual sunrise and sunset ramps. Photoperiod and light level follow the grow program stage by stage.</p>
           <div class="tech-stack">
-            <span class="tech-tag">pH/EC</span>
-            <span class="tech-tag">Dosing Pumps</span>
-            <span class="tech-tag">Flow Meters</span>
+            <span class="tech-tag">0-10V Dimming</span>
+            <span class="tech-tag">Sunrise/Sunset Ramps</span>
+            <span class="tech-tag">Grow Programs</span>
           </div>
         </div>
         
         <div class="subsystem-card">
-          <h3><span class="icon">💡</span> Lighting Control</h3>
-          <p class="muted">LED dimming, photoperiod scheduling, and spectrum control. DLI tracking with sunrise/sunset simulation and blackout coordination.</p>
+          <h3><span class="icon">💧</span> Irrigation</h3>
+          <p class="muted">Timed runs on valves and pumps with a guard on how long any output may stay on. Watering records from your irrigation controller shown against the room's climate.</p>
           <div class="tech-stack">
-            <span class="tech-tag">0-10V Dimming</span>
-            <span class="tech-tag">DLI Tracking</span>
-            <span class="tech-tag">Scheduling</span>
+            <span class="tech-tag">Timed Runs</span>
+            <span class="tech-tag">On-Time Guard</span>
+            <span class="tech-tag">Watering Records</span>
           </div>
         </div>
         
         <div class="subsystem-card">
           <h3><span class="icon">📊</span> Environmental Monitoring</h3>
-          <p class="muted">Distributed sensors for temperature, humidity, light, CO2, and substrate moisture. Real-time mapping with historical trending.</p>
+          <p class="muted">Wired RS-485 Modbus sensors for CO<sub>2</sub>, temperature, humidity, light and leaf wetness. Primary and backup sensors side by side, with health shown on every reading.</p>
           <div class="tech-stack">
-            <span class="tech-tag">Wireless Sensors</span>
-            <span class="tech-tag">LoRaWAN</span>
-            <span class="tech-tag">Data Logging</span>
+            <span class="tech-tag">RS-485 Modbus</span>
+            <span class="tech-tag">Backup Sensors</span>
+            <span class="tech-tag">Sensor Health</span>
           </div>
         </div>
         
         <div class="subsystem-card">
           <h3><span class="icon">⚡</span> Equipment Control</h3>
-          <p class="muted">Pumps, fans, valves, and motors — all sequenced and interlocked. Safety shutoffs, run-time tracking, and maintenance alerts.</p>
+          <p class="muted">Fans, pumps, valves and dehumidifiers switched through our DIN-rail I/O module, with safe states if the bus goes quiet and run-time guards on every output.</p>
           <div class="tech-stack">
-            <span class="tech-tag">PLC/DDC</span>
-            <span class="tech-tag">VFDs</span>
-            <span class="tech-tag">Interlocks</span>
+            <span class="tech-tag">LWV-IO-4R2D</span>
+            <span class="tech-tag">Safe States</span>
+            <span class="tech-tag">Run-Time Guards</span>
           </div>
         </div>
         
         <div class="subsystem-card">
           <h3><span class="icon">📱</span> Dashboards & Alerts</h3>
-          <p class="muted">Custom web dashboards with real-time data, mobile alerts, and role-based access. Integration with existing crop management software.</p>
+          <p class="muted">GCU Manager or GCU Cloud: every room on one screen, email alerts that start and clear, role-based access and an activity log. An API for the software you already use.</p>
           <div class="tech-stack">
-            <span class="tech-tag">Web UI</span>
-            <span class="tech-tag">SMS/Email</span>
+            <span class="tech-tag">Web & Phone</span>
+            <span class="tech-tag">Email Alerts</span>
             <span class="tech-tag">API</span>
           </div>
         </div>
@@ -194,35 +243,35 @@
 
   <section class="solution-section" style="background: linear-gradient(135deg, #065f46 0%, #064e3b 100%); color: #fff;">
     <div class="container">
-      <span class="kicker" style="color: #34d399;">AI-Powered Growing</span>
-      <h2 class="h2" style="color: #fff;">Intelligent Agriculture with AI & Cloud</h2>
-      <p style="color: rgba(255,255,255,0.8); max-width: 700px;">We're bringing AI to controlled environment agriculture — from conversational control interfaces to cloud-powered optimization that learns from your crop data.</p>
+      <span class="kicker" style="color: #34d399;">AI in the Grow Room</span>
+      <h2 class="h2" style="color: #fff;">A Second Look at Every Room, Every Night</h2>
+      <p style="color: rgba(255,255,255,0.8); max-width: 700px;">AI review is part of both GCU Manager and GCU Cloud today. It reads the day's data for each room and reports what it finds, with the evidence behind every point. It suggests; it never changes a setting.</p>
       
       <div class="grid cards-3" style="margin-top: 32px;">
         <div class="subsystem-card" style="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2);">
-          <h3 style="color: #fff;"><span class="icon">🤖</span> AI Chatbot Control</h3>
-          <p style="color: rgba(255,255,255,0.7);">Natural language interfaces for grow operations. "What's the VPD in Zone 3?" or "Increase CO2 to 1200ppm" — talk to your facility like you talk to your team.</p>
+          <h3 style="color: #fff;"><span class="icon">🔍</span> Nightly Room Review</h3>
+          <p style="color: rgba(255,255,255,0.7);">Equipment working harder than last week, CO<sub>2</sub> vented by an exhaust schedule, rooms drifting apart, a sensor that stopped changing. Findings are checked against your data before you see them.</p>
           <div class="tech-stack">
-            <span class="tech-tag" style="background: rgba(52,211,153,0.3); color: #34d399;">Conversational AI</span>
-            <span class="tech-tag" style="background: rgba(52,211,153,0.3); color: #34d399;">Voice Control</span>
+            <span class="tech-tag" style="background: rgba(52,211,153,0.3); color: #34d399;">Grounded in Data</span>
+            <span class="tech-tag" style="background: rgba(52,211,153,0.3); color: #34d399;">Weekly Summary</span>
           </div>
         </div>
         
         <div class="subsystem-card" style="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2);">
-          <h3 style="color: #fff;"><span class="icon">🔗</span> MCP Integration</h3>
-          <p style="color: rgba(255,255,255,0.7);">Model Context Protocol connects AI assistants directly to your automation systems. Enable Claude, GPT, and other AI platforms to monitor and control your grow.</p>
+          <h3 style="color: #fff;"><span class="icon">📷</span> Photo Analysis</h3>
+          <p style="color: rgba(255,255,255,0.7);">Each day's crop photo compared with earlier ones and with the room's conditions. Growers give a thumbs up or down and the review learns what matters to them.</p>
           <div class="tech-stack">
-            <span class="tech-tag" style="background: rgba(52,211,153,0.3); color: #34d399;">MCP Servers</span>
-            <span class="tech-tag" style="background: rgba(52,211,153,0.3); color: #34d399;">AI Agents</span>
+            <span class="tech-tag" style="background: rgba(52,211,153,0.3); color: #34d399;">Crop Photos</span>
+            <span class="tech-tag" style="background: rgba(52,211,153,0.3); color: #34d399;">Grower Verdicts</span>
           </div>
         </div>
         
         <div class="subsystem-card" style="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2);">
-          <h3 style="color: #fff;"><span class="icon">☁️</span> Cloud Accelerators</h3>
-          <p style="color: rgba(255,255,255,0.7);">Azure AI, AWS, and edge computing for crop prediction, yield optimization, and anomaly detection. Machine learning models trained on your growing data.</p>
+          <h3 style="color: #fff;"><span class="icon">💬</span> Help Assistant</h3>
+          <p style="color: rgba(255,255,255,0.7);">Ask what a reading means or how a feature works, right from the page. Your data is never used to train models, and the review can be switched off for your site.</p>
           <div class="tech-stack">
-            <span class="tech-tag" style="background: rgba(52,211,153,0.3); color: #34d399;">Azure AI</span>
-            <span class="tech-tag" style="background: rgba(52,211,153,0.3); color: #34d399;">ML Models</span>
+            <span class="tech-tag" style="background: rgba(52,211,153,0.3); color: #34d399;">In-App Help</span>
+            <span class="tech-tag" style="background: rgba(52,211,153,0.3); color: #34d399;">Private by Design</span>
           </div>
         </div>
       </div>
