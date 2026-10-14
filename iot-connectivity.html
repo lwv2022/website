@@ -5,6 +5,14 @@
 <title>IoT Connectivity Services — Legacy West Ventures</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Managed LTE connectivity for IoT: preconfigured gateways, static IP option, remote monitoring, and support.">
+<link rel="canonical" href="https://www.legacywestventures.com/iot-connectivity.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Legacy West Ventures">
+<meta property="og:title" content="IoT Connectivity Services — Legacy West Ventures">
+<meta property="og:description" content="Managed LTE connectivity for IoT: preconfigured gateways, static IP option, remote monitoring, and support.">
+<meta property="og:url" content="https://www.legacywestventures.com/iot-connectivity.html">
+<meta property="og:image" content="https://www.legacywestventures.com/images/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
 
 <!-- Favicon -->
 <link rel="icon" type="image/png" sizes="32x32" href="./favicon.png">
@@ -12,12 +20,14 @@
 <link rel="shortcut icon" href="./favicon.png">
 
 <link rel="stylesheet" href="./assets/css/style.css">
+<script defer src="./assets/js/main.js"></script>
 </head>
 <body>
 <header class="header">
-  <div class="container nav">
+  <nav class="container nav" aria-label="Main">
     <a class="logo" href="./"><img src="./images/Legacy West Ventures (2021) - Rev3 - HOZ - Color_med.png" alt="Legacy West Ventures" height="48"></a>
-    <ul>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <ul id="nav-menu">
       <li><a href="./services.html">Services</a></li>
       <li><a href="./solutions/smart-buildings.html">Smart Buildings</a></li>
       <li><a href="./solutions/indoor-agriculture.html">Agriculture</a></li>
@@ -27,7 +37,7 @@
       <li><a href="./contact.html">Contact</a></li>
       <li><a class="btn" href="./contact.html">Get Started</a></li>
     </ul>
-  </div>
+  </nav>
 </header>
 
 <main>
@@ -46,7 +56,7 @@
         <div class="price">$30<span class="muted">/mo per line</span></div>
         <ul class="list">
           <li>2 GB LTE, then network may throttle to 256 kbps</li>
-          <li>Preconfigured enterprise‑grade IoT gateway</li>
+          <li>Runs on an LWV‑supplied Teltonika LTE gateway (sold or leased separately)</li>
           <li>Secure Cellular setup and testing by LWV</li>
           <li>1‑year minimum contract</li>
         </ul>
@@ -74,10 +84,13 @@
         </ul>
       </div>
     </div>
+  </section>
+
   <section class="section">
     <div class="container">
       <p class="notice"><strong>Setup fee:</strong> $65 per modem/line. Hardware priced separately. Shipping and taxes not included.</p>
       <p class="notice"><strong>Modem leasing option:</strong> Add $20-$30/mo to lease hardware as part of your service plan. After 1-year term, monthly rate drops by the leasing amount.</p>
+      <p class="notice"><strong>Annual prepay:</strong> Pay 12 months up front and save 15% ($306, $408, or $459 per line per year).</p>
     </div>
   </section>
 
@@ -142,7 +155,7 @@
         </div>
         <div class="card">
           <h3>Which hardware do I get?</h3>
-          <p class="muted">An enterprise‑grade LTE IoT gateway sized for your project. Model details available after order.</p>
+          <p class="muted">A Teltonika industrial LTE gateway sized for your project: the RUT2xx series for commercial sites, or the RUT9xx series for rugged and industrial deployments. We confirm the exact model with your quote.</p>
         </div>
         <div class="card">
           <h3>What are the terms?</h3>
@@ -157,6 +170,7 @@
   <div class="container">
     <div class="footer-content">
       <div>© 2020–<span id="y"></span> Legacy West Ventures</div>
+      <div class="notice">Shipping and taxes not included. Minimum 1‑year term. Setup fee applies per line.</div>
     </div>
     <div class="social-links">
       <a href="https://www.linkedin.com/company/lwviot" target="_blank" rel="noopener">LinkedIn</a>

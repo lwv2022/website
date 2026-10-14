@@ -1,22 +1,22 @@
 # Partner & Customer Logos
 
-This directory contains logos for Legacy West Ventures partners and customers.
+Logos shown in the partners grid on `index.html` and `services.html`.
 
-## Required Logo Files:
-- `trane-logo.png` - Trane Technologies logo
-- `santa-clara-county-logo.png` - Santa Clara County logo  
-- `bemis-logo.png` - BEMIS Manufacturing logo
-- `richs-products-logo.png` - Rich's Products logo
-- `demegrow-logo.png` - DemeGrow logo
-- `mwconnect-logo.png` - mwConnect logo
-- `daintree-logo.png` - Daintree logo
+| File | Company |
+|---|---|
+| `trane_technologies.svg` | Trane Technologies |
+| `santa_clara_county.jpg` | Santa Clara County |
+| `bemis.png` | BEMIS Manufacturing |
+| `richs_products.png` | Rich's Products |
+| `demegrow.webp` | DemeGrow |
+| `MWConnect_Logo_v2_Horiz-edit-2-23-24_2.png` | mwConnect |
+| `daintree.png` | Daintree |
+| `radiare_technologies.avif` | Radiare Technologies |
+| `nebula_grow.jpg` | Nebula Grow |
+| `arise_cannabis.png` | ARISE Cannabis |
 
-## Logo Requirements:
-- Format: PNG with transparent background preferred
-- Size: Approximately 300-400px wide, 120-150px tall
-- Resolution: 72-150 DPI for web use
-- Color: Full color logos preferred (grayscale effect applied via CSS)
-
-## Usage:
-Logos are displayed in a responsive grid on the home page with hover effects.
-All logos are filtered to grayscale by default and show full color on hover.
+## Adding a logo
+- Format: SVG, PNG, WebP, or AVIF with a transparent background where possible.
+- Size: roughly 300–400 px wide; CSS caps display at 140×60 px.
+- Logos render grayscale and switch to full color on hover (see `.partner-logo` in `assets/css/style.css`).
+- Add the `<div class="partner-logo">` block to both `index.html` and `services.html`.

@@ -1,0 +1,12 @@
+# OS / editor
+Thumbs.db
+.DS_Store
+*.log
+.vscode/
+
+# Jekyll build output (if built locally)
+_site/
+.jekyll-cache/
+
+# Internal files live in ../website-private, never in this public repo
+*.docx

@@ -1,5 +1,11 @@
 title: Legacy West Ventures
-description: Secure IoT connectivity. Simplified.
+description: IoT solutions for smart buildings and controlled environment agriculture.
+url: https://www.legacywestventures.com
 theme: null
 markdown: kramdown
 plugins: []
+exclude:
+  - README.md
+  - lwv-website.code-workspace
+  - docs/Brand-Guidelines.md
+  - images/partners/README.md
