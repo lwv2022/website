@@ -1,80 +1,125 @@
 # Legacy West Ventures Website - AI Agent Instructions
 
-## Architecture Overview
-This is a **static GitHub Pages site** for Legacy West Ventures, an IoT connectivity and automation company. Built with pure HTML/CSS/JS - no frameworks, bundlers, or build process.
+## Architecture
+Static GitHub Pages site with **pure HTML/CSS/JS** — no frameworks or build process. Pages deploy instantly on push to `main`.
 
-## Project Structure & Key Files
-- **Core Pages**: `index.html` (homepage), `services.html`, `contact.html`, `iot-connectivity.html`
-- **Styling**: Single CSS file at `assets/css/style.css` using CSS custom properties
-- **Assets**: `images/` (company logos, partner logos), `assets/js/main.js` (minimal JS)
-- **Config**: `CNAME` (custom domain), `_config.yml` (Jekyll settings for GitHub Pages)
-- **Partners**: `images/partners/` directory with 10+ partner/customer logos
-
-## Critical Development Patterns
-
-### CSS Architecture
-- **CSS Custom Properties**: All colors/styling defined in `:root` - modify there for theme changes
-- **Utility Classes**: `.container`, `.grid`, `.cards-3/.cards-4`, `.btn`, `.hero`, `.section`, `.kicker`
-- **Card System**: Consistent `.card` styling across all pages with shadow/border/radius
-- **Partner Logo Grid**: Special `.partners-grid` with grayscale-to-color hover effects
-
-### HTML Structure
-- **Consistent Navigation**: Same header across all pages with logo and navigation
-- **Section-Based Layout**: Each page uses `<section class="section">` blocks
-- **Footer Pattern**: Enhanced footer with social links and responsive design
-- **SEO/Meta**: Each page has proper meta tags, structured data (JSON-LD), and favicons
-
-### Partner Logo System
-- **File Management**: Partner logos stored in `images/partners/` with specific naming
-- **Dynamic Display**: Responsive grid showing 10 partners (Trane, Santa Clara County, etc.)
-- **Update Process**: Add new logos by placing files in partners folder and updating HTML references
-
-## Development Workflows
-
-### Local Development
-```bash
-# No build process - open directly in browser or use VS Code Live Server
-# Edit HTML/CSS directly, refresh browser to see changes
+## File Structure & Path Conventions
+```
+Root pages:     index.html, services.html, contact.html, iot-connectivity.html, iot-sensors.html
+Solution pages: solutions/{daintree,mwlink,smart-buildings,indoor-agriculture,robotics}.html
+Styling:        assets/css/style.css (single file, CSS custom properties)
+Partner logos:  images/partners/
 ```
 
-### Deployment
-```bash
-git add . && git commit -m "Description" && git push
-# Auto-deploys to GitHub Pages via main branch
-# Live at: https://lwv2022.github.io/website/ and www.legacywestventures.com
+**Critical path rule**: Root pages use `./` relative paths; solution pages use `../`:
+- Root: `<link rel="stylesheet" href="./assets/css/style.css">`
+- Solutions: `<link rel="stylesheet" href="../assets/css/style.css">`
+
+## Page Template Structure
+Every page follows this exact structure:
+```html
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Meta, favicon (3 link tags), stylesheet, optional <style> for page-specific CSS -->
+</head>
+<body>
+  <header class="header">...</header>  <!-- Copy from index.html, adjust paths -->
+  <main>
+    <section class="section">...</section>  <!-- Use kicker + h2 + cards pattern -->
+  </main>
+  <footer class="footer">...</footer>  <!-- Copy footer pattern -->
+  <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
+</body>
+</html>
 ```
 
-### Content Updates
-- **Pricing**: Edit pricing tiers in `iot-connectivity.html`
-- **Services**: Modify service cards in `services.html` and homepage
-- **Partners**: Add logo files to `images/partners/` and update grid HTML
-- **Styling**: All visual changes go through `assets/css/style.css`
-- **Contact Forms**: Replace `YOUR_FORM_ID` in `contact.html` for Formspree integration
+## CSS Architecture (assets/css/style.css)
+**Theme via CSS custom properties** — modify `:root` for global changes:
+```css
+:root { --bg:#fff; --text:#1e293b; --accent:#22b9e8; --card:#f8fafc; --border:#e2e8f0; }
+```
 
-## Business Context & Content Guidelines
-Legacy West Ventures provides IoT connectivity, smart building automation, wireless lighting controls, and controlled environment agriculture solutions. They partner with major companies (Trane Technologies, Santa Clara County, etc.) and serve warehouses, smart buildings, and indoor farms.
+**Core utility classes**:
+- Layout: `.container`, `.section`, `.hero`, `.grid`
+- Cards: `.cards-2`, `.cards-3`, `.cards-4` (auto-fit grids), `.card`
+- Typography: `.h2`, `.kicker` (accent uppercase label), `.muted`, `.lead`
+- Buttons: `.btn`, `.btn.ghost`
+- Partners: `.partners-grid`, `.partner-logo` (grayscale→color hover)
 
-### Key Service Areas
-1. **IoT Solutions**: Smart building automation, industrial IoT, connectivity services
-2. **Lighting Controls**: Daintree/Current, mwLink (TruBlu/Casambi), Bluetooth mesh platforms
-3. **Custom Software**: Dashboards, APIs, OpenADR implementation  
-4. **Agriculture**: Greenhouse automation, climate control, fertigation systems
+**Standard card markup**:
+```html
+<div class="card">
+  <span class="badge">Category</span>
+  <h3>Title</h3>
+  <p class="muted">Description text.</p>
+</div>
+```
 
-### Content Patterns
-- **Professional Tone**: B2B enterprise language, technical but accessible
-- **Benefit-Driven**: Focus on operational efficiency, energy savings, optimization
-- **Social Proof**: Emphasize partnerships, testimonials, industry experience
-- **Call-to-Actions**: "Get Started", "Talk to an expert", "Explore Services"
+## Adding New Content
 
-## Integration Points
-- **GitHub Pages**: Direct deployment from main branch, no CI/CD needed
-- **Custom Domain**: Uses CNAME file for www.legacywestventures.com
-- **Formspree**: Contact form integration (requires form ID replacement)
-- **LinkedIn**: Company page linked in footer across all pages
-- **Schema.org**: Structured data for organization info and SEO
+### New Partner Logo
+1. Add image to `images/partners/` (naming: `company_name.{png,svg,jpg}`)
+2. Insert in `index.html` partners grid:
+```html
+<div class="partner-logo">
+  <img src="./images/partners/filename.png" alt="Company Name" loading="lazy">
+</div>
+```
 
-## Common Maintenance Tasks
-- Adding new partners: Upload logo to `images/partners/`, update HTML grids on homepage and services page
-- Service updates: Modify card content in relevant HTML files, maintain consistency across pages  
-- Contact info changes: Update footer social links, contact page email addresses, and meta tags
-- Visual updates: Modify CSS custom properties for theme changes, ensure responsive design integrity
+### New Solution Page
+1. Copy `solutions/daintree.html` as template
+2. Update paths from `../` for all assets
+3. Add page-specific styles in `<style>` block if needed (see `hero-daintree` pattern)
+4. Add navigation link to all page headers
+
+## Navigation Updates
+When adding new pages, update the nav in **all HTML files**. Navigation is in each file's `<header class="header">`:
+```html
+<ul>
+  <li><a href="./services.html">Services</a></li>
+  <!-- ... other links ... -->
+  <li><a class="btn" href="./contact.html">Get Started</a></li>
+</ul>
+```
+
+## SEO & Structured Data
+Homepage includes JSON-LD for organization schema. Add to new pages if needed:
+```html
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Organization",
+  "name":"Legacy West Ventures",
+  "url":"https://legacywestventures.com"
+}
+</script>
+```
+
+## Documentation & Reference Files
+- `docs/brand-guidelines.html` — Standalone brand guide (self-contained CSS, print-ready)
+- `docs/teltonika/` — Product spec sheets (RUT241, RUT956 routers)
+- `IoT-Connectivity-Services.md`, `Milesight*.md` — Pricing/product reference (not published)
+
+## Content Guidelines
+- **Tone**: B2B professional, technical but accessible
+- **CTAs**: "Get Started", "Talk to an expert", "Explore Services"
+- **Email addresses**: sales@, support@, consulting@legacywestventures.com
+
+## Formspree Contact Form
+`contact.html` uses Formspree. Replace `YOUR_FORM_ID` with actual ID when deploying:
+```html
+<form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+```
+
+## Deployment
+```bash
+git add . && git commit -m "message" && git push
+# Auto-deploys to https://lwv2022.github.io/website/ and www.legacywestventures.com
+```
+
+## Key Reference Files
+- `index.html` — Homepage with partners grid, testimonials, hero pattern, JSON-LD
+- `assets/css/style.css` — All styling, CSS custom properties at `:root`
+- `solutions/daintree.html` — Example solution page with custom hero styling
+- `contact.html` — Formspree form pattern

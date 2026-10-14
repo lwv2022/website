@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Legacy West Ventures — Brand Guidelines</title>
+  <style>
+    @page {
+      size: letter;
+      margin: 0.75in;
+    }
+    
+    :root {
+      --bg: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --accent: #22b9e8;
+      --accent-ink: #ffffff;
+      --card: #f8fafc;
+      --border: #e2e8f0;
+    }
+    
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-size: 11pt;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--bg);
+      max-width: 8.5in;
+      margin: 0 auto;
+      padding: 0.5in;
+    }
+    
+    h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
+    h1 { font-size: 32pt; margin-bottom: 8px; }
+    h2 { font-size: 18pt; margin: 32px 0 16px; color: var(--accent); border-bottom: 2px solid var(--accent); padding-bottom: 8px; }
+    h3 { font-size: 14pt; margin: 20px 0 12px; }
+    h4 { font-size: 11pt; margin: 16px 0 8px; color: var(--muted); }
+    
+    p { margin-bottom: 12px; }
+    
+    .cover {
+      text-align: center;
+      padding: 2in 0;
+      page-break-after: always;
+    }
+    
+    .cover-logo {
+      font-size: 28pt;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+    
+    .cover-subtitle {
+      font-size: 14pt;
+      color: var(--muted);
+      margin-bottom: 48px;
+    }
+    
+    .cover-tagline {
+      font-size: 16pt;
+      color: var(--accent);
+      font-weight: 600;
+    }
+    
+    .version {
+      margin-top: 3in;
+      font-size: 10pt;
+      color: var(--muted);
+    }
+    
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 16px 0;
+    }
+    
+    .color-swatch {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    
+    .color-preview {
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+      font-size: 10pt;
+    }
+    
+    .color-info {
+      padding: 12px;
+      background: var(--card);
+      font-size: 10pt;
+    }
+    
+    .color-info strong { display: block; margin-bottom: 4px; }
+    .color-info code { font-family: monospace; color: var(--muted); }
+    
+    .font-sample {
+      padding: 20px;
+      background: var(--card);
+      border-radius: 12px;
+      margin: 12px 0;
+      border: 1px solid var(--border);
+    }
+    
+    .font-primary {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+    
+    .font-display { font-size: 28pt; font-weight: 800; line-height: 1.2; }
+    .font-heading { font-size: 18pt; font-weight: 700; line-height: 1.3; }
+    .font-body { font-size: 11pt; line-height: 1.6; }
+    .font-small { font-size: 9pt; color: var(--muted); }
+    
+    .spacing-box {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin: 16px 0;
+    }
+    
+    .spacing-item {
+      text-align: center;
+      padding: 12px;
+      background: var(--card);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      min-width: 80px;
+    }
+    
+    .spacing-visual {
+      background: var(--accent);
+      margin: 8px auto;
+      border-radius: 4px;
+    }
+    
+    .spacing-value { font-weight: 700; font-size: 14pt; }
+    .spacing-label { font-size: 9pt; color: var(--muted); }
+    
+    .do-dont {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin: 16px 0;
+    }
+    
+    .do-box, .dont-box {
+      padding: 16px;
+      border-radius: 12px;
+      border: 2px solid;
+    }
+    
+    .do-box {
+      border-color: #22c55e;
+      background: #f0fdf4;
+    }
+    
+    .dont-box {
+      border-color: #ef4444;
+      background: #fef2f2;
+    }
+    
+    .do-box h4 { color: #16a34a; margin-top: 0; }
+    .dont-box h4 { color: #dc2626; margin-top: 0; }
+    
+    .do-box ul, .dont-box ul {
+      margin: 0;
+      padding-left: 20px;
+      font-size: 10pt;
+    }
+    
+    .do-box li, .dont-box li { margin-bottom: 6px; }
+    
+    .example-box {
+      padding: 20px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin: 12px 0;
+    }
+    
+    .btn-example {
+      display: inline-block;
+      padding: 12px 18px;
+      border-radius: 12px;
+      background: var(--accent);
+      color: var(--accent-ink);
+      font-weight: 600;
+      margin-right: 12px;
+      margin-bottom: 8px;
+    }
+    
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+    
+    .kicker-example {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 10pt;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    
+    .badge-example {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #e6f7ff;
+      color: #1565c0;
+      font-size: 10pt;
+      font-weight: 700;
+    }
+    
+    .card-example {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 8px 24px rgba(2,6,23,.08);
+      max-width: 300px;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 10pt;
+    }
+    
+    th, td {
+      padding: 10px 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    th { 
+      background: var(--card); 
+      font-weight: 700;
+      color: var(--muted);
+      font-size: 9pt;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .page-break { page-break-before: always; }
+    
+    .toc {
+      background: var(--card);
+      padding: 24px;
+      border-radius: 12px;
+      margin: 24px 0;
+    }
+    
+    .toc ol {
+      margin: 0;
+      padding-left: 24px;
+    }
+    
+    .toc li {
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+    
+    .logo-example {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 20pt;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    @media print {
+      body { padding: 0; }
+      .page-break { page-break-before: always; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Cover Page -->
+  <div class="cover">
+    <div class="cover-logo">LEGACY WEST VENTURES</div>
+    <div class="cover-subtitle">Brand Guidelines</div>
+    <div class="cover-tagline">"Your Partner for Smart Building & Agriculture Technology"</div>
+    <div class="version">
+      Version 1.0<br>
+      January 2026
+    </div>
+  </div>
+
+  <!-- Table of Contents -->
+  <h2>Contents</h2>
+  <div class="toc">
+    <ol>
+      <li>Brand Overview & Tagline</li>
+      <li>Color Palette</li>
+      <li>Typography</li>
+      <li>Spacing & Layout</li>
+      <li>UI Components</li>
+      <li>Logo Usage</li>
+      <li>Do's and Don'ts</li>
+      <li>Voice & Tone</li>
+    </ol>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- 1. Brand Overview -->
+  <h2>1. Brand Overview</h2>
+  
+  <h3>About Legacy West Ventures</h3>
+  <p>Legacy West Ventures provides comprehensive IoT solutions, wireless lighting controls, custom dashboards, APIs, and advanced grow automation systems for smart buildings and controlled environment agriculture.</p>
+  
+  <h3>Our Tagline</h3>
+  <div class="example-box">
+    <p style="font-size: 16pt; font-weight: 600; color: var(--accent); margin: 0;">
+      "Your Partner for Smart Building & Agriculture Technology"
+    </p>
+  </div>
+  
+  <h4>Alternative Taglines (Approved)</h4>
+  <ul>
+    <li>"IoT & Automation Solutions"</li>
+    <li>"Secure, managed IoT connectivity for buildings, agriculture, and industrial systems"</li>
+  </ul>
+  
+  <h3>Brand Pillars</h3>
+  <table>
+    <tr>
+      <th>Pillar</th>
+      <th>Description</th>
+    </tr>
+    <tr>
+      <td><strong>Innovation</strong></td>
+      <td>Cutting-edge IoT and automation technology solutions</td>
+    </tr>
+    <tr>
+      <td><strong>Reliability</strong></td>
+      <td>Enterprise-grade systems that perform consistently</td>
+    </tr>
+    <tr>
+      <td><strong>Partnership</strong></td>
+      <td>Collaborative approach to solving complex challenges</td>
+    </tr>
+    <tr>
+      <td><strong>Efficiency</strong></td>
+      <td>Solutions that optimize operations and reduce costs</td>
+    </tr>
+  </table>
+
+  <div class="page-break"></div>
+
+  <!-- 2. Color Palette -->
+  <h2>2. Color Palette</h2>
+  
+  <h3>Primary Colors</h3>
+  <div class="color-grid">
+    <div class="color-swatch">
+      <div class="color-preview" style="background: #22b9e8;">Accent</div>
+      <div class="color-info">
+        <strong>Accent Blue</strong>
+        <code>HEX: #22b9e8</code><br>
+        <code>RGB: 34, 185, 232</code>
+      </div>
+    </div>
+    <div class="color-swatch">
+      <div class="color-preview" style="background: #1e293b;">Text</div>
+      <div class="color-info">
+        <strong>Primary Text</strong>
+        <code>HEX: #1e293b</code><br>
+        <code>RGB: 30, 41, 59</code>
+      </div>
+    </div>
+    <div class="color-swatch">
+      <div class="color-preview" style="background: #ffffff; color: #1e293b; border: 1px solid #e2e8f0;">BG</div>
+      <div class="color-info">
+        <strong>Background</strong>
+        <code>HEX: #ffffff</code><br>
+        <code>RGB: 255, 255, 255</code>
+      </div>
+    </div>
+  </div>
+  
+  <h3>Secondary Colors</h3>
+  <div class="color-grid">
+    <div class="color-swatch">
+      <div class="color-preview" style="background: #64748b;">Muted</div>
+      <div class="color-info">
+        <strong>Muted Text</strong>
+        <code>HEX: #64748b</code><br>
+        <code>RGB: 100, 116, 139</code>
+      </div>
+    </div>
+    <div class="color-swatch">
+      <div class="color-preview" style="background: #f8fafc; color: #1e293b;">Card</div>
+      <div class="color-info">
+        <strong>Card Background</strong>
+        <code>HEX: #f8fafc</code><br>
+        <code>RGB: 248, 250, 252</code>
+      </div>
+    </div>
+    <div class="color-swatch">
+      <div class="color-preview" style="background: #e2e8f0; color: #1e293b;">Border</div>
+      <div class="color-info">
+        <strong>Border</strong>
+        <code>HEX: #e2e8f0</code><br>
+        <code>RGB: 226, 232, 240</code>
+      </div>
+    </div>
+  </div>
+  
+  <h3>Accent Variations</h3>
+  <div class="color-grid">
+    <div class="color-swatch">
+      <div class="color-preview" style="background: #e6f7ff; color: #1565c0;">Badge BG</div>
+      <div class="color-info">
+        <strong>Badge Background</strong>
+        <code>HEX: #e6f7ff</code>
+      </div>
+    </div>
+    <div class="color-swatch">
+      <div class="color-preview" style="background: #1565c0;">Badge Text</div>
+      <div class="color-info">
+        <strong>Badge Text</strong>
+        <code>HEX: #1565c0</code>
+      </div>
+    </div>
+    <div class="color-swatch">
+      <div class="color-preview" style="background: rgba(2,6,23,.08); color: #1e293b;">Shadow</div>
+      <div class="color-info">
+        <strong>Shadow</strong>
+        <code>rgba(2,6,23,.08)</code>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- 3. Typography -->
+  <h2>3. Typography</h2>
+  
+  <h3>Primary Font Stack</h3>
+  <div class="example-box">
+    <code style="font-size: 10pt; color: var(--muted);">
+      system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif
+    </code>
+  </div>
+  <p>We use the system font stack for optimal performance and native feel across all platforms.</p>
+  
+  <h3>Type Scale</h3>
+  <div class="font-sample font-primary">
+    <div class="font-display">Display — 44px / 800 weight</div>
+    <p class="font-small">Used for hero headlines. Line height: 1.1</p>
+  </div>
+  
+  <div class="font-sample font-primary">
+    <div class="font-heading">Heading — 28px / 700 weight</div>
+    <p class="font-small">Used for section titles (h2). Line height: 1.3</p>
+  </div>
+  
+  <div class="font-sample font-primary">
+    <div style="font-size: 20px; color: var(--muted);">Lead — 20px / 400 weight</div>
+    <p class="font-small">Used for hero subtitles and introductions. Color: Muted</p>
+  </div>
+  
+  <div class="font-sample font-primary">
+    <div class="font-body">Body — 16px / 400 weight — Line height: 1.6</div>
+    <p class="font-small">Standard paragraph text for content.</p>
+  </div>
+  
+  <div class="font-sample font-primary">
+    <div style="font-size: 14px;">Small — 14px</div>
+    <p class="font-small">Used for footer text, notices, and secondary information.</p>
+  </div>
+  
+  <div class="font-sample font-primary">
+    <div class="kicker-example">KICKER — 12px / 700 / UPPERCASE / 0.16em spacing</div>
+    <p class="font-small">Used for section labels and category identifiers. Color: Accent Blue</p>
+  </div>
+  
+  <h3>Font Weights</h3>
+  <table>
+    <tr>
+      <th>Weight</th>
+      <th>Value</th>
+      <th>Usage</th>
+    </tr>
+    <tr>
+      <td>Regular</td>
+      <td>400</td>
+      <td>Body text, paragraphs</td>
+    </tr>
+    <tr>
+      <td>Bold</td>
+      <td>700</td>
+      <td>Headings, kickers, emphasis</td>
+    </tr>
+    <tr>
+      <td>Extra Bold</td>
+      <td>800</td>
+      <td>Display headlines, logo text, prices</td>
+    </tr>
+  </table>
+
+  <div class="page-break"></div>
+
+  <!-- 4. Spacing & Layout -->
+  <h2>4. Spacing & Layout</h2>
+  
+  <h3>Base Spacing Unit</h3>
+  <p>All spacing derives from a base unit of <strong>4px</strong>. Common spacing values:</p>
+  
+  <div class="spacing-box">
+    <div class="spacing-item">
+      <div class="spacing-value">10px</div>
+      <div class="spacing-visual" style="width: 10px; height: 10px;"></div>
+      <div class="spacing-label">XS</div>
+    </div>
+    <div class="spacing-item">
+      <div class="spacing-value">14px</div>
+      <div class="spacing-visual" style="width: 14px; height: 14px;"></div>
+      <div class="spacing-label">SM</div>
+    </div>
+    <div class="spacing-item">
+      <div class="spacing-value">20px</div>
+      <div class="spacing-visual" style="width: 20px; height: 20px;"></div>
+      <div class="spacing-label">MD</div>
+    </div>
+    <div class="spacing-item">
+      <div class="spacing-value">30px</div>
+      <div class="spacing-visual" style="width: 30px; height: 30px;"></div>
+      <div class="spacing-label">LG</div>
+    </div>
+    <div class="spacing-item">
+      <div class="spacing-value">48px</div>
+      <div class="spacing-visual" style="width: 48px; height: 48px;"></div>
+      <div class="spacing-label">XL</div>
+    </div>
+  </div>
+  
+  <h3>Layout Values</h3>
+  <table>
+    <tr>
+      <th>Element</th>
+      <th>Value</th>
+    </tr>
+    <tr>
+      <td>Container max-width</td>
+      <td>1140px</td>
+    </tr>
+    <tr>
+      <td>Container padding</td>
+      <td>20px (horizontal)</td>
+    </tr>
+    <tr>
+      <td>Header height</td>
+      <td>80px</td>
+    </tr>
+    <tr>
+      <td>Section padding</td>
+      <td>48px (vertical)</td>
+    </tr>
+    <tr>
+      <td>Hero padding</td>
+      <td>72px top, 40px bottom</td>
+    </tr>
+    <tr>
+      <td>Card padding</td>
+      <td>20px</td>
+    </tr>
+    <tr>
+      <td>Grid gap</td>
+      <td>20px</td>
+    </tr>
+    <tr>
+      <td>Navigation gap</td>
+      <td>20px</td>
+    </tr>
+  </table>
+  
+  <h3>Border Radius</h3>
+  <table>
+    <tr>
+      <th>Element</th>
+      <th>Radius</th>
+    </tr>
+    <tr>
+      <td>Cards, Tiers</td>
+      <td>16px</td>
+    </tr>
+    <tr>
+      <td>Buttons, Inputs</td>
+      <td>12px</td>
+    </tr>
+    <tr>
+      <td>Partner logos</td>
+      <td>12px</td>
+    </tr>
+    <tr>
+      <td>Badges</td>
+      <td>999px (pill shape)</td>
+    </tr>
+  </table>
+
+  <div class="page-break"></div>
+
+  <!-- 5. UI Components -->
+  <h2>5. UI Components</h2>
+  
+  <h3>Buttons</h3>
+  <div class="example-box">
+    <span class="btn-example">Primary Button</span>
+    <span class="btn-example btn-ghost">Ghost Button</span>
+  </div>
+  <table>
+    <tr>
+      <th>Property</th>
+      <th>Primary</th>
+      <th>Ghost</th>
+    </tr>
+    <tr>
+      <td>Background</td>
+      <td>#22b9e8</td>
+      <td>Transparent</td>
+    </tr>
+    <tr>
+      <td>Text Color</td>
+      <td>#ffffff</td>
+      <td>#1e293b</td>
+    </tr>
+    <tr>
+      <td>Border</td>
+      <td>None</td>
+      <td>1px solid #e2e8f0</td>
+    </tr>
+    <tr>
+      <td>Padding</td>
+      <td>12px 18px</td>
+      <td>12px 18px</td>
+    </tr>
+    <tr>
+      <td>Border Radius</td>
+      <td>12px</td>
+      <td>12px</td>
+    </tr>
+  </table>
+  
+  <h3>Kickers & Badges</h3>
+  <div class="example-box">
+    <p><span class="kicker-example">KICKER TEXT</span></p>
+    <p><span class="badge-example">Badge Label</span></p>
+  </div>
+  
+  <h3>Cards</h3>
+  <div class="card-example">
+    <span class="badge-example">Category</span>
+    <h3 style="margin: 12px 0 8px;">Card Title</h3>
+    <p style="color: var(--muted); margin: 0; font-size: 10pt;">Card description text goes here with supporting information.</p>
+  </div>
+  
+  <h3>Shadow</h3>
+  <p>Standard shadow for elevated elements:</p>
+  <code>box-shadow: 0 8px 24px rgba(2, 6, 23, 0.08)</code>
+
+  <div class="page-break"></div>
+
+  <!-- 6. Logo Usage -->
+  <h2>6. Logo Usage</h2>
+  
+  <h3>Primary Logo</h3>
+  <p>The Legacy West Ventures logo should be used in its horizontal format. The logo includes the company name in bold, clean typography.</p>
+  
+  <div class="example-box">
+    <div class="logo-example">
+      LEGACY WEST VENTURES
+    </div>
+  </div>
+  
+  <h3>Logo Specifications</h3>
+  <table>
+    <tr>
+      <th>Property</th>
+      <th>Value</th>
+    </tr>
+    <tr>
+      <td>Primary Logo File</td>
+      <td>Legacy West Ventures (2021) - Rev3 - HOZ - Color_med.png</td>
+    </tr>
+    <tr>
+      <td>Header Logo Height</td>
+      <td>68px</td>
+    </tr>
+    <tr>
+      <td>Max Width</td>
+      <td>250px</td>
+    </tr>
+    <tr>
+      <td>Clear Space</td>
+      <td>Minimum 20px on all sides</td>
+    </tr>
+  </table>
+  
+  <h3>Logo Clear Space</h3>
+  <p>Always maintain adequate clear space around the logo. The minimum clear space is equal to the height of the "L" in Legacy.</p>
+  
+  <h3>Minimum Size</h3>
+  <p>Do not reproduce the logo smaller than 120px wide to ensure legibility.</p>
+
+  <div class="page-break"></div>
+
+  <!-- 7. Do's and Don'ts -->
+  <h2>7. Do's and Don'ts</h2>
+  
+  <h3>Brand Colors</h3>
+  <div class="do-dont">
+    <div class="do-box">
+      <h4>✓ DO</h4>
+      <ul>
+        <li>Use #22b9e8 as the primary accent color</li>
+        <li>Use accent color for CTAs and highlights</li>
+        <li>Maintain sufficient contrast ratios</li>
+        <li>Use muted gray (#64748b) for secondary text</li>
+        <li>Keep backgrounds clean and minimal</li>
+      </ul>
+    </div>
+    <div class="dont-box">
+      <h4>✗ DON'T</h4>
+      <ul>
+        <li>Substitute the accent blue with other colors</li>
+        <li>Use low-contrast color combinations</li>
+        <li>Place colored text on colored backgrounds</li>
+        <li>Use gradients unless specifically approved</li>
+        <li>Add unapproved colors to the palette</li>
+      </ul>
+    </div>
+  </div>
+  
+  <h3>Typography</h3>
+  <div class="do-dont">
+    <div class="do-box">
+      <h4>✓ DO</h4>
+      <ul>
+        <li>Use the system font stack consistently</li>
+        <li>Follow the established type scale</li>
+        <li>Use uppercase for kickers only</li>
+        <li>Maintain proper line heights</li>
+        <li>Keep body text at 16px minimum</li>
+      </ul>
+    </div>
+    <div class="dont-box">
+      <h4>✗ DON'T</h4>
+      <ul>
+        <li>Use decorative or script fonts</li>
+        <li>Mix multiple font families</li>
+        <li>Use all caps for body text</li>
+        <li>Go below 12px for any text</li>
+        <li>Stretch or distort typography</li>
+      </ul>
+    </div>
+  </div>
+  
+  <h3>Logo</h3>
+  <div class="do-dont">
+    <div class="do-box">
+      <h4>✓ DO</h4>
+      <ul>
+        <li>Use official logo files only</li>
+        <li>Maintain clear space around logo</li>
+        <li>Use on white or light backgrounds</li>
+        <li>Scale proportionally</li>
+        <li>Ensure logo remains crisp and clear</li>
+      </ul>
+    </div>
+    <div class="dont-box">
+      <h4>✗ DON'T</h4>
+      <ul>
+        <li>Recreate or redraw the logo</li>
+        <li>Change logo colors arbitrarily</li>
+        <li>Add effects (shadows, glows, outlines)</li>
+        <li>Stretch, compress, or rotate</li>
+        <li>Place on busy or low-contrast backgrounds</li>
+      </ul>
+    </div>
+  </div>
+  
+  <h3>Content & Messaging</h3>
+  <div class="do-dont">
+    <div class="do-box">
+      <h4>✓ DO</h4>
+      <ul>
+        <li>Use professional B2B language</li>
+        <li>Focus on benefits and outcomes</li>
+        <li>Include clear calls-to-action</li>
+        <li>Mention efficiency, optimization, savings</li>
+        <li>Highlight partnerships and credibility</li>
+      </ul>
+    </div>
+    <div class="dont-box">
+      <h4>✗ DON'T</h4>
+      <ul>
+        <li>Use overly casual or slang language</li>
+        <li>Make unsubstantiated claims</li>
+        <li>Use excessive jargon without explanation</li>
+        <li>Neglect accessibility considerations</li>
+        <li>Copy competitor messaging</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- 8. Voice & Tone -->
+  <h2>8. Voice & Tone</h2>
+  
+  <h3>Brand Voice</h3>
+  <p>Legacy West Ventures communicates with a voice that is:</p>
+  
+  <table>
+    <tr>
+      <th>Attribute</th>
+      <th>Description</th>
+      <th>Example</th>
+    </tr>
+    <tr>
+      <td><strong>Professional</strong></td>
+      <td>B2B enterprise language that inspires confidence</td>
+      <td>"Comprehensive IoT solutions for seamless integration"</td>
+    </tr>
+    <tr>
+      <td><strong>Technical</strong></td>
+      <td>Knowledgeable but accessible</td>
+      <td>"OpenADR implementation for energy optimization"</td>
+    </tr>
+    <tr>
+      <td><strong>Solution-Oriented</strong></td>
+      <td>Focus on outcomes and benefits</td>
+      <td>"Optimize operations and drive efficiency"</td>
+    </tr>
+    <tr>
+      <td><strong>Collaborative</strong></td>
+      <td>Partnership-focused messaging</td>
+      <td>"Your Partner for Smart Building Technology"</td>
+    </tr>
+  </table>
+  
+  <h3>Key Phrases</h3>
+  <ul>
+    <li>"Get Started" — Primary CTA</li>
+    <li>"Talk to an expert" — Secondary CTA</li>
+    <li>"Explore Services" — Navigation CTA</li>
+    <li>"Optimize operations"</li>
+    <li>"Drive efficiency"</li>
+    <li>"Seamless integration"</li>
+  </ul>
+  
+  <h3>Avoid</h3>
+  <ul>
+    <li>Superlatives without evidence ("best", "only", "#1")</li>
+    <li>Overly promotional language</li>
+    <li>Complex technical jargon without context</li>
+    <li>Informal or casual expressions</li>
+  </ul>
+
+  <hr style="margin: 48px 0; border: none; border-top: 2px solid var(--border);">
+  
+  <p style="text-align: center; color: var(--muted);">
+    <strong>Legacy West Ventures</strong><br>
+    Brand Guidelines v1.0 — January 2026<br>
+    For questions, contact: sales@legacywestventures.com
+  </p>
+
+</body>
+</html>
