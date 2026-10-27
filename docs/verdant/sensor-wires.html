@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Verdant Sensor Wires</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#f5f4ee; --panel:#ffffff; --panel2:#e9efe8; --ink:#1c2a22; --muted:#5c6b62; --line:#d3dad3;
+  --green:#2e6b4a; --green-ink:#ffffff; --amber:#b86a12; --amber-bg:#fff2df; --red:#b03a2e; --red-bg:#fbe7e3;
+  --ok:#2e6b4a; --ok-bg:#e2f1e7; --copper:#b87333; --lever:#e8541e; --wred:#d12e2e; --wblk:#222222; --wblu:#2f6fd6; --wgry:#8c949a; --shadow:0 1px 2px rgba(20,40,30,.08);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#111a15; --panel:#182219; --panel2:#1f2c23; --ink:#e7ede8; --muted:#a3b2a8; --line:#33423a;
+    --green:#5fb283; --green-ink:#0d1a12; --amber:#e9a24a; --amber-bg:#2e2213; --red:#ee7b6e; --red-bg:#331c19;
+    --ok:#6dbb8c; --ok-bg:#16301f; --copper:#d98b4a; --lever:#ff7a45; --wred:#ff5b5b; --wblk:#9aa3a8; --wblu:#6ea2ff; --wgry:#7c858b; --shadow:none;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#111a15; --panel:#182219; --panel2:#1f2c23; --ink:#e7ede8; --muted:#a3b2a8; --line:#33423a;
+  --green:#5fb283; --green-ink:#0d1a12; --amber:#e9a24a; --amber-bg:#2e2213; --red:#ee7b6e; --red-bg:#331c19;
+  --ok:#6dbb8c; --ok-bg:#16301f; --copper:#d98b4a; --lever:#ff7a45; --wred:#ff5b5b; --wblk:#9aa3a8; --wblu:#6ea2ff; --wgry:#7c858b; --shadow:none;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:Barlow,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:18px;line-height:1.5;margin:0}
+.wrap{max-width:760px;margin:0 auto;padding-inline:16px;padding-block:8px 64px}
+h1,h2,h3{font-family:"Barlow Condensed","Arial Narrow",Arial,sans-serif;font-weight:700;line-height:1.1;text-wrap:balance;margin:0}
+h1{font-size:2.6rem;letter-spacing:.005em}
+h2{font-size:1.9rem;margin-top:2.4rem;margin-bottom:.6rem;padding-top:1.2rem;border-top:3px solid var(--green)}
+h3{font-size:1.25rem;margin-top:1.2rem;margin-bottom:.3rem}
+p{margin:.5rem 0}
+.eyebrow{font-size:.8rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-top:1.4rem}
+.lede{font-size:1.15rem;color:var(--muted);max-width:60ch}
+.summary{background:var(--panel2);border-left:6px solid var(--green);padding:14px 16px;margin-top:1rem;font-size:1.05rem}
+.summary b{color:var(--ink)}
+.callout{display:flex;gap:12px;padding:12px 14px;border-radius:6px;margin:1rem 0;font-size:1rem}
+.callout .ic{font-family:"Barlow Condensed",Arial,sans-serif;font-weight:700;font-size:1.3rem;line-height:1;flex:0 0 auto;margin-top:2px}
+.warn{background:var(--amber-bg);color:var(--ink);border:1px solid var(--amber)}
+.warn .ic{color:var(--amber)}
+.stop{background:var(--red-bg);border:1px solid var(--red)}
+.stop .ic{color:var(--red)}
+.good{background:var(--ok-bg);border:1px solid var(--ok)}
+.good .ic{color:var(--ok)}
+table{border-collapse:collapse;width:100%;margin:.6rem 0;background:var(--panel);box-shadow:var(--shadow)}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:"Barlow Condensed",Arial,sans-serif;font-size:1.05rem;font-weight:700;letter-spacing:.03em;background:var(--panel2)}
+td.mono,th.mono{font-variant-numeric:tabular-nums;white-space:nowrap}
+.tablewrap{overflow-x:auto}
+.check{display:inline-block;width:22px;height:22px;border:2px solid var(--muted);border-radius:4px;vertical-align:middle;margin-right:6px}
+.steps{list-style:none;padding:0;margin:0;counter-reset:s}
+.step{counter-increment:s;display:grid;grid-template-columns:52px 1fr;gap:12px;padding:16px 0;border-bottom:1px solid var(--line)}
+.step::before{content:counter(s);font-family:"Barlow Condensed",Arial,sans-serif;font-weight:700;font-size:2rem;line-height:1;color:var(--green-ink);background:var(--green);width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;grid-column:1;grid-row:1}
+.step > *{grid-column:2;min-width:0}
+.step h3{margin-top:6px}
+.step p{margin:.35rem 0}
+figure{margin:1rem 0;background:var(--panel);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+figure img{display:block;width:100%;height:auto;background:#fff}
+figure svg{display:block;width:100%;height:auto;background:var(--panel)}
+svg text{fill:var(--ink)}
+figcaption{font-size:.95rem;color:var(--muted);padding:8px 12px;border-top:1px solid var(--line)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.two{grid-template-columns:1fr}}
+.wires{list-style:none;padding:0;margin:.5rem 0;display:grid;gap:8px}
+.wires li{display:grid;grid-template-columns:44px 34px 1fr;gap:12px;align-items:center;background:var(--panel);border:1px solid var(--line);padding:8px 12px}
+.wires .n{font-family:"Barlow Condensed",Arial,sans-serif;font-weight:700;font-size:1.6rem;text-align:center;background:var(--panel2);border-radius:6px;padding:2px 0}
+.sw{width:26px;height:26px;border-radius:50%;border:2px solid var(--line)}
+.wires b{font-family:"Barlow Condensed",Arial,sans-serif;font-size:1.2rem}
+.wires span{color:var(--muted);font-size:.95rem}
+.svgtext{font-family:Barlow,Arial,sans-serif;font-size:15px;fill:var(--ink)}
+.svgmuted{font-family:Barlow,Arial,sans-serif;font-size:13px;fill:var(--muted)}
+.svghead{font-family:"Barlow Condensed",Arial,sans-serif;font-weight:700;font-size:20px;fill:var(--ink)}
+.svgnum{font-family:"Barlow Condensed",Arial,sans-serif;font-weight:700;font-size:26px;fill:var(--ink)}
+.contact{background:var(--panel);border:1px solid var(--line);padding:14px 16px;margin-top:1rem}
+.contact .addr{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:1.05rem;user-select:all;display:inline-block;padding:4px 8px;background:var(--panel2);border-radius:4px}
+button.copy{font:inherit;font-size:.9rem;font-weight:600;color:var(--green-ink);background:var(--green);border:0;border-radius:4px;padding:6px 12px;cursor:pointer;margin-left:8px}
+button.copy:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.foot{margin-top:2.5rem;color:var(--muted);font-size:.9rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Verdant Cultivation · Linthicum Heights MD</div>
+  <h1>Push the sensor wires in</h1>
+  <p class="lede">Three rooms have a new CO2 sensor the controller cannot hear. The box has power, the data line works, so the fix is almost certainly a sensor wire that is not gripped in its connector. No tools, about two minutes per room.</p>
+
+  <div class="summary">
+    <b>The whole job, in one line:</b> open the grey box, find the row of <b>five</b> orange-lever connectors, lift each lever on <b>2, 3, 4 and 5</b>, push the wire in until it stops, drop the lever, tug.
+  </div>
+
+  <h2>Rooms to do</h2>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Done</th><th>Room</th><th class="mono">Controller label</th></tr></thead>
+    <tbody>
+      <tr><td><span class="check"></span></td><td>C1</td><td class="mono">GCU_3184</td></tr>
+      <tr><td><span class="check"></span></td><td>C3</td><td class="mono">GCUCE9C</td></tr>
+      <tr><td><span class="check"></span></td><td>C4</td><td class="mono">GCUA830</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="callout good"><div class="ic">OK</div><div><b>B3 and B4 are done.</b> Their new sensors started reading on October 27. The other rooms are fine.</div></div>
+
+  <h2>Inside the box</h2>
+  <p>Two rows of connectors with orange levers. The sensor cable lands on the <b>lower row of five</b>, under the white controller module.</p>
+  <figure>
+    <svg viewBox="0 0 720 420" role="img" aria-label="Simplified drawing of the inside of the grey box: a top row of eight connectors marked leave alone, a white controller module at the lower left, a row of five connectors numbered 1 to 5 in the middle marked sensor wires go here, and a black power converter at the right.">
+      <rect x="10" y="10" width="700" height="400" rx="14" style="fill:var(--panel2);stroke:var(--line);stroke-width:2"/>
+      <!-- top row of 8 -->
+      <rect x="150" y="40" width="420" height="20" rx="3" style="fill:var(--wgry);opacity:.45"/>
+      <g>
+        <rect x="190" y="30" width="36" height="78" rx="4" style="fill:#5a5f63"/><rect x="194" y="30" width="28" height="18" rx="3" style="fill:var(--lever)"/>
+        <rect x="234" y="30" width="36" height="78" rx="4" style="fill:#5a5f63"/><rect x="238" y="30" width="28" height="18" rx="3" style="fill:var(--lever)"/>
+        <rect x="278" y="30" width="36" height="78" rx="4" style="fill:#5a5f63"/><rect x="282" y="30" width="28" height="18" rx="3" style="fill:var(--lever)"/>
+        <rect x="322" y="30" width="36" height="78" rx="4" style="fill:#5a5f63"/><rect x="326" y="30" width="28" height="18" rx="3" style="fill:var(--lever)"/>
+        <rect x="366" y="30" width="36" height="78" rx="4" style="fill:#5a5f63"/><rect x="370" y="30" width="28" height="18" rx="3" style="fill:var(--lever)"/>
+        <rect x="410" y="30" width="36" height="78" rx="4" style="fill:#5a5f63"/><rect x="414" y="30" width="28" height="18" rx="3" style="fill:var(--lever)"/>
+        <rect x="454" y="30" width="36" height="78" rx="4" style="fill:#5a5f63"/><rect x="458" y="30" width="28" height="18" rx="3" style="fill:var(--lever)"/>
+        <rect x="498" y="30" width="36" height="78" rx="4" style="fill:#5a5f63"/><rect x="502" y="30" width="28" height="18" rx="3" style="fill:var(--lever)"/>
+      </g>
+      <text x="360" y="136" text-anchor="middle" class="svghead" style="fill:var(--red)">Top row of 8 — leave alone</text>
+      <!-- white module -->
+      <rect x="60" y="210" width="140" height="170" rx="10" style="fill:#fff;stroke:var(--line);stroke-width:2"/>
+      <rect x="80" y="225" width="100" height="18" rx="3" style="fill:#4caf50;opacity:.7"/>
+      <rect x="80" y="350" width="100" height="18" rx="3" style="fill:#4caf50;opacity:.7"/>
+      <text x="130" y="300" text-anchor="middle" class="svgmuted">controller</text>
+      <text x="130" y="318" text-anchor="middle" class="svgmuted">module</text>
+      <!-- row of 5 -->
+      <rect x="236" y="276" width="260" height="18" rx="3" style="fill:var(--wgry);opacity:.45"/>
+      <g>
+        <rect x="246" y="250" width="40" height="110" rx="5" style="fill:#5a5f63"/><rect x="251" y="250" width="30" height="22" rx="3" style="fill:var(--lever)"/><rect x="251" y="338" width="30" height="22" rx="3" style="fill:var(--lever)"/>
+        <rect x="296" y="250" width="40" height="110" rx="5" style="fill:#5a5f63"/><rect x="301" y="250" width="30" height="22" rx="3" style="fill:var(--lever)"/><rect x="301" y="338" width="30" height="22" rx="3" style="fill:var(--lever)"/>
+        <rect x="346" y="250" width="40" height="110" rx="5" style="fill:#5a5f63"/><rect x="351" y="250" width="30" height="22" rx="3" style="fill:var(--lever)"/><rect x="351" y="338" width="30" height="22" rx="3" style="fill:var(--lever)"/>
+        <rect x="396" y="250" width="40" height="110" rx="5" style="fill:#5a5f63"/><rect x="401" y="250" width="30" height="22" rx="3" style="fill:var(--lever)"/><rect x="401" y="338" width="30" height="22" rx="3" style="fill:var(--lever)"/>
+        <rect x="446" y="250" width="40" height="110" rx="5" style="fill:#5a5f63"/><rect x="451" y="250" width="30" height="22" rx="3" style="fill:var(--lever)"/><rect x="451" y="338" width="30" height="22" rx="3" style="fill:var(--lever)"/>
+        <rect x="251" y="290" width="30" height="30" rx="3" style="fill:#fff"/><text x="266" y="313" text-anchor="middle" class="svgnum">1</text>
+        <rect x="301" y="290" width="30" height="30" rx="3" style="fill:#fff"/><text x="316" y="313" text-anchor="middle" class="svgnum">2</text>
+        <rect x="351" y="290" width="30" height="30" rx="3" style="fill:#fff"/><text x="366" y="313" text-anchor="middle" class="svgnum">3</text>
+        <rect x="401" y="290" width="30" height="30" rx="3" style="fill:#fff"/><text x="416" y="313" text-anchor="middle" class="svgnum">4</text>
+        <rect x="451" y="290" width="30" height="30" rx="3" style="fill:#fff"/><text x="466" y="313" text-anchor="middle" class="svgnum">5</text>
+      </g>
+      <rect x="226" y="236" width="280" height="138" rx="10" style="fill:none;stroke:var(--ok);stroke-width:4;stroke-dasharray:10 6"/>
+      <text x="366" y="400" text-anchor="middle" class="svghead" style="fill:var(--ok)">Row of 5 — sensor wires go here</text>
+      <!-- converter -->
+      <rect x="540" y="250" width="150" height="110" rx="8" style="fill:#2b2f33"/>
+      <text x="615" y="300" text-anchor="middle" class="svgmuted" style="fill:#ddd">power</text>
+      <text x="615" y="318" text-anchor="middle" class="svgmuted" style="fill:#ddd">converter</text>
+      <text x="615" y="384" text-anchor="middle" class="svgmuted">leave alone</text>
+    </svg>
+    <figcaption>Drawn to match the box. Only the row of five matters today.</figcaption>
+  </figure>
+  <figure>
+    <img src="img/gcu-box.jpg" alt="Photo of the open grey box: the lid label on the left, the top row of eight orange-lever connectors, the white controller module, the row of five connectors numbered 1 to 5, and the black TOBSUN power converter on the right.">
+    <figcaption>The same box in a photo. The numbered white tags on the connectors match the numbers in this guide.</figcaption>
+  </figure>
+
+  <h2>The five positions</h2>
+  <p>Numbers are printed on the white tags. The wire colours are what you should see.</p>
+  <figure>
+    <svg viewBox="0 0 720 300" role="img" aria-label="Five connectors numbered 1 to 5 drawn large. Position 1 holds a grey wire and is marked not the sensor. Position 2 holds a red wire marked 12 volt. Position 3 holds a black wire marked ground. Position 4 holds wire A and position 5 wire B, marked data. Positions 2 to 5 are highlighted as the four to reseat.">
+      <g>
+        <rect x="40" y="40" width="100" height="160" rx="8" style="fill:#5a5f63"/><rect x="52" y="40" width="76" height="30" rx="4" style="fill:var(--lever)"/>
+        <rect x="170" y="40" width="100" height="160" rx="8" style="fill:#5a5f63"/><rect x="182" y="40" width="76" height="30" rx="4" style="fill:var(--lever)"/>
+        <rect x="300" y="40" width="100" height="160" rx="8" style="fill:#5a5f63"/><rect x="312" y="40" width="76" height="30" rx="4" style="fill:var(--lever)"/>
+        <rect x="430" y="40" width="100" height="160" rx="8" style="fill:#5a5f63"/><rect x="442" y="40" width="76" height="30" rx="4" style="fill:var(--lever)"/>
+        <rect x="560" y="40" width="100" height="160" rx="8" style="fill:#5a5f63"/><rect x="572" y="40" width="76" height="30" rx="4" style="fill:var(--lever)"/>
+        <!-- number tags -->
+        <rect x="66" y="98" width="48" height="44" rx="4" style="fill:#fff"/><text x="90" y="131" text-anchor="middle" class="svgnum" style="font-size:34px">1</text>
+        <rect x="196" y="98" width="48" height="44" rx="4" style="fill:#fff"/><text x="220" y="131" text-anchor="middle" class="svgnum" style="font-size:34px">2</text>
+        <rect x="326" y="98" width="48" height="44" rx="4" style="fill:#fff"/><text x="350" y="131" text-anchor="middle" class="svgnum" style="font-size:34px">3</text>
+        <rect x="456" y="98" width="48" height="44" rx="4" style="fill:#fff"/><text x="480" y="131" text-anchor="middle" class="svgnum" style="font-size:34px">4</text>
+        <rect x="586" y="98" width="48" height="44" rx="4" style="fill:#fff"/><text x="610" y="131" text-anchor="middle" class="svgnum" style="font-size:34px">5</text>
+        <!-- wires coming out the bottom -->
+        <rect x="84" y="200" width="12" height="60" rx="6" style="fill:var(--wgry)"/>
+        <rect x="214" y="200" width="12" height="60" rx="6" style="fill:var(--wred)"/>
+        <rect x="344" y="200" width="12" height="60" rx="6" style="fill:var(--wblk)"/>
+        <rect x="474" y="200" width="12" height="60" rx="6" style="fill:var(--wblu)"/>
+        <rect x="604" y="200" width="12" height="60" rx="6" style="fill:var(--wblu)"/>
+      </g>
+      <rect x="160" y="30" width="510" height="180" rx="12" style="fill:none;stroke:var(--ok);stroke-width:4;stroke-dasharray:10 6"/>
+      <text x="90" y="285" text-anchor="middle" class="svgtext" style="fill:var(--muted)">not the sensor</text>
+      <text x="220" y="285" text-anchor="middle" class="svgtext" font-weight="600">red · 12 V</text>
+      <text x="350" y="285" text-anchor="middle" class="svgtext" font-weight="600">black · ground</text>
+      <text x="480" y="285" text-anchor="middle" class="svgtext" font-weight="600">data A</text>
+      <text x="610" y="285" text-anchor="middle" class="svgtext" font-weight="600">data B</text>
+    </svg>
+    <figcaption>Reseat the four inside the dashed box: 2, 3, 4 and 5. Position 1 is the light dimmer and is not part of this.</figcaption>
+  </figure>
+  <ul class="wires">
+    <li><span class="n">2</span><span class="sw" style="background:var(--wred)"></span><div><b>Red</b> <span>— 12 V power to the sensor</span></div></li>
+    <li><span class="n">3</span><span class="sw" style="background:var(--wblk)"></span><div><b>Black</b> <span>— ground</span></div></li>
+    <li><span class="n">4</span><span class="sw" style="background:var(--wblu)"></span><div><b>Data A</b> <span>— the sensor's A wire</span></div></li>
+    <li><span class="n">5</span><span class="sw" style="background:var(--wblu)"></span><div><b>Data B</b> <span>— the sensor's B wire</span></div></li>
+  </ul>
+  <figure>
+    <img src="img/sensor-block.jpg" alt="Close-up photo of the row of five connectors with their orange levers and white number tags, the white controller module to the left and the black converter to the right.">
+    <figcaption>Close-up of the row of five. Press the orange lever on the side the wire goes in.</figcaption>
+  </figure>
+
+  <h2>How the connector works</h2>
+  <p>These connectors have no screws. The orange lever opens a spring clamp. A wire that is pushed in with the lever <b>down</b> only goes part way and may not be gripped at all.</p>
+  <figure>
+    <svg viewBox="0 0 720 380" role="img" aria-label="Four panels. One: lever lifted, the clamp inside is open. Two: the wire is pushed in until it stops. Three: the lever is pushed down and the clamp grips the bare copper. Four: a gentle pull on the wire, it does not move.">
+      <!-- panel helper shapes drawn four times -->
+      <g transform="translate(10,20)">
+        <text x="80" y="18" text-anchor="middle" class="svghead">1 · Lift</text>
+<g transform="translate(0,48)">        <rect x="30" y="40" width="100" height="150" rx="8" style="fill:#5a5f63"/>
+        <rect x="40" y="26" width="76" height="30" rx="4" transform="rotate(-35 40 56)" style="fill:var(--lever)"/>
+        <rect x="55" y="110" width="50" height="46" rx="3" style="fill:var(--panel2)"/>
+        <rect x="55" y="110" width="50" height="10" style="fill:var(--copper);opacity:.5"/>
+        <text x="80" y="228" text-anchor="middle" class="svgtext">Lift the orange</text>
+        <text x="80" y="248" text-anchor="middle" class="svgtext">lever right up.</text>
+        <text x="80" y="272" text-anchor="middle" class="svgmuted">The clamp opens.</text></g>
+      </g>
+      <g transform="translate(185,20)">
+        <text x="80" y="18" text-anchor="middle" class="svghead">2 · Push</text>
+<g transform="translate(0,48)">        <rect x="30" y="40" width="100" height="150" rx="8" style="fill:#5a5f63"/>
+        <rect x="40" y="26" width="76" height="30" rx="4" transform="rotate(-35 40 56)" style="fill:var(--lever)"/>
+        <rect x="55" y="110" width="50" height="46" rx="3" style="fill:var(--panel2)"/>
+        <rect x="55" y="110" width="50" height="10" style="fill:var(--copper);opacity:.5"/>
+        <rect x="74" y="120" width="12" height="130" rx="6" style="fill:var(--wred)"/>
+        <rect x="76" y="114" width="8" height="30" style="fill:var(--copper)"/>
+        <path d="M80 262 L80 236 M72 246 L80 236 L88 246" fill="none" stroke-width="4" style="stroke:var(--ink)"/>
+        <text x="80" y="290" text-anchor="middle" class="svgtext">Push the wire in</text>
+        <text x="80" y="310" text-anchor="middle" class="svgtext">until it stops.</text></g>
+      </g>
+      <g transform="translate(360,20)">
+        <text x="80" y="18" text-anchor="middle" class="svghead">3 · Close</text>
+<g transform="translate(0,48)">        <rect x="30" y="40" width="100" height="150" rx="8" style="fill:#5a5f63"/>
+        <rect x="42" y="40" width="76" height="30" rx="4" style="fill:var(--lever)"/>
+        <rect x="55" y="110" width="50" height="46" rx="3" style="fill:var(--panel2)"/>
+        <rect x="55" y="110" width="50" height="22" style="fill:var(--copper);opacity:.85"/>
+        <rect x="74" y="120" width="12" height="130" rx="6" style="fill:var(--wred)"/>
+        <rect x="76" y="114" width="8" height="30" style="fill:var(--copper)"/>
+        <text x="80" y="290" text-anchor="middle" class="svgtext">Push the lever</text>
+        <text x="80" y="310" text-anchor="middle" class="svgtext">back down.</text></g>
+      </g>
+      <g transform="translate(535,20)">
+        <text x="80" y="18" text-anchor="middle" class="svghead">4 · Tug</text>
+<g transform="translate(0,48)">        <rect x="30" y="40" width="100" height="150" rx="8" style="fill:#5a5f63"/>
+        <rect x="42" y="40" width="76" height="30" rx="4" style="fill:var(--lever)"/>
+        <rect x="55" y="110" width="50" height="46" rx="3" style="fill:var(--panel2)"/>
+        <rect x="55" y="110" width="50" height="22" style="fill:var(--copper);opacity:.85"/>
+        <rect x="74" y="120" width="12" height="130" rx="6" style="fill:var(--wred)"/>
+        <rect x="76" y="114" width="8" height="30" style="fill:var(--copper)"/>
+        <path d="M80 232 L80 262 M72 252 L80 262 L88 252" fill="none" stroke-width="4" style="stroke:var(--ok)"/>
+        <text x="80" y="290" text-anchor="middle" class="svgtext" font-weight="600" style="fill:var(--ok)">Gentle pull.</text>
+        <text x="80" y="310" text-anchor="middle" class="svgtext" font-weight="600" style="fill:var(--ok)">It must not move.</text></g>
+      </g>
+    </svg>
+    <figcaption>Lift, push, close, tug. Do this on positions 2, 3, 4 and 5 in each room.</figcaption>
+  </figure>
+
+  <h2>Steps for each room</h2>
+  <ol class="steps">
+    <li class="step">
+      <h3>Open the grey box</h3>
+      <p>Leave the power on. Find the lower row of five connectors, under the white controller module.</p>
+    </li>
+    <li class="step">
+      <h3>Position 2 — red wire</h3>
+      <p>Lift the orange lever. Push the red wire in until it stops. Close the lever. Tug it.</p>
+    </li>
+    <li class="step">
+      <h3>Position 3 — black wire</h3>
+      <p>Same again: lift, push, close, tug.</p>
+    </li>
+    <li class="step">
+      <h3>Positions 4 and 5 — the two data wires</h3>
+      <p>Same again on both. Do not swap them with each other.</p>
+    </li>
+    <li class="step">
+      <h3>Close the box and wait two minutes</h3>
+      <p>The sensor warms up, then its readings appear on the room's page in GCU Cloud. We can see it from our side too.</p>
+    </li>
+  </ol>
+
+  <div class="callout warn"><div class="ic">!</div><div><b>If a wire slides out</b> when you tug it, its bare end is too short. Strip about 10 mm of insulation and push it in again with the lever up.</div></div>
+  <div class="callout stop"><div class="ic">STOP</div><div>Do not move wires between positions. Red stays on 2, black on 3. If the data wires end up swapped the sensor stays silent.</div></div>
+
+  <h2>When you are done</h2>
+  <div class="contact">
+    <p style="margin-top:0"><b>Send one photo per room</b> of the row of five with the wires in, to:</p>
+    <p><span class="addr" id="addr">support@legacywestventures.com</span><button class="copy" id="copyBtn" type="button">Copy</button></p>
+    <p style="margin-bottom:0;color:var(--muted);font-size:.95rem">Put the room name in the subject line. We confirm each room from our side as soon as its sensor answers.</p>
+  </div>
+
+  <p class="foot">Prepared by LWV Engineering for Verdant Cultivation, October 27, 2026.</p>
+</div>
+
+<script>
+(function(){
+  var btn=document.getElementById('copyBtn'), addr=document.getElementById('addr');
+  if(!btn) return;
+  btn.addEventListener('click',function(){
+    var text=addr.textContent;
+    function fallback(){
+      try{var r=document.createRange();r.selectNodeContents(addr);var s=window.getSelection();s.removeAllRanges();s.addRange(r);btn.textContent='Selected';}catch(e){btn.textContent='Copy';}
+      setTimeout(function(){btn.textContent='Copy';},1800);
+    }
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy';},1800);}).catch(fallback);
+    } else { fallback(); }
+  });
+})();
+</script>
+</body>
+</html>
