@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Arise Fertigation Controller</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* Layout: one column, the system diagram first (toggle today/new), then the per-second loop, then parts, rollout, questions. LWV brand tokens. */
+:root {
+  --bg: #ffffff; --fg: #1e293b; --muted: #64748b; --card: #f8fafc; --line: #e2e8f0; --soft: #94a3b8;
+  --accent: #00a3dc; --accent-ink: #0072a3; --accent-tint: #e3f5fc;
+  --buy: #b45309; --buy-tint: #fdf3dc;
+  --retired: #94a3b8; --bad: #dc2626;
+  --pipe-wall: #64748b; --pipe-water: #bfe3f5;
+  --display: "Montserrat", "Segoe UI", system-ui, sans-serif;
+  --body: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0f172a; --fg: #e2e8f0; --muted: #94a3b8; --card: #172234; --line: #2c3a50; --soft: #64748b;
+  --accent: #38bdf8; --accent-ink: #7dd3fc; --accent-tint: #0d2c42;
+  --buy: #fbbf24; --buy-tint: #33280c;
+  --retired: #64748b; --bad: #f87171;
+  --pipe-wall: #94a3b8; --pipe-water: #1d4a66; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #0f172a; --fg: #e2e8f0; --muted: #94a3b8; --card: #172234; --line: #2c3a50; --soft: #64748b;
+  --accent: #38bdf8; --accent-ink: #7dd3fc; --accent-tint: #0d2c42;
+  --buy: #fbbf24; --buy-tint: #33280c;
+  --retired: #64748b; --bad: #f87171;
+  --pipe-wall: #94a3b8; --pipe-water: #1d4a66; color-scheme: dark }
+
+body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.55 var(--body); }
+.wrap { max-width: 1080px; margin: 0 auto; padding-block: 36px 64px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; gap: 40px; }
+section { display: grid; gap: 14px; min-width: 0; }
+h1, h2 { font-family: var(--display); text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(26px, 4vw, 34px); line-height: 1.15; }
+h2 { font-size: 19px; }
+p { margin: 0; max-width: 68ch; }
+.kicker { font: 600 12px var(--body); letter-spacing: .12em; text-transform: uppercase; color: var(--accent-ink); }
+.lede { font-size: 16.5px; color: var(--fg); }
+.meta { color: var(--muted); font-size: 13px; }
+header { display: grid; gap: 10px; }
+.muted { color: var(--muted); }
+
+/* diagram */
+.figbar { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; justify-content: space-between; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 10px; padding: 3px; background: var(--card); }
+.seg button { font: 600 13.5px var(--body); color: var(--muted); background: none; border: 0; border-radius: 7px; padding: 7px 14px; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--bg); color: var(--fg); box-shadow: 0 1px 3px rgba(2,6,23,.12); }
+.seg button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 13px; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 7px; }
+.sw { width: 18px; height: 12px; border-radius: 3px; border: 1.5px solid var(--soft); background: var(--card); }
+.sw.new { border: 2px solid var(--accent); background: var(--accent-tint); }
+.sw.buy { border: 2px solid var(--buy); background: var(--buy-tint); }
+.sw.old { border: 1.5px dashed var(--retired); background: none; }
+.sw.net { border: 0; height: 0; border-top: 2px dashed var(--accent); border-radius: 0; }
+figure { margin: 0; display: grid; gap: 12px; }
+.scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; background: var(--bg); }
+.scroll svg { display: block; width: 100%; min-width: 780px; height: auto; color: var(--fg); }
+figcaption { font-size: 13.5px; color: var(--muted); max-width: 80ch; }
+.swipe { display: none; font-size: 13px; color: var(--muted); }
+@media screen and (max-width: 800px) { .swipe { display: block; } }
+
+svg .box { fill: var(--card); stroke: var(--soft); stroke-width: 1.5; }
+svg .box-new { fill: var(--accent-tint); stroke: var(--accent); stroke-width: 2; }
+svg .box-buy { fill: var(--buy-tint); stroke: var(--buy); stroke-width: 2; }
+svg .box-old { fill: var(--bg); stroke: var(--retired); stroke-width: 1.5; stroke-dasharray: 6 4; }
+svg text { font-family: var(--body); fill: var(--fg); }
+svg .t-title { font: 600 15px var(--display); }
+svg .t-label { font-weight: 600; font-size: 13px; }
+svg .t-sub { font-size: 12px; fill: var(--muted); }
+svg .t-wire { font-weight: 500; font-size: 12px; }
+svg .t-acc { fill: var(--accent-ink); }
+svg .t-buy { fill: var(--buy); }
+svg .t-bad { fill: var(--bad); }
+svg .t-old { fill: var(--retired); }
+svg .wire { stroke: var(--fg); stroke-width: 1.5; fill: none; }
+svg .wire-net { stroke: var(--accent); stroke-width: 2; stroke-dasharray: 7 5; fill: none; }
+svg .wire-dead { stroke: var(--retired); stroke-width: 1.5; stroke-dasharray: 4 4; fill: none; }
+svg .bracket { stroke: var(--muted); stroke-width: 1.2; fill: none; }
+svg .pipe-wall { stroke: var(--pipe-wall); stroke-width: 16; stroke-linecap: round; }
+svg .pipe-water { stroke: var(--pipe-water); stroke-width: 10; stroke-linecap: round; }
+svg .chev { stroke: var(--pipe-wall); stroke-width: 2; fill: none; }
+svg .x { stroke: var(--bad); stroke-width: 2.5; }
+svg .ah { fill: var(--fg); }
+svg .ah-acc { fill: var(--accent); }
+svg .ah-old { fill: var(--retired); }
+#sys[data-view="new"] .v-today, #sys[data-view="today"] .v-new { display: none; }
+
+.changes { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; }
+.chg { border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; background: var(--card); display: grid; gap: 4px; align-content: start; }
+.chg b { font: 600 14px var(--display); }
+.chg span { font-size: 14px; color: var(--muted); }
+
+/* per-second loop */
+.loop { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.step { padding: 16px 18px; display: grid; gap: 6px; align-content: start; position: relative; background: var(--bg); }
+.step + .step { border-left: 1px solid var(--line); }
+.step .n { font: 700 12px var(--body); letter-spacing: .1em; text-transform: uppercase; color: var(--accent-ink); }
+.step .q { font-size: 14px; color: var(--muted); }
+.step .a { font: 600 18px var(--display); font-variant-numeric: tabular-nums; }
+.step .f { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+@media (max-width: 760px) { .loop { grid-template-columns: 1fr 1fr; } .step:nth-child(3) { border-left: 0; } .step:nth-child(n+3) { border-top: 1px solid var(--line); } }
+@media (max-width: 440px) { .loop { grid-template-columns: 1fr; } .step + .step { border-left: 0; border-top: 1px solid var(--line); } }
+.guards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.guard { border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; display: grid; gap: 4px; align-content: start; }
+.guard b { font-size: 14px; }
+.guard span { font-size: 14px; color: var(--muted); }
+.tag { justify-self: start; font: 600 11px var(--body); letter-spacing: .08em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; background: var(--accent-tint); color: var(--accent-ink); }
+
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+.col { border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; display: grid; gap: 8px; align-content: start; min-width: 0; }
+.col h3 { margin: 0; font: 600 15px var(--display); }
+.col .sub { font-size: 13px; color: var(--muted); }
+ul, ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+li { max-width: 72ch; }
+
+.tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; }
+table { border-collapse: collapse; width: 100%; min-width: 620px; font-size: 14px; }
+th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font: 600 12px var(--body); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); background: var(--card); }
+tr:last-child td { border-bottom: 0; }
+td:first-child { font-weight: 600; white-space: nowrap; }
+.chip { display: inline-block; font: 600 12px var(--body); padding: 2px 9px; border-radius: 999px; white-space: nowrap; border: 1.5px solid var(--soft); background: var(--card); color: var(--fg); }
+.chip.new { border-color: var(--accent); background: var(--accent-tint); color: var(--accent-ink); }
+.chip.buy { border-color: var(--buy); background: var(--buy-tint); color: var(--buy); }
+.chip.old { border-style: dashed; border-color: var(--retired); background: none; color: var(--muted); }
+.confirm { color: var(--buy); font-weight: 600; font-size: 13px; }
+@media (prefers-reduced-motion: no-preference) { .seg button { transition: background .15s, color .15s; } }
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="kicker">Arise · Replacing Growlink</div>
+    <h1>Arise Fertigation Controller</h1>
+    <p class="lede">The flow meter, the 7 Etatron pumps and the pipes stay as they are. The Growlink box comes out and an LWV controller takes its spot on the same wires, one in each building. It runs the dosing on its own, and the GCU Manager sets the recipes and logs every feed.</p>
+    <p class="meta">Draft for the fertigation walk-through · 30 Oct 2026 · Legacy West Ventures. Items marked <span class="confirm">to confirm</span> are our guesses: please correct anything that is wrong.</p>
+  </header>
+
+  <section>
+    <div class="figbar">
+      <h2>How it connects</h2>
+      <div class="seg" role="group" aria-label="Which setup to show">
+        <button type="button" id="btn-new" data-set="new" aria-pressed="true">New setup</button>
+        <button type="button" id="btn-today" data-set="today" aria-pressed="false">Today (Growlink)</button>
+      </div>
+    </div>
+    <figure id="sys" data-view="new">
+      <p class="swipe">Swipe the drawing sideways to see all of it, or turn your phone.</p>
+      <div class="scroll">
+        <svg viewBox="0 0 1040 640" role="img" aria-label="Water flows left to right through the main pipe, past the Signet flow meter, then the 7 Etatron pumps inject concentrate, then EC and pH sensors, then the manifold and pod valves. The flow meter's pulses go to an I/O module that counts them; the fertigation controller reads that count, drives the pumps through the module's 4-20 mA outputs and reads the EC and pH sensors. The GCU Manager sends recipes to the controller and logs every feed, and already runs the irrigation valve controllers.">
+          <defs>
+            <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah" d="M0,0 L10,5 L0,10 z"/></marker>
+            <marker id="ah-acc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah-acc" d="M0,0 L10,5 L0,10 z"/></marker>
+            <marker id="ah-old" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah-old" d="M0,0 L10,5 L0,10 z"/></marker>
+          </defs>
+
+          <!-- top row: Manager + irrigation controllers (both exist today) -->
+          <rect class="box" x="360" y="24" width="320" height="80" rx="10"/>
+          <text class="t-title" x="520" y="58" text-anchor="middle">GCU Manager</text>
+          <text class="t-sub" x="520" y="80" text-anchor="middle">the Pi at Arise · already running</text>
+
+          <rect class="box" x="800" y="24" width="216" height="80" rx="10"/>
+          <text class="t-title" x="908" y="58" text-anchor="middle" style="font-size:14px">Irrigation controllers</text>
+          <text class="t-sub" x="908" y="80" text-anchor="middle">OpenSprinkler · North + South</text>
+
+          <line class="wire" x1="682" y1="64" x2="797" y2="64" marker-end="url(#ah)"/>
+          <text class="t-wire" x="740" y="56" text-anchor="middle">which pod, when</text>
+          <text class="t-sub" x="740" y="84" text-anchor="middle">since 20 Oct</text>
+
+          <!-- Manager to controller link -->
+          <g class="v-new">
+            <line class="wire-net" x1="520" y1="108" x2="520" y2="164" marker-start="url(#ah-acc)" marker-end="url(#ah-acc)"/>
+            <text class="t-wire t-acc" x="534" y="131">recipes down</text>
+            <text class="t-wire t-acc" x="534" y="147">every feed logged up</text>
+          </g>
+          <g class="v-today">
+            <text class="t-sub" x="534" y="140">not connected today</text>
+          </g>
+
+          <!-- controller -->
+          <g class="v-new">
+            <rect class="box-new" x="360" y="168" width="320" height="96" rx="10"/>
+            <text class="t-title" x="520" y="200" text-anchor="middle">Fertigation controller</text>
+            <text class="t-sub t-acc" x="520" y="221" text-anchor="middle">new · LWV builds one per building</text>
+            <text class="t-sub" x="520" y="242" text-anchor="middle">our ESP32 board + RS-485, in an enclosure</text>
+          </g>
+          <g class="v-today">
+            <rect class="box-old" x="360" y="168" width="320" height="96" rx="10"/>
+            <text class="t-title" x="520" y="200" text-anchor="middle">Growlink controller</text>
+            <text class="t-sub" x="520" y="221" text-anchor="middle">monthly subscription</text>
+            <text class="t-sub" x="520" y="242" text-anchor="middle">counts the pulses, sets each pump's speed</text>
+          </g>
+
+          <!-- flow meter wire: to Growlink today; to the I/O module's counter in the new setup (the GCU board has no spare pin) -->
+          <polyline class="wire v-today" points="150,504 150,216 356,216" marker-end="url(#ah)"/>
+          <polyline class="wire v-new" points="150,504 150,322 356,322" marker-end="url(#ah)"/>
+          <text class="t-wire" x="162" y="276">pulses</text>
+          <text class="t-sub" x="162" y="292">121.42 per gallon</text>
+
+          <!-- output module (new only) -->
+          <g class="v-new">
+            <line class="wire" x1="520" y1="264" x2="520" y2="297" marker-end="url(#ah)"/>
+            <text class="t-wire" x="532" y="285">RS-485 · pump speeds, flow count</text>
+            <rect class="box-new" x="360" y="300" width="320" height="44" rx="8"/>
+            <text class="t-label" x="520" y="327" text-anchor="middle">I/O module · 8 × 4–20 mA + flow counter</text>
+            <line class="wire" x1="370" y1="344" x2="370" y2="381" marker-end="url(#ah)"/>
+            <line class="wire" x1="420" y1="344" x2="420" y2="381" marker-end="url(#ah)"/>
+            <line class="wire" x1="470" y1="344" x2="470" y2="381" marker-end="url(#ah)"/>
+            <line class="wire" x1="520" y1="344" x2="520" y2="381" marker-end="url(#ah)"/>
+            <line class="wire" x1="570" y1="344" x2="570" y2="381" marker-end="url(#ah)"/>
+            <line class="wire" x1="620" y1="344" x2="620" y2="381" marker-end="url(#ah)"/>
+            <line class="wire" x1="670" y1="344" x2="670" y2="381" marker-end="url(#ah)"/>
+          </g>
+          <g class="v-today">
+            <line class="wire" x1="370" y1="264" x2="370" y2="381" marker-end="url(#ah)"/>
+            <line class="wire" x1="420" y1="264" x2="420" y2="381" marker-end="url(#ah)"/>
+            <line class="wire" x1="470" y1="264" x2="470" y2="381" marker-end="url(#ah)"/>
+            <line class="wire" x1="520" y1="264" x2="520" y2="381" marker-end="url(#ah)"/>
+            <line class="wire" x1="570" y1="264" x2="570" y2="381" marker-end="url(#ah)"/>
+            <line class="wire" x1="620" y1="264" x2="620" y2="381" marker-end="url(#ah)"/>
+            <line class="wire" x1="670" y1="264" x2="670" y2="381" marker-end="url(#ah)"/>
+          </g>
+          <text class="t-wire" x="696" y="362">4–20 mA each</text>
+          <text class="t-sub" x="696" y="378">4 stop · 20 full</text>
+
+          <!-- pumps -->
+          <g>
+            <rect class="box" x="351" y="384" width="38" height="48" rx="6"/>
+            <rect class="box" x="401" y="384" width="38" height="48" rx="6"/>
+            <rect class="box" x="451" y="384" width="38" height="48" rx="6"/>
+            <rect class="box" x="501" y="384" width="38" height="48" rx="6"/>
+            <rect class="box" x="551" y="384" width="38" height="48" rx="6"/>
+            <rect class="box" x="601" y="384" width="38" height="48" rx="6"/>
+            <rect class="box" x="651" y="384" width="38" height="48" rx="6"/>
+            <text class="t-label" x="370" y="413" text-anchor="middle">P1</text>
+            <text class="t-label" x="420" y="413" text-anchor="middle">P2</text>
+            <text class="t-label" x="470" y="413" text-anchor="middle">P3</text>
+            <text class="t-label" x="520" y="413" text-anchor="middle">P4</text>
+            <text class="t-label" x="570" y="413" text-anchor="middle">P5</text>
+            <text class="t-label" x="620" y="413" text-anchor="middle">P6</text>
+            <text class="t-label" x="670" y="413" text-anchor="middle">P7</text>
+          </g>
+          <text class="t-label" x="336" y="403" text-anchor="end">7 Etatron pumps</text>
+          <text class="t-sub" x="336" y="420" text-anchor="end">eOne MF · kept</text>
+
+          <!-- injection lines -->
+          <line class="wire" x1="370" y1="432" x2="370" y2="508" marker-end="url(#ah)"/>
+          <line class="wire" x1="420" y1="432" x2="420" y2="508" marker-end="url(#ah)"/>
+          <line class="wire" x1="470" y1="432" x2="470" y2="508" marker-end="url(#ah)"/>
+          <line class="wire" x1="520" y1="432" x2="520" y2="508" marker-end="url(#ah)"/>
+          <line class="wire" x1="570" y1="432" x2="570" y2="508" marker-end="url(#ah)"/>
+          <line class="wire" x1="620" y1="432" x2="620" y2="508" marker-end="url(#ah)"/>
+          <line class="wire" x1="670" y1="432" x2="670" y2="508" marker-end="url(#ah)"/>
+
+          <!-- the main pipe -->
+          <line class="pipe-wall" x1="30" y1="520" x2="884" y2="520"/>
+          <line class="pipe-water" x1="30" y1="520" x2="884" y2="520"/>
+          <path class="chev" d="M64,514 l7,6 l-7,6 M74,514 l7,6 l-7,6"/>
+          <path class="chev" d="M250,514 l7,6 l-7,6 M260,514 l7,6 l-7,6"/>
+          <path class="chev" d="M720,514 l7,6 l-7,6 M730,514 l7,6 l-7,6"/>
+          <text class="t-label" x="30" y="494">Water in</text>
+
+          <!-- flow meter -->
+          <circle class="box" cx="150" cy="520" r="16"/>
+          <path class="wire" d="M139,520 h22 M150,509 v22"/>
+          <text class="t-label" x="150" y="562" text-anchor="middle">Signet 2536 flow meter</text>
+          <text class="t-sub" x="150" y="578" text-anchor="middle">kept</text>
+
+          <text class="t-label" x="520" y="562" text-anchor="middle">pumps inject concentrate into the main line</text>
+
+          <!-- EC / pH sensors -->
+          <g class="v-new">
+            <polyline class="wire" points="806,490 806,476 842,476 842,490"/>
+            <polyline class="wire" points="824,476 824,216 684,216" marker-end="url(#ah)"/>
+            <rect class="box-buy" x="794" y="490" width="24" height="30" rx="4"/>
+            <rect class="box-buy" x="830" y="490" width="24" height="30" rx="4"/>
+            <text class="t-wire" x="752" y="208" text-anchor="middle">readings</text>
+            <text class="t-sub" x="834" y="300">RS-485 or 4–20 mA</text>
+            <text class="t-label" x="824" y="562" text-anchor="middle">EC + pH sensors</text>
+            <text class="t-sub t-buy" x="824" y="578" text-anchor="middle">new · to buy</text>
+          </g>
+          <g class="v-today">
+            <polyline class="wire-dead" points="806,490 806,476 842,476 842,490"/>
+            <polyline class="wire-dead" points="824,476 824,216 684,216" marker-end="url(#ah-old)"/>
+            <rect class="box-old" x="794" y="490" width="24" height="30" rx="4"/>
+            <rect class="box-old" x="830" y="490" width="24" height="30" rx="4"/>
+            <path class="x" d="M790,486 l68,38 M858,486 l-68,38"/>
+            <text class="t-wire t-old" x="752" y="208" text-anchor="middle">nothing to read</text>
+            <text class="t-sub" x="834" y="300">Mitch tests by hand,</text>
+            <text class="t-sub" x="834" y="316">about twice a week</text>
+            <text class="t-label" x="824" y="562" text-anchor="middle">old EC + pH meters</text>
+            <text class="t-sub t-bad" x="824" y="578" text-anchor="middle">not working</text>
+          </g>
+          <text class="t-sub" x="806" y="511" text-anchor="middle" style="font-size:10px;font-weight:600">EC</text>
+          <text class="t-sub" x="842" y="511" text-anchor="middle" style="font-size:10px;font-weight:600">pH</text>
+
+          <!-- manifold + pod valves -->
+          <rect class="box" x="890" y="476" width="126" height="92" rx="10"/>
+          <text class="t-label" x="953" y="502" text-anchor="middle">Manifold</text>
+          <text class="t-sub" x="953" y="521" text-anchor="middle">pod valves</text>
+          <text class="t-sub" x="953" y="538" text-anchor="middle">73 mapped</text>
+          <text class="t-sub" x="953" y="555" text-anchor="middle">→ the pods</text>
+          <line class="wire" x1="980" y1="104" x2="980" y2="472" marker-end="url(#ah)"/>
+          <text class="t-wire" x="968" y="404" text-anchor="end">opens one</text>
+          <text class="t-wire" x="968" y="420" text-anchor="end">pod's valve</text>
+
+          <!-- shared pipe note -->
+          <path class="bracket" d="M351,592 v8 H884 v-8"/>
+          <text class="t-sub" x="618" y="622" text-anchor="middle">Shared pipe after the pumps: every pod on this line gets the same mix. Per-pod recipes need re-piping, a later step.</text>
+        </svg>
+      </div>
+      <div class="legend" aria-label="Legend">
+        <span><i class="sw"></i>Already at Arise, kept</span>
+        <span><i class="sw new"></i>New, LWV builds</span>
+        <span><i class="sw buy"></i>New, to buy</span>
+        <span><i class="sw old"></i>Retired or not working</span>
+        <span><i class="sw net"></i>Network link</span>
+      </div>
+      <figcaption>Water runs left to right along the main pipe; the thin lines are signal wires. Switch to <b>Today</b> to see Growlink's version: the flow meter, pumps, pipe and valves are the same in both. This shows one building; North and South each get the same set. <span class="confirm">To confirm:</span> that each building has its own mix room, and whether the feed goes through the same pod valves the Manager already runs.</figcaption>
+    </figure>
+
+    <div class="changes">
+      <div class="chg"><b>Growlink box → our controller</b><span>Same spot, same wires. The flow meter's wire and the pump wires move across.</span></div>
+      <div class="chg"><b>New I/O module</b><span>Counts the flow meter's pulses, and turns the controller's 7 pump speeds into the milliamp signal the Etatrons already take.</span></div>
+      <div class="chg"><b>Working EC + pH sensors</b><span>The controller can check the mix and correct it again. Hand testing becomes a spot check.</span></div>
+      <div class="chg"><b>Linked to the Manager</b><span>Recipes, feed logs and alerts sit with the irrigation, harvests and photos it already has.</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>What the controller does every second</h2>
+    <p class="muted">Example numbers for pump 1. The real recipe and pump sizes come from the walk-through.</p>
+    <div class="loop">
+      <div class="step"><span class="n">1 · Count</span><span class="q">3,643 ticks from the flow meter in the last minute</span><span class="a">30 gal/min</span><span class="f">3,643 ÷ 121.42 ticks per gallon</span></div>
+      <div class="step"><span class="n">2 · Recipe</span><span class="q">Pump 1 is set to 2.0 ml per gallon</span><span class="a">60 ml/min</span><span class="f">30 gal/min × 2.0 ml/gal</span></div>
+      <div class="step"><span class="n">3 · Speed</span><span class="q">A 10 L/h pump does 167 ml/min flat out</span><span class="a">36% speed</span><span class="f">60 ÷ 167</span></div>
+      <div class="step"><span class="n">4 · Signal</span><span class="q">4 mA is stopped, 20 mA is full speed</span><span class="a">9.8 mA</span><span class="f">4 + 36% × 16 mA, sent to pump 1</span></div>
+    </div>
+    <p class="muted">Then the same for pumps 2 to 7. If the flow rises to 40 gal/min, every pump speeds up by the same share, so each gallon keeps the same mix.</p>
+    <div class="guards">
+      <div class="guard"><b>No flow, no dosing</b><span>No ticks from the meter sends all 7 pumps to 4 mA (stopped).</span></div>
+      <div class="guard"><b>A ceiling per pump</b><span>Each pump has a top speed it never goes past, whatever the recipe or a correction says.</span></div>
+      <div class="guard"><b>Small corrections only</b><span>EC and pH can nudge the recipe in small capped steps, and only while the sensors read sensible values.</span></div>
+      <div class="guard"><b>Runs without the Pi</b><span>If the Manager or the network drops, the controller keeps feeding on the last recipe and logs locally.</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Who does what</h2>
+    <div class="cols">
+      <div class="col">
+        <h3>Fertigation controller</h3>
+        <span class="sub">Runs the dosing by itself, second by second</span>
+        <ul>
+          <li>Reads the flow meter's count every second</li>
+          <li>Sets the speed of each of the 7 pumps</li>
+          <li>Reads the EC and pH sensors and makes small corrections</li>
+          <li>Applies the safety rules above</li>
+          <li>Keeps its own log if the network is down</li>
+        </ul>
+      </div>
+      <div class="col">
+        <h3>GCU Manager</h3>
+        <span class="sub">Sets it up and keeps watch</span>
+        <ul>
+          <li>Recipes: ml per gallon for each pump, for each stage</li>
+          <li>Which recipe is running, tied to the feed schedule it already runs</li>
+          <li>A log of every feed: gallons, ml from each pump, EC, pH</li>
+          <li>Alerts: EC or pH out of range, no flow while a valve is open, a pump alarm</li>
+          <li>Feed history in the harvest report card and the AI review</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Parts</h2>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Part</th><th>Status</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Signet 2536 flow meter</td><td><span class="chip">Kept</span></td><td>Its wire moves from Growlink to a pulse-counter input in our controller box. The GCU board has no spare pin for it, so an RS-485 module keeps the count and the controller reads it every second. <span class="confirm">To confirm:</span> each building has its own meter.</td></tr>
+          <tr><td>7 Etatron eOne MF pumps</td><td><span class="chip">Kept</span></td><td>They already take a 4–20 mA speed signal. Their control wires move to our output module. <span class="confirm">To confirm:</span> 7 per building or 7 shared, and each pump's size.</td></tr>
+          <tr><td>Fertigation controllers × 2</td><td><span class="chip new">New · LWV builds</span></td><td>Our ESP32 board with RS-485, in an enclosure with a 24 V supply. One per building, so each building keeps feeding if the other has a fault.</td></tr>
+          <tr><td>I/O modules × 2</td><td><span class="chip new">New · LWV builds</span></td><td>Off the shelf, on RS-485: 8 × 4–20 mA outputs (7 pumps and a spare) and a pulse-counter input for the flow meter. One per controller.</td></tr>
+          <tr><td>EC + pH sensors × 2 sets</td><td><span class="chip buy">New · to buy</span></td><td>Inline sensors with a Modbus or 4–20 mA output, a set per building. The main cost.</td></tr>
+          <tr><td>Growlink controller</td><td><span class="chip old">Retired</span></td><td>Stays wired as the fallback until both buildings run clean, then the subscription is cancelled.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Switching over without risk</h2>
+    <ol>
+      <li><b>Walk-through.</b> Photos of the wall, Growlink's settings for each pump, and what each pump doses.</li>
+      <li><b>Bench.</b> Build the first controller and run it against one pump before anything goes on site.</li>
+      <li><b>Listen only.</b> Fit it next to Growlink in the first building, reading the flow meter, and check our gallon count matches Growlink's.</li>
+      <li><b>One pump.</b> Move pump 1 to our controller and check it against Mitch's hand samples, then move the other six.</li>
+      <li><b>Sensors.</b> Fit the EC and pH sensors and turn the corrections on last.</li>
+      <li><b>Second building.</b> A copy of the first controller, through the same steps.</li>
+      <li><b>Cancel Growlink</b> once both buildings have run clean for an agreed time.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>To find out on the walk-through</h2>
+    <ul>
+      <li>Does each building have its own mix room, flow meter and 7 pumps? The plan assumes it does.</li>
+      <li>What each pump doses (nutrient parts, pH up or down) and its size in litres an hour.</li>
+      <li>Growlink's current setting for each pump.</li>
+      <li>Is Growlink wired straight to the pumps, and does it switch anything else, such as a main feed pump?</li>
+      <li>Does the feed water go through the same pod valves the Manager already runs?</li>
+      <li>Which EC and pH meters were there, and why they stopped working.</li>
+    </ul>
+  </section>
+</div>
+
+<script>
+(function () {
+  var fig = document.getElementById('sys');
+  var btns = document.querySelectorAll('[data-set]');
+  btns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      fig.setAttribute('data-view', b.getAttribute('data-set'));
+      btns.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
