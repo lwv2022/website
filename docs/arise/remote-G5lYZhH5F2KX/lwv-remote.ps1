@@ -34,7 +34,16 @@ if (-not (Test-Path $ts)) {
 }
 $status = (& $ts status 2>&1 | Out-String)
 if ($LASTEXITCODE -ne 0 -or $status -match 'Logged out|NeedsLogin|not logged in|stopped') {
-  if ($AuthKey -eq 'TSKEY_PLACEHOLDER') { throw 'Tailscale key not set in this script yet.' }
+  if ($AuthKey -eq 'TSKEY_PLACEHOLDER') {
+    # the key is never kept on the website: Tony texts it, the person at the PC pastes it here
+    Add-Type -AssemblyName Microsoft.VisualBasic
+    for ($try = 0; $try -lt 3; $try++) {
+      $typed = [Microsoft.VisualBasic.Interaction]::InputBox("Paste the setup code Tony texted you (it starts with tskey-auth-).", 'Legacy West Ventures', '').Trim()
+      if ($typed -match '^tskey-auth-[A-Za-z0-9-]{20,}$') { $AuthKey = $typed; break }
+      if ($typed -eq '') { throw 'No setup code entered. Run this again when you have it.' }
+    }
+    if ($AuthKey -eq 'TSKEY_PLACEHOLDER') { throw 'That did not look like a setup code. Please text Tony at 916.757.5517.' }
+  }
   Say 'Joining the LWV network'
   & $ts up --authkey=$AuthKey --hostname=$HostName --unattended --accept-dns=false 2>&1 | ForEach-Object { Say "  tailscale: $_" }
 } else { Say 'Tailscale already connected; leaving it alone' }
