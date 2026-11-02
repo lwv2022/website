@@ -44,16 +44,19 @@ New-Item -Path 'HKLM:\SOFTWARE\OpenSSH' -Force | Out-Null
 New-ItemProperty -Path 'HKLM:\SOFTWARE\OpenSSH' -Name DefaultShell -Value 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe' -PropertyType String -Force | Out-Null
 $cfg = 'C:\ProgramData\ssh\sshd_config'
 if (-not (Test-Path $cfg)) { Start-Service sshd; Start-Sleep -Seconds 3; Stop-Service sshd }
-$lines = @(Get-Content $cfg | Where-Object { $_ -notmatch '^\s*(ListenAddress|PasswordAuthentication)\s' })
-$lines += "ListenAddress $tsIp"; $lines += 'PasswordAuthentication no'
-Set-Content -Path $cfg -Value $lines -Encoding ascii
+# these two must sit at the TOP: the stock file ends with a "Match Group administrators" block, and
+# ListenAddress is not allowed inside a Match block (sshd then refuses to start)
+$rest = @(Get-Content $cfg | Where-Object { $_ -notmatch '^\s*(ListenAddress|PasswordAuthentication)\s' })
+Set-Content -Path $cfg -Value (@("ListenAddress $tsIp", 'PasswordAuthentication no') + $rest) -Encoding ascii
 
 # 3. LWV's key for administrators
 $keyFile = 'C:\ProgramData\ssh\administrators_authorized_keys'
 $key = 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKoNapW12xcid4WzwjpuJ/BPSOzF19vwK7/1N662qsiT lwv2020-wsl-to-gcu-manager'
 if (-not (Test-Path $keyFile) -or -not (@(Get-Content $keyFile) -contains $key)) { Add-Content -Path $keyFile -Value $key -Encoding ascii }
 icacls $keyFile /inheritance:r /grant 'Administrators:F' /grant 'SYSTEM:F' | Out-Null
-Restart-Service sshd
+Stop-Service sshd -ErrorAction SilentlyContinue; Start-Service sshd
+Start-Sleep -Seconds 2
+if ((Get-Service sshd).Status -ne 'Running') { throw 'sshd did not start; send Tony a screenshot' }
 if (-not (Get-NetFirewallRule -DisplayName 'LWV OpenSSH on Tailscale' -ErrorAction SilentlyContinue)) {
   New-NetFirewallRule -DisplayName 'LWV OpenSSH on Tailscale' -Direction Inbound -Protocol TCP -LocalPort 22 -LocalAddress $tsIp -Action Allow -Profile Any | Out-Null
 }
