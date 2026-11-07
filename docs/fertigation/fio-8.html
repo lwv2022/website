@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>LWV FIO-8 Fertigation Board</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="LWV FIO-8 fertigation board: eight isolated 4-20 mA pump outputs, flow-paced dosing, two independent stops, Wi-Fi, Bluetooth and a powered RS-485 sensor port.">
+<link rel="icon" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: one reading column on the LWV website palette; diagrams and board images run full column width, specs as quiet tables. */
+:root {
+  --bg: #ffffff; --surface: #f6f9fb; --line: #e2e8f0; --ink: #1e293b; --muted: #5d6b80;
+  --accent: #0072a3; --cyan: #22b9e8; --stop: #c2410c; --pipe: #b9e3f3; --plate: transparent;
+  --display: "Montserrat", "Segoe UI", system-ui, sans-serif; --body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --radius: 14px;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0b1220; --surface: #111b2c; --line: #223047; --ink: #e5ecf4; --muted: #9aa8bb;
+  --accent: #62cbf1; --cyan: #22b9e8; --stop: #fb923c; --pipe: #1c4a5d; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #0b1220; --surface: #111b2c; --line: #223047; --ink: #e5ecf4; --muted: #9aa8bb;
+  --accent: #62cbf1; --cyan: #22b9e8; --stop: #fb923c; --pipe: #1c4a5d; color-scheme: dark }
+* { box-sizing: border-box }
+body { background: var(--bg); color: var(--ink); font: 400 16px/1.6 var(--body); }
+.wrap { max-width: 1040px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.prose { max-width: 68ch }
+h1, h2, h3 { font-family: var(--display); color: var(--ink); text-wrap: balance; margin: 0 }
+h1 { font-size: clamp(30px, 5.2vw, 48px); line-height: 1.08; letter-spacing: -0.01em }
+h2 { font-size: clamp(22px, 3.2vw, 30px); line-height: 1.2 }
+h3 { font-size: 17px; line-height: 1.3 }
+p { margin: 0 }
+a { color: var(--accent) }
+.kicker { font: 600 12px/1.2 var(--body); letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent) }
+.muted { color: var(--muted) }
+.mono { font-family: var(--mono); font-weight: 500 }
+
+/* header */
+.top { padding-block: 22px 0 }
+.brand { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap }
+.logo { height: 40px; width: auto; display: block }
+.logo-dark { display: none }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .logo-light { display: none } :root:not([data-theme="light"]) .logo-dark { display: block } }
+:root[data-theme="dark"] .logo-light { display: none } :root[data-theme="dark"] .logo-dark { display: block }
+.rev { font: 500 13px/1.3 var(--mono); color: var(--muted) }
+.hero { display: grid; gap: 18px; padding-block: 34px 8px }
+.lead { font-size: clamp(17px, 2vw, 19px); line-height: 1.55; color: var(--ink); max-width: 64ch }
+.hero-fig { margin: 8px 0 0; position: relative }
+.hero-fig::before { content: ""; position: absolute; inset: 8% 4% 4%; background: radial-gradient(ellipse at 50% 55%, color-mix(in srgb, var(--cyan) 14%, transparent), transparent 70%); z-index: 0 }
+.hero-fig img { position: relative; z-index: 1; width: 100%; height: auto; display: block }
+figcaption { font-size: 14px; line-height: 1.5; color: var(--muted); margin-top: 10px; max-width: 72ch }
+
+/* figures strip */
+.facts { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-block: 26px 10px }
+.fact { padding: 16px 14px 16px 0; display: grid; gap: 4px; align-content: start }
+.fact + .fact { padding-left: 14px; border-left: 1px solid var(--line) }
+.fact b { font: 500 30px/1 var(--mono); color: var(--ink); font-variant-numeric: tabular-nums }
+.fact span { font-size: 13.5px; line-height: 1.35; color: var(--muted) }
+@media (max-width: 860px) { .facts { grid-template-columns: repeat(3, minmax(0, 1fr)) } .fact:nth-child(4) { border-left: 0; padding-left: 0 } .fact:nth-child(n+4) { border-top: 1px solid var(--line) } }
+@media (max-width: 480px) { .facts { grid-template-columns: repeat(2, minmax(0, 1fr)) } .fact:nth-child(odd) { border-left: 0; padding-left: 0 } .fact:nth-child(even) { border-left: 1px solid var(--line); padding-left: 14px } .fact:nth-child(n+3) { border-top: 1px solid var(--line) } }
+
+/* sections */
+section { padding-block: 46px 6px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px }
+section > *, .hero > * { min-width: 0 }
+.hero { grid-template-columns: minmax(0, 1fr) }
+section > header { display: grid; gap: 8px }
+.cols { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; align-items: start }
+@media (max-width: 760px) { .cols { grid-template-columns: minmax(0, 1fr) } }
+ul.plain { margin: 0; padding-left: 1.1em; display: grid; gap: 6px }
+ul.plain li::marker { color: var(--cyan) }
+
+/* diagrams */
+.diagram { margin: 0; }
+.scroll { overflow-x: auto; -webkit-overflow-scrolling: touch }
+.diagram svg { display: block; width: 100%; height: auto; min-width: 720px; color: var(--ink) }
+svg text { font-family: var(--body); fill: currentColor }
+svg .t-s { font-size: 12.5px; fill: var(--muted) }
+svg .t-m { font-size: 14px }
+svg .t-b { font-size: 15px; font-weight: 600 }
+svg .t-xl { font-family: var(--display); font-size: 19px; font-weight: 700 }
+svg .t-acc { fill: var(--accent); font-weight: 600 }
+svg .t-stop { fill: var(--stop); font-weight: 600 }
+svg .box { fill: var(--surface); stroke: var(--line); stroke-width: 1.5 }
+svg .box-acc { fill: var(--surface); stroke: var(--cyan); stroke-width: 2.5 }
+svg .box-stop { fill: var(--surface); stroke: var(--stop); stroke-width: 2 }
+svg .ln { stroke: currentColor; stroke-width: 1.6; fill: none }
+svg .ln-acc { stroke: var(--cyan); stroke-width: 2.6; fill: none }
+svg .ln-stop { stroke: var(--stop); stroke-width: 2; fill: none }
+svg .dash { stroke-dasharray: 6 5 }
+svg .pipe { stroke: var(--pipe); stroke-width: 14; stroke-linecap: round; fill: none }
+svg .barrier { stroke: var(--stop); stroke-width: 2; stroke-dasharray: 7 6 }
+svg .zone { fill: color-mix(in srgb, var(--cyan) 7%, transparent); stroke: none }
+
+/* dosing steps */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px }
+.steps li { position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 14px 16px; display: grid; gap: 6px; align-content: start }
+.steps li:last-child { border-color: var(--cyan); border-width: 2px }
+.steps li + li::before { content: "→"; position: absolute; left: -13px; top: 50%; transform: translate(-50%, -50%); color: var(--muted); font-size: 16px }
+.steps .k { font: 600 11.5px/1.2 var(--body); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted) }
+.steps .v { font: 500 24px/1.1 var(--mono); font-variant-numeric: tabular-nums; color: var(--ink) }
+.steps li:last-child .v { color: var(--accent) }
+.steps .s { font-size: 13px; line-height: 1.4; color: var(--muted) }
+@media (max-width: 900px) { .steps { grid-template-columns: minmax(0, 1fr) } .steps li + li::before { content: "↓"; left: 50%; top: -8px; transform: translate(-50%, -50%) } }
+
+/* tables */
+.tbl { width: 100%; border-collapse: collapse; font-size: 15px }
+.tbl th, .tbl td { text-align: left; vertical-align: top; padding: 10px 12px 10px 0; border-bottom: 1px solid var(--line) }
+.tbl th { font: 600 12px/1.3 var(--body); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted) }
+.tbl td:first-child { font-weight: 600; white-space: nowrap; padding-right: 18px }
+.tbl .mono { font-size: 13.5px }
+@media (max-width: 640px) {
+  .tbl, .tbl tbody, .tbl tr, .tbl td { display: block; width: 100% }
+  .tbl thead { display: none }
+  .tbl tr { padding-block: 10px; border-bottom: 1px solid var(--line) }
+  .tbl td { border: 0; padding: 2px 0 }
+  .tbl td:first-child { white-space: normal }
+}
+
+/* board map */
+.map { margin: 0 }
+.map .board { position: relative }
+.map .board img { width: 100%; height: auto; display: block }
+.edge { position: relative; height: 34px }
+.edge span { position: absolute; left: var(--x); transform: translateX(-50%); bottom: 4px; font: 500 11.5px/1.15 var(--mono); color: var(--muted); text-align: center; white-space: nowrap }
+.edge.bottom span { top: 4px; bottom: auto }
+.edge span::after { content: ""; position: absolute; left: 50%; width: 1px; height: 6px; background: var(--line) }
+.edge.top span::after { top: 100%; margin-top: 2px } .edge.bottom span::after { bottom: 100%; margin-bottom: 2px }
+.pin { position: absolute; left: var(--x); top: var(--y); transform: translate(-50%, -50%); width: 26px; height: 26px; border-radius: 50%; background: var(--cyan); color: #06263a; font: 700 13px/26px var(--body); text-align: center; box-shadow: 0 0 0 3px var(--bg) }
+.legend { list-style: none; margin: 14px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 10px 22px }
+.legend li { display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 10px; align-items: start; font-size: 14.5px; line-height: 1.45 }
+.legend i { width: 26px; height: 26px; border-radius: 50%; background: var(--cyan); color: #06263a; font: 700 13px/26px var(--body); font-style: normal; text-align: center }
+@media (max-width: 700px) { .edge { display: none } .pin { width: 20px; height: 20px; font-size: 11px; line-height: 20px } }
+
+.pair { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 22px; align-items: start }
+.pair img { width: 100%; height: auto; display: block }
+@media (max-width: 760px) { .pair { grid-template-columns: minmax(0, 1fr) } }
+
+.note { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; display: grid; gap: 6px }
+footer { margin-top: 56px; border-top: 1px solid var(--line); padding-block: 22px 40px; display: flex; flex-wrap: wrap; gap: 10px 24px; align-items: center; justify-content: space-between; font-size: 14px; color: var(--muted) }
+footer .logo { height: 28px }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top brand">
+    <img class="logo logo-light" src="img/lwv-logo.png" alt="Legacy West Ventures">
+    <img class="logo logo-dark" src="img/lwv-logo-white.png" alt="Legacy West Ventures">
+    <span class="rev">Rev A · November 2026</span>
+  </div>
+
+  <div class="hero">
+    <span class="kicker">LWV fertigation solution</span>
+    <h1>FIO-8 fertigation board</h1>
+    <p class="lead">The FIO-8 drives up to eight nutrient dosing pumps from one flow meter. Ten times a second it turns the recipe into a speed for every pump. Each pump output is electrically isolated, and the board stops dosing on its own the moment a reading or a wire looks wrong. It connects to GCU Cloud over Wi-Fi on its own, can report to an on-site GCU Manager, and is set up and run from the GCU Setup app over Bluetooth. Its RS-485 port reads and powers the water-quality probes.</p>
+    <figure class="hero-fig">
+      <img src="img/fio8-3d-hero.webp" width="1800" height="1107" alt="3D render of the FIO-8 board: a green circuit board with grey push-in terminal blocks along the front and back edges, eight output channels along the front, and black power modules">
+      <figcaption>Rev A, rendered from the production layout with each part's manufacturer 3D model. Pump outputs run along the front edge, field inputs along the back, and an M3 mounting hole sits in each corner.</figcaption>
+    </figure>
+  </div>
+
+  <div class="facts" role="list">
+    <div class="fact" role="listitem"><b>8</b><span>isolated 4–20 mA pump outputs</span></div>
+    <div class="fact" role="listitem"><b>2</b><span>flow-meter pulse inputs</span></div>
+    <div class="fact" role="listitem"><b>8</b><span>dry-contact inputs for floats and valves</span></div>
+    <div class="fact" role="listitem"><b>2</b><span>4–20 mA sensor inputs</span></div>
+    <div class="fact" role="listitem"><b>2</b><span>contacts: pump power and flush valve</span></div>
+    <div class="fact" role="listitem"><b>10×</b><span>dosing updates every second</span></div>
+  </div>
+
+  <!-- 1 -->
+  <section id="system">
+    <header><span class="kicker">Where it sits</span><h2>One networked board between the water line and the pumps</h2></header>
+    <div class="cols">
+      <p class="prose">The FIO-8 runs a feed on its own. It counts the flow meter, sets each pump, watches every interlock and reads its own water-quality probes. The recipe, calibration and limits live on the board, so a network outage does not interrupt a feed.</p>
+      <p class="prose">It reports to GCU Cloud over Wi-Fi, and an on-site GCU Manager can supervise it over the local network. The GCU Setup app sets it up and runs it over Bluetooth, just as it does a GCU. pH and EC probes plug into the board's RS-485 port, which also powers them, so water quality and dosing land side by side in GCU Cloud. The board also switches the contactor that powers the pumps, which gives every pump a second, independent way to stop.</p>
+    </div>
+    <figure class="diagram">
+      <div class="scroll">
+      <svg viewBox="0 0 1000 600" role="img" aria-label="System diagram: the FIO-8 board connects to GCU Cloud over Wi-Fi, to an on-site GCU Manager over the local network, and to the GCU Setup phone app over Bluetooth. Its RS-485 port reads and powers pH and EC probes in the water line. It sends eight isolated 4-20 mA signals to eight dosing pumps, switches the pump-power contactor with K1 and the flush valve with K2, and reads tank floats, valve contacts, pressure and tank level. A flow meter on the water line sends pulses to the FIO-8, and the pumps dose nutrient into the same line on its way to the rooms.">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker>
+          <marker id="arc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--cyan)"/></marker>
+        </defs>
+        <!-- the three ways in -->
+        <rect class="box" x="40" y="24" width="220" height="56" rx="12"/>
+        <text class="t-b" x="150" y="47" text-anchor="middle">GCU Cloud</text>
+        <text class="t-s" x="150" y="68" text-anchor="middle">records · alerts · remote · updates</text>
+        <rect class="box" x="40" y="96" width="220" height="56" rx="12"/>
+        <text class="t-b" x="150" y="119" text-anchor="middle">GCU Manager</text>
+        <text class="t-s" x="150" y="140" text-anchor="middle">on-site supervisor</text>
+        <rect class="box" x="40" y="168" width="220" height="56" rx="12"/>
+        <text class="t-b" x="150" y="191" text-anchor="middle">GCU Setup app</text>
+        <text class="t-s" x="150" y="212" text-anchor="middle">set up and run from a phone</text>
+        <polyline class="ln" points="260,52 364,52 364,160 378,160" fill="none" marker-start="url(#ar)" marker-end="url(#ar)"/>
+        <text class="t-s" x="268" y="44">Wi-Fi</text>
+        <polyline class="ln" points="260,124 348,124 348,196 378,196" fill="none" marker-start="url(#ar)" marker-end="url(#ar)"/>
+        <text class="t-s" x="268" y="116">LAN</text>
+        <polyline class="ln" points="260,196 332,196 332,232 378,232" fill="none" marker-start="url(#ar)" marker-end="url(#ar)"/>
+        <text class="t-s" x="266" y="214">Bluetooth</text>
+        <!-- field inputs -->
+        <rect class="box" x="40" y="382" width="250" height="50" rx="12"/>
+        <text class="t-m" x="56" y="403">Tank floats · valve contacts</text>
+        <text class="t-s" x="56" y="422">8 dry-contact inputs</text>
+        <rect class="box" x="40" y="440" width="250" height="50" rx="12"/>
+        <text class="t-m" x="56" y="461">Pressure · tank level</text>
+        <text class="t-s" x="56" y="480">2 × 4–20 mA inputs</text>
+        <line class="ln" x1="290" y1="407" x2="378" y2="282" marker-end="url(#ar)"/>
+        <line class="ln" x1="290" y1="465" x2="392" y2="302" marker-end="url(#ar)"/>
+        <!-- FIO-8 -->
+        <rect class="box-acc" x="380" y="138" width="250" height="172" rx="14"/>
+        <text class="t-xl" x="505" y="176" text-anchor="middle">LWV FIO-8</text>
+        <text class="t-s" x="505" y="198" text-anchor="middle">fertigation board</text>
+        <text class="t-m" x="505" y="234" text-anchor="middle">recipe stored on the board</text>
+        <text class="t-m" x="505" y="256" text-anchor="middle">dosing set 10 times a second</text>
+        <text class="t-m" x="505" y="278" text-anchor="middle">stops itself on any fault</text>
+        <!-- contactor + flush -->
+        <rect class="box" x="700" y="24" width="250" height="42" rx="10"/>
+        <text class="t-m" x="825" y="50" text-anchor="middle">Pump-power contactor</text>
+        <rect class="box" x="700" y="76" width="250" height="42" rx="10"/>
+        <text class="t-m" x="825" y="102" text-anchor="middle">Flush / drain valve</text>
+        <polyline class="ln" points="555,138 555,45 698,45" marker-end="url(#ar)"/>
+        <text class="t-acc" x="564" y="74" font-size="13">K1</text>
+        <polyline class="ln" points="595,138 595,97 698,97" marker-end="url(#ar)"/>
+        <text class="t-acc" x="604" y="124" font-size="13">K2</text>
+        <!-- pumps -->
+        <text class="t-s" x="855" y="140" text-anchor="middle">8 dosing pumps</text>
+        <g>
+          <rect class="box" x="760" y="150" width="190" height="21" rx="6"/><text class="t-s" x="855" y="165" text-anchor="middle">Pump 1</text>
+          <rect class="box" x="760" y="176" width="190" height="21" rx="6"/><text class="t-s" x="855" y="191" text-anchor="middle">Pump 2</text>
+          <rect class="box" x="760" y="202" width="190" height="21" rx="6"/><text class="t-s" x="855" y="217" text-anchor="middle">Pump 3</text>
+          <rect class="box" x="760" y="228" width="190" height="21" rx="6"/><text class="t-s" x="855" y="243" text-anchor="middle">Pump 4</text>
+          <rect class="box" x="760" y="254" width="190" height="21" rx="6"/><text class="t-s" x="855" y="269" text-anchor="middle">Pump 5</text>
+          <rect class="box" x="760" y="280" width="190" height="21" rx="6"/><text class="t-s" x="855" y="295" text-anchor="middle">Pump 6</text>
+          <rect class="box" x="760" y="306" width="190" height="21" rx="6"/><text class="t-s" x="855" y="321" text-anchor="middle">Pump 7</text>
+          <rect class="box" x="760" y="332" width="190" height="21" rx="6"/><text class="t-s" x="855" y="347" text-anchor="middle">Pump 8</text>
+        </g>
+        <line class="ln-acc" x1="630" y1="232" x2="752" y2="232" marker-end="url(#arc)"/>
+        <text class="t-acc" x="691" y="221" text-anchor="middle" font-size="13">8 × 4–20 mA</text>
+        <text class="t-s" x="691" y="252" text-anchor="middle">each isolated</text>
+        <polyline class="ln dash" points="950,45 972,45 972,342 952,342"/>
+        <text class="t-s" x="986" y="194" text-anchor="middle" transform="rotate(90 986 194)">pump power</text>
+        <!-- water line -->
+        <line class="ln" x1="855" y1="353" x2="855" y2="506" marker-end="url(#ar)"/>
+        <text class="t-s" x="843" y="478" text-anchor="end">nutrient dosed into the line</text>
+        <!-- probes on the sensor port -->
+        <rect class="box" x="520" y="392" width="200" height="54" rx="12"/>
+        <text class="t-b" x="620" y="415" text-anchor="middle">pH and EC probes</text>
+        <text class="t-s" x="620" y="435" text-anchor="middle">read and powered by the board</text>
+        <line class="ln" x1="600" y1="392" x2="600" y2="312" marker-start="url(#ar)" marker-end="url(#ar)"/>
+        <text class="t-s" x="610" y="358">RS-485 + 24 V</text>
+        <line class="ln dash" x1="560" y1="446" x2="560" y2="512"/>
+        <line class="pipe" x1="48" y1="522" x2="944" y2="522"/>
+        <polygon points="948,508 972,522 948,536" fill="var(--pipe)"/>
+        <text class="t-s" x="48" y="560">source water</text>
+        <text class="t-s" x="972" y="560" text-anchor="end">to the rooms</text>
+        <circle cx="470" cy="522" r="17" fill="var(--bg)" stroke="currentColor" stroke-width="1.6"/>
+        <path d="M462 522 h16 M470 514 v16" stroke="currentColor" stroke-width="1.6"/>
+        <text class="t-s" x="470" y="562" text-anchor="middle">flow meter</text>
+        <line class="ln" x1="470" y1="504" x2="470" y2="312" marker-end="url(#ar)"/>
+        <text class="t-s" x="460" y="410" text-anchor="end">pulses</text>
+      </svg>
+      </div>
+      <figcaption>The FIO-8 does the fast, safety-critical work next to the pumps and reads its own probes. GCU Cloud, the GCU Manager and the GCU Setup app are where people see it and change it.</figcaption>
+    </figure>
+  </section>
+
+  <!-- 2 -->
+  <section id="dosing">
+    <header><span class="kicker">How a dose is set</span><h2>From flow pulses to a pump signal</h2></header>
+    <p class="prose">Every 100 ms the board measures the water flow and works out how fast each pump must run to hold the recipe. The example below follows one pump through that calculation with a typical paddlewheel meter on 1½-inch pipe.</p>
+    <ol class="steps">
+      <li><span class="k">Flow meter</span><span class="v">16.2 /s</span><span class="s">pulses; 121.42 pulses per gallon for this meter</span></li>
+      <li><span class="k">Flow</span><span class="v">8.00 gpm</span><span class="s">pulses ÷ the meter's K-factor</span></li>
+      <li><span class="k">Nutrient needed</span><span class="v">152 ml/min</span><span class="s">8.00 gpm × recipe 19.00 ml/gal</span></li>
+      <li><span class="k">Pump speed</span><span class="v">30.4 %</span><span class="s">÷ this pump's 500 ml/min at full speed</span></li>
+      <li><span class="k">Output</span><span class="v">8.86 mA</span><span class="s">4 mA + 16 mA × 30.4 %</span></li>
+    </ol>
+    <div class="cols">
+      <div class="prose" style="display:grid;gap:10px">
+        <h3>The board doses only while all of these hold</h3>
+        <ul class="plain">
+          <li>Dosing is switched on, from the app, GCU Cloud or the GCU Manager.</li>
+          <li>Water is flowing to a room. The board sees it in the flow itself, from a valve contact on input 8, or from the GCU Manager or GCU Cloud.</li>
+          <li>Flow is above the minimum (0.20 gpm by default) and below the most the meter can honestly read (20 gpm by default).</li>
+                    <li>The feed has not run past its time limit.</li>
+          <li>The pump-power contactor reports the state it was told to be in.</li>
+        </ul>
+      </div>
+      <div class="prose" style="display:grid;gap:10px">
+        <h3>Calibrated per pump</h3>
+        <p>Each pump's full-speed rate comes from a cup test. From the app, the board runs that one pump at 20 mA for 60 seconds with everything else off; you measure the volume, and that number becomes the pump's capacity. Every output is also calibrated at the factory at 4.00 mA and 20.00 mA.</p>
+        <p>If the recipe asks for more than a pump can deliver at the current flow, the board runs it at full speed, and the app and GCU Cloud show that the pump cannot keep up.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section id="outputs">
+    <header><span class="kicker">Eight isolated outputs</span><h2>Each pump gets its own island</h2></header>
+    <p class="prose">Every pump output has its own cell on the board: a 1 W isolated supply, a digital isolator and a precision 4–20 mA current source. Nothing in a cell connects to the board's ground or to another cell. Only the supply's transformer and the isolator cross the barrier, so pumps on different circuits cannot form ground loops, and a wiring fault on one pump stays on that pump.</p>
+    <figure class="diagram">
+      <div class="scroll">
+      <svg viewBox="0 0 1000 300" role="img" aria-label="One output channel: on the board side the processor and PWM driver feed a digital isolator that straddles the isolation barrier; on the isolated side a 4-20 mA current source drives the pump input. The 5 V supply crosses the barrier through an isolated 15 V DC-DC converter that powers the current source. A loop-fault flag returns from the current source through the isolator to the processor.">
+        <defs><marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker></defs>
+        <rect class="zone" x="500" y="30" width="480" height="254" rx="12"/>
+        <text class="kicker" x="30" y="24" style="font:600 12px var(--body);letter-spacing:.1em;fill:var(--muted)">BOARD SIDE</text>
+        <text x="970" y="24" text-anchor="end" style="font:600 12px var(--body);letter-spacing:.1em;fill:var(--accent)">ISOLATED SIDE · ONE PER PUMP</text>
+        <line class="barrier" x1="500" y1="34" x2="500" y2="284"/>
+        <text class="t-stop" x="508" y="278" font-size="12.5">isolation barrier</text>
+        <!-- signal row -->
+        <rect class="box" x="30" y="96" width="140" height="56" rx="10"/><text class="t-m" x="100" y="129" text-anchor="middle">Processor</text>
+        <rect class="box" x="214" y="96" width="150" height="56" rx="10"/><text class="t-m" x="289" y="121" text-anchor="middle">PWM driver</text><text class="t-s" x="289" y="140" text-anchor="middle">12-bit</text>
+        <rect class="box-acc" x="430" y="90" width="140" height="68" rx="10"/><text class="t-m" x="500" y="119" text-anchor="middle">Digital</text><text class="t-m" x="500" y="138" text-anchor="middle">isolator</text>
+        <rect class="box" x="618" y="90" width="180" height="68" rx="10"/><text class="t-m" x="708" y="119" text-anchor="middle">4–20 mA</text><text class="t-m" x="708" y="138" text-anchor="middle">current source</text>
+        <rect class="box" x="840" y="96" width="130" height="56" rx="10"/><text class="t-m" x="905" y="121" text-anchor="middle">Pump input</text><text class="t-s mono" x="905" y="140" text-anchor="middle">PUMP n  + −</text>
+        <line class="ln" x1="170" y1="124" x2="212" y2="124" marker-end="url(#ar2)"/>
+        <line class="ln" x1="364" y1="124" x2="428" y2="124" marker-end="url(#ar2)"/>
+        <line class="ln" x1="570" y1="124" x2="616" y2="124" marker-end="url(#ar2)"/>
+        <line class="ln" x1="798" y1="124" x2="838" y2="124" marker-end="url(#ar2)"/>
+        <!-- fault path -->
+        <polyline class="ln dash" points="708,90 708,64 532,64 532,88" marker-end="url(#ar2)"/>
+        <polyline class="ln dash" points="468,90 468,64 100,64 100,94" marker-end="url(#ar2)"/>
+        <text class="t-s" x="620" y="56" text-anchor="middle">loop-fault flag</text>
+        <text class="t-s" x="284" y="56" text-anchor="middle">back to the processor</text>
+        <!-- power row -->
+        <rect class="box" x="214" y="196" width="150" height="56" rx="10"/><text class="t-m" x="289" y="229" text-anchor="middle">5 V supply</text>
+        <rect class="box-acc" x="430" y="190" width="140" height="68" rx="10"/><text class="t-m" x="500" y="219" text-anchor="middle">Isolated</text><text class="t-m" x="500" y="238" text-anchor="middle">DC-DC, 1 W</text>
+        <line class="ln" x1="364" y1="224" x2="428" y2="224" marker-end="url(#ar2)"/>
+        <polyline class="ln" points="570,224 708,224 708,160" marker-end="url(#ar2)"/>
+        <text class="t-s" x="718" y="216">15 V, its own ground</text>
+      </svg>
+      </div>
+      <figcaption>One of the eight identical output cells. The only things that cross the dashed barrier are the DC-DC converter's transformer and the isolator.</figcaption>
+    </figure>
+    <ul class="plain prose">
+      <li>Drives at least 500 Ω at 20 mA (about 600 Ω in practice).</li>
+      <li>Set in 0.01 mA steps from a 12-bit driver, calibrated at 4 mA and 20 mA on every channel.</li>
+      <li>Rests at 0 mA, or at 4 mA if your pumps expect a live zero.</li>
+      <li>Reports a loop fault per channel: cable off, pump input open, loop resistance too high, or the cell's own supply dead.</li>
+    </ul>
+  </section>
+
+  <!-- 4 -->
+  <section id="safety">
+    <header><span class="kicker">Built to stop safely</span><h2>Two independent stops on every pump</h2></header>
+    <p class="prose">A pump stops when its 4–20 mA signal drops to 0 mA, and again when the contactor that feeds the pumps' power opens. The contactor is held in by a hardware watchdog. The processor has to keep sending it pulses; if the firmware stops for any reason, the outputs and the contactor drop within about a third of a second with no software involved.</p>
+    <figure class="diagram">
+      <div class="scroll">
+      <svg viewBox="0 0 1000 300" role="img" aria-label="Safety chain: the processor sends keep-alive pulses to a hardware watchdog. The watchdog holds two things up: the output driver enable, which feeds the eight pump outputs, and the K1 contactor coil, which feeds pump power. If the pulses stop, both drop in about 0.3 seconds: outputs go to 0 mA and pump power goes off.">
+        <defs><marker id="ar3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker>
+        <marker id="ar3s" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--stop)"/></marker></defs>
+        <rect class="box" x="30" y="118" width="150" height="64" rx="10"/><text class="t-m" x="105" y="146" text-anchor="middle">Processor</text><text class="t-s" x="105" y="166" text-anchor="middle">firmware</text>
+        <line class="ln" x1="180" y1="150" x2="262" y2="150" marker-end="url(#ar3)"/>
+        <text class="t-s" x="221" y="138" text-anchor="middle">pulses</text>
+        <text class="t-s" x="221" y="172" text-anchor="middle">≥ 5 per s</text>
+        <rect class="box-acc" x="264" y="106" width="210" height="88" rx="12"/>
+        <text class="t-b" x="369" y="140" text-anchor="middle">Hardware watchdog</text>
+        <text class="t-s" x="369" y="162" text-anchor="middle">held up only by pulses,</text>
+        <text class="t-s" x="369" y="180" text-anchor="middle">never by a steady level</text>
+        <polyline class="ln" points="474,130 520,130 520,68 566,68" marker-end="url(#ar3)"/>
+        <polyline class="ln" points="474,170 520,170 520,232 566,232" marker-end="url(#ar3)"/>
+        <rect class="box" x="568" y="40" width="190" height="56" rx="10"/><text class="t-m" x="663" y="66" text-anchor="middle">Output driver</text><text class="t-s" x="663" y="85" text-anchor="middle">enable</text>
+        <rect class="box" x="568" y="204" width="190" height="56" rx="10"/><text class="t-m" x="663" y="230" text-anchor="middle">Contactor coil</text><text class="t-s" x="663" y="249" text-anchor="middle">K1</text>
+        <line class="ln-stop" x1="758" y1="68" x2="798" y2="68" marker-end="url(#ar3s)"/>
+        <line class="ln-stop" x1="758" y1="232" x2="798" y2="232" marker-end="url(#ar3s)"/>
+        <rect class="box-stop" x="800" y="40" width="172" height="56" rx="10"/><text class="t-stop" x="886" y="64" text-anchor="middle" font-size="13">STOP 1</text><text class="t-s" x="886" y="84" text-anchor="middle">all outputs to 0 mA</text>
+        <rect class="box-stop" x="800" y="204" width="172" height="56" rx="10"/><text class="t-stop" x="886" y="228" text-anchor="middle" font-size="13">STOP 2</text><text class="t-s" x="886" y="248" text-anchor="middle">pump power off</text>
+        <text class="t-s" x="369" y="238" text-anchor="middle">pulses stop → both drop in ≈ 0.3 s</text>
+        <text class="t-s" x="105" y="216" text-anchor="middle">any stop rule in the</text>
+        <text class="t-s" x="105" y="234" text-anchor="middle">firmware drops both too</text>
+      </svg>
+      </div>
+      <figcaption>The firmware can stop the pumps; the watchdog makes sure a stalled or crashed processor stops them too.</figcaption>
+    </figure>
+    <table class="tbl">
+      <thead><tr><th>If this happens</th><th>The board</th></tr></thead>
+      <tbody>
+        <tr><td>The processor hangs or restarts</td><td>The watchdog drops the contactor and every output within about 0.3 s. After a crash restart, dosing stays off until someone clears the fault.</td></tr>
+        <tr><td>24 V power is lost</td><td>The contactor opens and the outputs go dead. When power returns, the board picks up again from its saved settings.</td></tr>
+        <tr><td>Wi-Fi or the internet drops</td><td>Keeps dosing from the saved recipe and sends what it logged when it reconnects. A site can choose to stop after a set outage instead.</td></tr>
+        <tr><td>A probe stops answering</td><td>Marks its reading stale and raises an alert. Dosing carries on.</td></tr>
+        <tr><td>A sensor cable shorts</td><td>The sensor port's own fuse trips. The flow meters and the other inputs keep their supply.</td></tr>
+        <tr><td>A pump cable comes off</td><td>Flags that channel's loop fault.</td></tr>
+        <tr><td>An output reads back wrong</td><td>Stops and flags a fault.</td></tr>
+        <tr><td>The flow meter stops while a valve is open</td><td>Doses nothing without flow, and raises an alarm after 10 s.</td></tr>
+        <tr><td>The flow meter reads impossibly high</td><td>Treats it as noise: stops and flags a fault.</td></tr>
+        <tr><td>A tank float drops</td><td>Raises an alert.</td></tr>
+        <tr><td>The contactor's contact welds shut</td><td>The outputs stay at 0 mA, and the contact feedback flags the fault.</td></tr>
+        <tr><td>The watchdog line sticks high or low</td><td>The contactor drops either way, because only pulses hold it in.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 5 -->
+  <section id="connections">
+    <header><span class="kicker">Connections</span><h2>What lands where</h2></header>
+    <p class="prose">All field wiring lands on push-in terminal blocks along the two long edges: controls and sensors on the back edge, pumps and the contactor on the front edge. The I/O labels are printed on the enclosure.</p>
+    <figure class="map">
+      <div class="edge top" aria-hidden="true"><span style="--x:11.16%">24 V IN</span><span style="--x:20.43%">RS-485</span><span style="--x:32.48%">4–20 mA IN</span><span style="--x:44.52%">INPUTS 1–4</span><span style="--x:56.57%">INPUTS 5–8</span><span style="--x:66.21%">IN COM</span><span style="--x:78.84%">FLOW A · B</span><span style="--x:90.15%">STATUS</span></div>
+      <div class="board">
+        <img src="img/fio8-3d-top.webp" width="2000" height="1299" alt="Top view of the FIO-8 board with numbered markers over its main areas">
+        <span class="pin" style="--x:21.89%;--y:38.76%" aria-hidden="true">1</span>
+        <span class="pin" style="--x:33.94%;--y:28.08%" aria-hidden="true">2</span>
+        <span class="pin" style="--x:54.02%;--y:25.84%" aria-hidden="true">3</span>
+        <span class="pin" style="--x:84.68%;--y:33.14%" aria-hidden="true">4</span>
+        <span class="pin" style="--x:45.62%;--y:33.7%" aria-hidden="true">5</span>
+        <span class="pin" style="--x:13.5%;--y:63.49%" aria-hidden="true">6</span>
+        <span class="pin" style="--x:50.22%;--y:67.98%" aria-hidden="true">7</span>
+      </div>
+      <div class="edge bottom" aria-hidden="true"><span style="--x:18.02%">PUMP 1·2</span><span style="--x:36.35%">PUMP 3·4</span><span style="--x:50.36%">CONTACTOR · FLUSH</span><span style="--x:64.02%">PUMP 5·6</span><span style="--x:82.34%">PUMP 7·8</span></div>
+      <ol class="legend">
+        <li><i>1</i><span><b>Power in.</b> Fuse, reverse-polarity guard, surge clamp and the 5 V supply for the board.</span></li>
+        <li><i>2</i><span><b>RS-485 sensor port.</b> The board is the bus master; 24 V for the probes on its own fuse, and a jumper for the 120 Ω termination.</span></li>
+        <li><i>3</i><span><b>Input isolation.</b> Optocouplers for the eight dry-contact inputs and the two flow meters.</span></li>
+        <li><i>4</i><span><b>Processor.</b> A plug-in Seeed XIAO ESP32-S3 with Wi-Fi and Bluetooth, in two sockets. Its antenna lead runs to the case wall.</span></li>
+        <li><i>5</i><span><b>Hardware watchdog</b> that holds the contactor and the output driver.</span></li>
+        <li><i>6</i><span><b>One of the eight output cells:</b> isolated supply, isolator and current source, with a status light above each.</span></li>
+        <li><i>7</i><span><b>Pump-power and flush contacts</b> with their fuses and contact feedback.</span></li>
+      </ol>
+      <figcaption>Top view, 132 × 84 mm. Status lights for the bus, faults, run, flush and both flow meters sit at the top right.</figcaption>
+    </figure>
+    <table class="tbl">
+      <thead><tr><th>Terminal</th><th>Poles</th><th>Connects to</th></tr></thead>
+      <tbody>
+        <tr><td>24 V IN</td><td class="mono">− +</td><td>24 V DC supply (±10 %), about 0.3 A plus what the probes on the RS-485 port draw.</td></tr>
+        <tr><td>RS-485</td><td class="mono">B A G +24</td><td>pH and EC probes and other Modbus sensors, read by the board and powered from it at 24 V (0.5 A, its own fuse). One four-wire cable per sensor run.</td></tr>
+        <tr><td>4–20 mA IN</td><td class="mono">1+ 1− 2+ 2−</td><td>Two loop-powered sensors: line pressure, tank level, or a transmitter.</td></tr>
+        <tr><td>INPUTS 1–4, 5–8</td><td class="mono">1 2 3 4</td><td>Dry contacts: tank floats, a valve-open contact (input 8), door or alarm switches.</td></tr>
+        <tr><td>IN COM</td><td class="mono">+24 +24</td><td>The common side of the dry contacts, wetted from the board at 24 V.</td></tr>
+        <tr><td>FLOW A · B</td><td class="mono">+ S G  + S G</td><td>Two pulse-output flow meters, powered from the board at 24 V.</td></tr>
+        <tr><td>PUMP 1·2 … 7·8</td><td class="mono">+ − + −</td><td>The 4–20 mA speed inputs of the dosing pumps, two pumps per block.</td></tr>
+        <tr><td>CONTACTOR · FLUSH</td><td class="mono">K1 K1 K2 K2</td><td>K1 switches the 24 V coil of the contactor that feeds the pumps' power. K2 switches the flush or drain valve (60 V, 2 A, AC or DC).</td></tr>
+      </tbody>
+    </table>
+    <div class="pair">
+      <figure class="map"><img src="img/fio8-3d-terminals.webp" width="1400" height="899" alt="3D render of the FIO-8 from the control edge, showing the terminal blocks for power, RS-485, sensor inputs, dry contacts and flow meters"><figcaption>The control edge: power, RS-485, sensor and contact inputs, and the flow meters.</figcaption></figure>
+      <figure class="map"><img src="img/fio8-3d-bottom.webp" width="1400" height="909" alt="Underside of the FIO-8 board with rows of small surface-mount parts"><figcaption>The underside carries 246 of the 396 parts, which keeps the top clear for the terminals and the eight output cells.</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section id="connected">
+    <header><span class="kicker">GCU Cloud, GCU Manager and the app</span><h2>The board does the work; you see it and steer it from anywhere</h2></header>
+    <div class="cols">
+      <div class="prose" style="display:grid;gap:10px">
+        <h3>What you set</h3>
+        <ul class="plain">
+          <li>The recipe for each pump, in ml per gallon.</li>
+          <li>Each pump's capacity from its cup test, and the flow and time limits.</li>
+          <li>Dosing on or off, where the valve signal comes from, and the probes on the sensor port.</li>
+          <li>From the GCU Setup app on site, from GCU Cloud anywhere, or from the GCU Manager on the site network.</li>
+        </ul>
+      </div>
+      <div class="prose" style="display:grid;gap:10px">
+        <h3>What it reports</h3>
+        <ul class="plain">
+          <li>Flow, gallons this feed and today, and ml per pump for the feed and the day.</li>
+          <li>Every input, the contactor state and any fault, as they change.</li>
+          <li>pH, EC and the other probe readings from its sensor port.</li>
+          <li>In GCU Cloud: charts, per-injector daily totals and alarms for low flow, high flow, probes and board faults.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="note prose"><b>When the network drops</b><span>The recipe, calibration and limits live in the board's own memory, so a feed carries on through a Wi-Fi or internet outage and the records catch up when it reconnects. On site, the GCU Setup app reaches the board over Bluetooth with no network at all. Firmware updates come over Wi-Fi from GCU Cloud.</span></div>
+  </section>
+
+  <!-- 7 -->
+  <section id="specs">
+    <header><span class="kicker">Specifications</span><h2>Rev A at a glance</h2></header>
+    <table class="tbl">
+      <tbody>
+        <tr><td>Power</td><td>24 V DC ±10 %, about 0.3 A plus sensor power. Fused, reverse-polarity protected, surge clamped.</td></tr>
+        <tr><td>Pump outputs</td><td>8 × 4–20 mA, each in its own isolated cell. At least 500 Ω at 20 mA. 0.01 mA steps. Rest at 0 or 4 mA. Loop-fault flag per channel.</td></tr>
+        <tr><td>Flow inputs</td><td>2 pulse inputs with 24 V sensor supply, optocoupled, counted in hardware above 1 kHz.</td></tr>
+        <tr><td>Sensor inputs</td><td>2 × 4–20 mA, loop powered, 0.1 % precision shunt, 16-bit converter.</td></tr>
+        <tr><td>Contact inputs</td><td>8 dry contacts, 24 V wetting, optocoupled.</td></tr>
+        <tr><td>Contacts out</td><td>2 solid-state contacts, 60 V, 2 A, AC or DC, each fused, with contact feedback. K1 is held by the hardware watchdog.</td></tr>
+        <tr><td>Network</td><td>Wi-Fi to GCU Cloud and the GCU Manager; Bluetooth LE for the GCU Setup app. Firmware updates over Wi-Fi.</td></tr>
+        <tr><td>Sensor port</td><td>RS-485, Modbus RTU master, 24 V sensor supply on its own 0.5 A fuse, jumper for the 120 Ω termination.</td></tr>
+        <tr><td>Processor</td><td>Plug-in Seeed XIAO ESP32-S3 (Wi-Fi, Bluetooth LE), antenna lead to the case wall.</td></tr>
+        <tr><td>Board</td><td>132 × 84 mm, 4 layers, four M3 mounting holes, 26 test points.</td></tr>
+        <tr><td>Terminals</td><td>Push-in terminal blocks, 3.5 mm pitch.</td></tr>
+        <tr><td>Enclosure</td><td>DIN-rail case with the I/O labels printed on it.</td></tr>
+      </tbody>
+    </table>
+    <div class="note prose"><b>Coming next: water quality on the sensor port</b><span>A companion board with on-board pH and EC measurement, each in its own isolated circuit with temperature compensation and probe diagnostics, plugs into the FIO-8's RS-485 port at its own address and runs from its 24 V.</span></div>
+  </section>
+
+  <footer>
+    <span>Legacy West Ventures · Your Partner for Smart Building &amp; Agriculture Technology</span>
+    <span class="mono">info@legacywestventures.com</span>
+  </footer>
+</div>
+</body>
+</html>
