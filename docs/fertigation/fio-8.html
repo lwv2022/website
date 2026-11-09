@@ -493,7 +493,7 @@ footer .logo { height: 28px }
   <!-- 8 -->
   <section id="fiowq">
     <header><span class="kicker">Companion board</span><h2>FIO-WQ: pH and EC measured on the board, in the water line</h2></header>
-    <p class="lead">The FIO-WQ reads two pH electrodes and two conductivity cells, each with its own temperature probe, and hands the readings to the FIO-8 over one four-wire cable. Each of the four measurement circuits is electrically isolated from the others and from the bus, so probes in the same water do not disturb each other and a wiring fault on one stays on one. It checks its own electrodes before it trusts them.</p>
+    <p class="lead">The FIO-WQ reads two pH electrodes and two conductivity cells, each with its own temperature probe, and hands the readings to the FIO-8 over one four-wire cable. Each of the four measurement circuits is electrically isolated from the others and from the bus, so probes in the same water do not disturb each other and a wiring fault on one stays on one. It checks its own electrodes before it trusts them. The board itself stays dry on the DIN rail: the pH electrodes and conductivity cells sit in the water line, in a tee or a flow cell, and their cables run back to the jacks and terminals.</p>
     <figure class="hero-fig">
       <img src="img/fiowq-3d-hero.webp" width="1222" height="771" alt="3D render of the FIO-WQ board: a green circuit board with two BNC jacks and four push-in terminal blocks along the front edge, two bus terminal blocks and a row of status lights along the back, and a plug-in processor module at the right end">
       <figcaption>Rev A, rendered from the production layout with simplified part bodies. The two pH BNC jacks and the probe terminals sit along the front edge; bus in and out and the status lights along the back. Same 132 × 84 mm outline and mounting holes as the FIO-8.</figcaption>
@@ -585,22 +585,22 @@ footer .logo { height: 28px }
 
   <!-- 9 -->
   <section id="enclosures">
-    <header><span class="kicker">Enclosures</span><h2>Printed DIN-rail cases with the labels on the lid</h2></header>
-    <p class="prose">Both boards share one case family: a base tray and a cover, printed in ASA, clipped to 35 mm DIN rail. The terminal ends are open, so wires drop straight into the push-in blocks and the levers flip outward with the cover on. The I/O labels, the board name and the LWV mark are part of the cover, which is why the boards themselves carry no field labels. Four M3 screws pass through the board's own mounting holes and hold board, base and cover together, so nothing moves once the case is closed.</p>
+    <header><span class="kicker">Enclosures</span><h2>Printed DIN-rail cases</h2></header>
+    <p class="prose">Both boards share one case family: a base tray and a cover, printed in ASA with rounded corners and edges, clipped to 35 mm DIN rail. The terminal ends are open, so wires drop straight into the push-in blocks and the levers flip outward with the cover on. The roof is a plain surface: the I/O labels go on as printed stickers, and the four M3 screws that hold board, base and cover together are countersunk underneath.</p>
     <div class="pair">
-      <figure class="map"><img src="img/case-fio8-iso.webp" width="1466" height="952" alt="Render of the FIO-8 in its grey printed DIN-rail case: pump terminals along the front, the sensor and bus terminals along the back, eight channel lights and a status column, the labels and the LWV logo on the cover"><figcaption>FIO-8 case. Pump outputs along the front, inputs and bus along the back, a light per channel and a status column.</figcaption></figure>
-      <figure class="map"><img src="img/case-fiowq-iso.webp" width="1103" height="727" alt="Render of the FIO-WQ in its light grey printed DIN-rail case: two BNC jacks through the front wall between the probe terminal blocks, bus terminals and the status light slot along the back, labels and the LWV logo on the cover"><figcaption>FIO-WQ case. The two BNC jacks pass through the front wall and are held by their own panel nuts; the probe terminals sit beside them.</figcaption></figure>
+      <figure class="map"><img src="img/case-fio8-iso.webp" width="1466" height="924" alt="Render of the FIO-8 in its grey printed DIN-rail case with rounded corners: pump terminals along the front, the sensor and bus terminals along the back, round windows for the channel lights and the status column"><figcaption>FIO-8 case. Pump outputs along the front, inputs and bus along the back, a round window per channel light and for the status column. Labels go on as stickers.</figcaption></figure>
+      <figure class="map"><img src="img/case-fiowq-iso.webp" width="1089" height="718" alt="Render of the FIO-WQ in its light grey printed DIN-rail case with rounded corners: two BNC jacks through the front wall between the probe terminal blocks, bus terminals and the status light slot along the back"><figcaption>FIO-WQ case. The two BNC jacks pass through the front wall and are held by their own panel nuts; the probe terminals sit beside them.</figcaption></figure>
     </div>
     <div class="pair">
-      <figure class="map"><img src="img/case-fio8-exploded.webp" width="1466" height="1186" alt="Exploded render of the FIO-8 case: the cover lifted above the board and the base tray"><figcaption>FIO-8 case, cover lifted.</figcaption></figure>
-      <figure class="map"><img src="img/case-fiowq-exploded.webp" width="1038" height="789" alt="Exploded render of the FIO-WQ case: the cover lifted above the board and the base tray"><figcaption>FIO-WQ case, cover lifted.</figcaption></figure>
+      <figure class="map"><img src="img/case-fio8-exploded.webp" width="1466" height="1215" alt="Exploded render of the FIO-8 case: the cover lifted above the board and the base tray"><figcaption>FIO-8 case, cover lifted.</figcaption></figure>
+      <figure class="map"><img src="img/case-fiowq-exploded.webp" width="1028" height="772" alt="Exploded render of the FIO-WQ case: the cover lifted above the board and the base tray"><figcaption>FIO-WQ case, cover lifted.</figcaption></figure>
     </div>
     <table class="tbl">
       <tbody>
-        <tr><td>Material</td><td>ASA, printed in two parts (base and cover) with an optional second-colour legend. No supports.</td></tr>
+        <tr><td>Material</td><td>ASA, printed in two parts (base and cover), 2.6 mm walls, no supports. Labels as stickers.</td></tr>
         <tr><td>Mounting</td><td>35 mm DIN rail clip under the base. The board is held by four M3 screws through its own mounting holes.</td></tr>
-        <tr><td>FIO-8 case</td><td>137 × 89 × 28 mm, 8 DIN modules. A window over each channel light and a comb over the status column, with optional translucent light pipes; the USB-C port reachable through the end wall.</td></tr>
-        <tr><td>FIO-WQ case</td><td>137 × 90 × 26 mm, 8 DIN modules. BNC jacks through the front wall, held by their own panel nuts; one slot for the status lights.</td></tr>
+        <tr><td>FIO-8 case</td><td>138 × 90 × 31 mm, 8 DIN modules. A round window over each channel light and the status column, with optional translucent light pipes; the USB-C port reachable through the end wall.</td></tr>
+        <tr><td>FIO-WQ case</td><td>138 × 91 × 26 mm, 8 DIN modules. BNC jacks through the front wall on the base-to-cover seam, held by their own panel nuts; one slot for the status lights.</td></tr>
         <tr><td>Wiring</td><td>Open terminal ends; levers reachable with the cover on. USB-C notch on the end wall.</td></tr>
       </tbody>
     </table>
