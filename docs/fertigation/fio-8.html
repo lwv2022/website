@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>LWV FIO-8 Fertigation Board</title>
+<title>LWV FIO-8 and FIO-WQ Fertigation Boards</title>
 <meta name="robots" content="noindex,nofollow">
 <meta name="description" content="LWV FIO-8 fertigation board: eight isolated 4-20 mA pump outputs, flow-paced dosing, two independent stops, Wi-Fi, Bluetooth and a powered RS-485 sensor port.">
 <link rel="icon" href="/favicon.png">
@@ -487,7 +487,123 @@ footer .logo { height: 28px }
         <tr><td>Enclosure</td><td>DIN-rail case with the I/O labels printed on it.</td></tr>
       </tbody>
     </table>
-    <div class="note prose"><b>Coming next: water quality on the sensor port</b><span>A companion board with on-board pH and EC measurement, each in its own isolated circuit with temperature compensation and probe diagnostics, plugs into the FIO-8's RS-485 port at its own address and runs from its 24 V.</span></div>
+    <div class="note prose"><b>Water quality on the sensor port</b><span>The companion FIO-WQ board, below, measures pH and EC on the board itself, each channel in its own isolated circuit, and plugs into the FIO-8's RS-485 port at its own address on the FIO-8's 24 V.</span></div>
+  </section>
+
+  <!-- 8 -->
+  <section id="fiowq">
+    <header><span class="kicker">Companion board</span><h2>FIO-WQ: pH and EC measured on the board, in the water line</h2></header>
+    <p class="lead">The FIO-WQ reads two pH electrodes and two conductivity cells, each with its own temperature probe, and hands the readings to the FIO-8 over one four-wire cable. Each of the four measurement circuits is electrically isolated from the others and from the bus, so probes in the same water do not disturb each other and a wiring fault on one stays on one. It checks its own electrodes before it trusts them.</p>
+    <figure class="hero-fig">
+      <img src="img/fiowq-3d-hero.webp" width="1222" height="771" alt="3D render of the FIO-WQ board: a green circuit board with two BNC jacks and four push-in terminal blocks along the front edge, two bus terminal blocks and a row of status lights along the back, and a plug-in processor module at the right end">
+      <figcaption>Rev A, rendered from the production layout with simplified part bodies. The two pH BNC jacks and the probe terminals sit along the front edge; bus in and out and the status lights along the back. Same 132 × 84 mm outline and mounting holes as the FIO-8.</figcaption>
+    </figure>
+    <div class="facts" role="list">
+      <div class="fact" role="listitem"><b>2</b><span>pH inputs on BNC, glass and reference</span></div>
+      <div class="fact" role="listitem"><b>2</b><span>EC inputs for two-electrode cells</span></div>
+      <div class="fact" role="listitem"><b>4</b><span>PT1000 temperature inputs, one per channel</span></div>
+      <div class="fact" role="listitem"><b>4</b><span>isolated measurement circuits</span></div>
+      <div class="fact" role="listitem"><b>1</b><span>four-wire cable to the FIO-8</span></div>
+      <div class="fact" role="listitem"><b>0</b><span>extra power supplies: it runs from the FIO-8's 24 V</span></div>
+    </div>
+    <div class="cols">
+      <div class="prose" style="display:grid;gap:10px">
+        <h3>pH, the way a lab meter does it</h3>
+        <p>A glass electrode is a very high-impedance source, so each pH channel starts with an electrometer-grade buffer right behind the BNC jack and a 24-bit converter that also reads the channel's PT1000. The reference side of the electrode is the channel's own ground, not the board's. Before a reading is trusted the board can switch a 1 GΩ test resistor onto the glass: a healthy electrode and a cracked or aged one answer differently, and that answer goes to GCU Cloud with the reading.</p>
+      </div>
+      <div class="prose" style="display:grid;gap:10px">
+        <h3>EC with a built-in check</h3>
+        <p>Each conductivity channel drives its cell with a small AC signal and measures the complex impedance, with the cell's PT1000 for temperature compensation. Three precision resistors (100 Ω, 1 kΩ and 10 kΩ) and a check resistor sit on the board behind the same switch as the cell, so the channel measures a known value before every reading and reports if it drifts. The two channels are meant for source water in and mixed water out, so a recipe can be set in EC above the source and a pump that stops delivering shows up as a mix EC that does not rise.</p>
+      </div>
+    </div>
+    <figure class="diagram">
+      <div class="scroll">
+      <svg viewBox="0 0 1000 330" role="img" aria-label="FIO-WQ block diagram: the FIO-8 sensor port feeds the bus-in terminals; the bus passes through to bus-out for further sensors. On the board side a processor talks over I2C and SPI through four digital isolators, and four small isolated supplies feed four isolated measurement circuits: pH 1 and pH 2, each a buffer and 24-bit converter on a BNC electrode with a PT1000, and EC 1 and EC 2, each an impedance converter with calibration resistors on a two-electrode cell with a PT1000.">
+        <defs><marker id="ar4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker></defs>
+        <text x="30" y="24" style="font:600 12px var(--body);letter-spacing:.1em;fill:var(--muted)">BOARD SIDE · ON THE FIO-8 BUS</text>
+        <text x="970" y="24" text-anchor="end" style="font:600 12px var(--body);letter-spacing:.1em;fill:var(--accent)">FOUR ISOLATED CIRCUITS</text>
+        <rect class="box" x="30" y="60" width="150" height="56" rx="10"/><text class="t-m" x="105" y="84" text-anchor="middle">FIO-8 sensor port</text><text class="t-s mono" x="105" y="104" text-anchor="middle">B A GND 24V</text>
+        <rect class="box" x="30" y="150" width="150" height="56" rx="10"/><text class="t-m" x="105" y="174" text-anchor="middle">BUS OUT</text><text class="t-s" x="105" y="194" text-anchor="middle">on to further sensors</text>
+        <line class="ln" x1="105" y1="116" x2="105" y2="148" marker-end="url(#ar4)"/>
+        <rect class="box" x="214" y="86" width="196" height="92" rx="12"/><text class="t-b" x="312" y="116" text-anchor="middle">Processor</text><text class="t-s" x="312" y="138" text-anchor="middle">answers at its own address</text><text class="t-s" x="312" y="156" text-anchor="middle">5 V made from the 24 V bus</text>
+        <line class="ln" x1="180" y1="88" x2="212" y2="106" marker-start="url(#ar4)" marker-end="url(#ar4)"/>
+        <line class="barrier" x1="500" y1="40" x2="500" y2="310"/>
+        <text class="t-stop" x="508" y="312" font-size="12.5">isolation barrier</text>
+        <g>
+          <rect class="box-acc" x="428" y="46" width="144" height="44" rx="8"/><text class="t-s" x="500" y="68" text-anchor="middle">isolator</text><text class="t-s" x="500" y="83" text-anchor="middle">1 W supply</text>
+          <rect class="box-acc" x="428" y="110" width="144" height="44" rx="8"/><text class="t-s" x="500" y="132" text-anchor="middle">isolator</text><text class="t-s" x="500" y="147" text-anchor="middle">1 W supply</text>
+          <rect class="box-acc" x="428" y="174" width="144" height="44" rx="8"/><text class="t-s" x="500" y="196" text-anchor="middle">isolator</text><text class="t-s" x="500" y="211" text-anchor="middle">1 W supply</text>
+          <rect class="box-acc" x="428" y="238" width="144" height="44" rx="8"/><text class="t-s" x="500" y="260" text-anchor="middle">isolator</text><text class="t-s" x="500" y="275" text-anchor="middle">1 W supply</text>
+        </g>
+        <polyline class="ln" points="410,110 418,110 418,68 426,68" marker-end="url(#ar4)"/>
+        <polyline class="ln" points="410,124 418,124 418,132 426,132" marker-end="url(#ar4)"/>
+        <polyline class="ln" points="410,144 418,144 418,196 426,196" marker-end="url(#ar4)"/>
+        <polyline class="ln" points="410,158 418,158 418,260 426,260" marker-end="url(#ar4)"/>
+        <rect class="box" x="600" y="46" width="200" height="44" rx="8"/><text class="t-m" x="700" y="64" text-anchor="middle">pH 1 · buffer + 24-bit ADC</text><text class="t-s" x="700" y="82" text-anchor="middle">glass test · PT1000</text>
+        <rect class="box" x="600" y="110" width="200" height="44" rx="8"/><text class="t-m" x="700" y="128" text-anchor="middle">pH 2 · buffer + 24-bit ADC</text><text class="t-s" x="700" y="146" text-anchor="middle">glass test · PT1000</text>
+        <rect class="box" x="600" y="174" width="200" height="44" rx="8"/><text class="t-m" x="700" y="192" text-anchor="middle">EC 1 · impedance converter</text><text class="t-s" x="700" y="210" text-anchor="middle">100 Ω · 1 k · 10 k check · PT1000</text>
+        <rect class="box" x="600" y="238" width="200" height="44" rx="8"/><text class="t-m" x="700" y="256" text-anchor="middle">EC 2 · impedance converter</text><text class="t-s" x="700" y="274" text-anchor="middle">100 Ω · 1 k · 10 k check · PT1000</text>
+        <line class="ln" x1="572" y1="68" x2="598" y2="68" marker-end="url(#ar4)"/><line class="ln" x1="572" y1="132" x2="598" y2="132" marker-end="url(#ar4)"/>
+        <line class="ln" x1="572" y1="196" x2="598" y2="196" marker-end="url(#ar4)"/><line class="ln" x1="572" y1="260" x2="598" y2="260" marker-end="url(#ar4)"/>
+        <rect class="box" x="850" y="46" width="120" height="44" rx="8"/><text class="t-m" x="910" y="64" text-anchor="middle">pH electrode</text><text class="t-s mono" x="910" y="82" text-anchor="middle">BNC</text>
+        <rect class="box" x="850" y="110" width="120" height="44" rx="8"/><text class="t-m" x="910" y="128" text-anchor="middle">pH electrode</text><text class="t-s mono" x="910" y="146" text-anchor="middle">BNC</text>
+        <rect class="box" x="850" y="174" width="120" height="44" rx="8"/><text class="t-m" x="910" y="192" text-anchor="middle">EC cell</text><text class="t-s mono" x="910" y="210" text-anchor="middle">E1 E2 T+ T−</text>
+        <rect class="box" x="850" y="238" width="120" height="44" rx="8"/><text class="t-m" x="910" y="256" text-anchor="middle">EC cell</text><text class="t-s mono" x="910" y="274" text-anchor="middle">E1 E2 T+ T−</text>
+        <line class="ln" x1="800" y1="68" x2="848" y2="68" marker-start="url(#ar4)" marker-end="url(#ar4)"/><line class="ln" x1="800" y1="132" x2="848" y2="132" marker-start="url(#ar4)" marker-end="url(#ar4)"/>
+        <line class="ln" x1="800" y1="196" x2="848" y2="196" marker-start="url(#ar4)" marker-end="url(#ar4)"/><line class="ln" x1="800" y1="260" x2="848" y2="260" marker-start="url(#ar4)" marker-end="url(#ar4)"/>
+      </svg>
+      </div>
+      <figcaption>Four measurement circuits, each behind its own isolator and its own 1 W supply. Only those two parts cross each barrier; the electrodes never see the bus or each other.</figcaption>
+    </figure>
+    <table class="tbl">
+      <thead><tr><th>Terminal</th><th>Poles</th><th>Connects to</th></tr></thead>
+      <tbody>
+        <tr><td>pH 1 · pH 2</td><td class="mono">BNC</td><td>A standard combination pH electrode: glass on the centre pin, reference on the shell. The shell is that channel's own reference, never the chassis.</td></tr>
+        <tr><td>pH 1 · pH 2 probe block</td><td class="mono">RTD+ RTD− SG GND</td><td>The channel's PT1000 and a solution-ground pin for electrodes that have one.</td></tr>
+        <tr><td>EC 1 · EC 2</td><td class="mono">E1 E2 T+ T−</td><td>A two-electrode conductivity cell and its PT1000.</td></tr>
+        <tr><td>BUS IN</td><td class="mono">B A GND 24V</td><td>One four-wire cable from the FIO-8's RS-485 port: data and 24 V.</td></tr>
+        <tr><td>BUS OUT</td><td class="mono">B A GND 24V</td><td>The same four wires, passed through to the next sensor on the run.</td></tr>
+        <tr><td>Status lights</td><td class="mono">BUS FLT PH1 PH2 EC1 EC2</td><td>Bus traffic, a board fault, and one light per channel; a USB-C service port sits beside them.</td></tr>
+      </tbody>
+    </table>
+    <div class="pair">
+      <figure class="map"><img src="img/fiowq-3d-terminals.webp" width="1043" height="647" alt="3D render of the FIO-WQ from the bus edge, showing the two bus terminal blocks, the status lights and the processor module"><figcaption>The bus edge: bus in and out, the status lights and the plug-in processor module.</figcaption></figure>
+      <figure class="map"><img src="img/fiowq-3d-bottom.webp" width="1067" height="773" alt="Underside of the FIO-WQ board with its small surface-mount parts"><figcaption>The underside carries the small parts of each channel, which keeps the top clear for the jacks and terminals.</figcaption></figure>
+    </div>
+    <table class="tbl">
+      <tbody>
+        <tr><td>pH channels</td><td>2, on BNC. Electrometer buffer, 24-bit converter, PT1000 compensation, 1 GΩ glass-impedance test, each in its own isolated circuit.</td></tr>
+        <tr><td>EC channels</td><td>2, for two-electrode cells. AC impedance measurement, on-board 100 Ω / 1 kΩ / 10 kΩ calibration and check resistors, PT1000 compensation, each in its own isolated circuit.</td></tr>
+        <tr><td>Isolation</td><td>Four 1 W isolated supplies and four digital isolators; the electrodes and the bus share no ground.</td></tr>
+        <tr><td>Bus</td><td>RS-485 Modbus RTU on the FIO-8's sensor port, at its own address, with the bus passed through to further sensors. Readings and probe health appear in GCU Cloud next to the FIO-8's dosing.</td></tr>
+        <tr><td>Power</td><td>24 V from the FIO-8's sensor port, under 1 W typical. Fused and reverse-polarity protected.</td></tr>
+        <tr><td>Processor</td><td>Plug-in Seeed XIAO module in two sockets; USB-C for service.</td></tr>
+        <tr><td>Board</td><td>132 × 84 mm, 4 layers, 240 parts, the FIO-8's four M3 mounting holes and case family.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 9 -->
+  <section id="enclosures">
+    <header><span class="kicker">Enclosures</span><h2>Printed DIN-rail cases with the labels on the lid</h2></header>
+    <p class="prose">Both boards share one case family: a base tray and a cover, printed in ASA, clipped to 35 mm DIN rail. The terminal ends are open, so wires drop straight into the push-in blocks and the levers flip outward with the cover on. The I/O labels, the board name and the LWV mark are part of the cover, which is why the boards themselves carry no field labels. Four M3 screws pass through the board's own mounting holes and hold board, base and cover together, so nothing moves once the case is closed.</p>
+    <div class="pair">
+      <figure class="map"><img src="img/case-fio8-iso.webp" width="1466" height="952" alt="Render of the FIO-8 in its grey printed DIN-rail case: pump terminals along the front, the sensor and bus terminals along the back, eight channel lights and a status column, the labels and the LWV logo on the cover"><figcaption>FIO-8 case. Pump outputs along the front, inputs and bus along the back, a light per channel and a status column.</figcaption></figure>
+      <figure class="map"><img src="img/case-fiowq-iso.webp" width="1103" height="727" alt="Render of the FIO-WQ in its light grey printed DIN-rail case: two BNC jacks through the front wall between the probe terminal blocks, bus terminals and the status light slot along the back, labels and the LWV logo on the cover"><figcaption>FIO-WQ case. The two BNC jacks pass through the front wall and are held by their own panel nuts; the probe terminals sit beside them.</figcaption></figure>
+    </div>
+    <div class="pair">
+      <figure class="map"><img src="img/case-fio8-exploded.webp" width="1466" height="1186" alt="Exploded render of the FIO-8 case: the cover lifted above the board and the base tray"><figcaption>FIO-8 case, cover lifted.</figcaption></figure>
+      <figure class="map"><img src="img/case-fiowq-exploded.webp" width="1038" height="789" alt="Exploded render of the FIO-WQ case: the cover lifted above the board and the base tray"><figcaption>FIO-WQ case, cover lifted.</figcaption></figure>
+    </div>
+    <table class="tbl">
+      <tbody>
+        <tr><td>Material</td><td>ASA, printed in two parts (base and cover) with an optional second-colour legend. No supports.</td></tr>
+        <tr><td>Mounting</td><td>35 mm DIN rail clip under the base. The board is held by four M3 screws through its own mounting holes.</td></tr>
+        <tr><td>FIO-8 case</td><td>137 × 89 × 28 mm, 8 DIN modules. A window over each channel light and a comb over the status column, with optional translucent light pipes; the USB-C port reachable through the end wall.</td></tr>
+        <tr><td>FIO-WQ case</td><td>137 × 90 × 26 mm, 8 DIN modules. BNC jacks through the front wall, held by their own panel nuts; one slot for the status lights.</td></tr>
+        <tr><td>Wiring</td><td>Open terminal ends; levers reachable with the cover on. USB-C notch on the end wall.</td></tr>
+      </tbody>
+    </table>
   </section>
 
   <footer>
