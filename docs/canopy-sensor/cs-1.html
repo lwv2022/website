@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>LWV-CS-1 GCU Canopy Sensor</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="LWV-CS-1 GCU Canopy Sensor: dual-wavelength CO2, air temperature and humidity, leaf temperature, spectral light and air quality in a fan-drawn measuring box on the pod's M12 bus.">
+<link rel="icon" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: one reading column on the LWV website palette; diagrams and board images run full column width, specs as quiet tables. */
+:root {
+  --bg: #ffffff; --surface: #f6f9fb; --line: #e2e8f0; --ink: #1e293b; --muted: #5d6b80;
+  --accent: #0072a3; --cyan: #22b9e8; --stop: #c2410c; --pipe: #b9e3f3; --plate: transparent;
+  --display: "Montserrat", "Segoe UI", system-ui, sans-serif; --body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --radius: 14px;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0b1220; --surface: #111b2c; --line: #223047; --ink: #e5ecf4; --muted: #9aa8bb;
+  --accent: #62cbf1; --cyan: #22b9e8; --stop: #fb923c; --pipe: #1c4a5d; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #0b1220; --surface: #111b2c; --line: #223047; --ink: #e5ecf4; --muted: #9aa8bb;
+  --accent: #62cbf1; --cyan: #22b9e8; --stop: #fb923c; --pipe: #1c4a5d; color-scheme: dark }
+* { box-sizing: border-box }
+body { background: var(--bg); color: var(--ink); font: 400 16px/1.6 var(--body); }
+.wrap { max-width: 1040px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.prose { max-width: 68ch }
+h1, h2, h3 { font-family: var(--display); color: var(--ink); text-wrap: balance; margin: 0 }
+h1 { font-size: clamp(30px, 5.2vw, 48px); line-height: 1.08; letter-spacing: -0.01em }
+h2 { font-size: clamp(22px, 3.2vw, 30px); line-height: 1.2 }
+h3 { font-size: 17px; line-height: 1.3 }
+p { margin: 0 }
+a { color: var(--accent) }
+.kicker { font: 600 12px/1.2 var(--body); letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent) }
+.muted { color: var(--muted) }
+.mono { font-family: var(--mono); font-weight: 500 }
+
+/* header */
+.top { padding-block: 22px 0 }
+.brand { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap }
+.logo { height: 40px; width: auto; display: block }
+.logo-dark { display: none }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .logo-light { display: none } :root:not([data-theme="light"]) .logo-dark { display: block } }
+:root[data-theme="dark"] .logo-light { display: none } :root[data-theme="dark"] .logo-dark { display: block }
+.rev { font: 500 13px/1.3 var(--mono); color: var(--muted) }
+.hero { display: grid; gap: 18px; padding-block: 34px 8px }
+.lead { font-size: clamp(17px, 2vw, 19px); line-height: 1.55; color: var(--ink); max-width: 64ch }
+.hero-fig { margin: 8px 0 0; position: relative }
+.hero-fig::before { content: ""; position: absolute; inset: 8% 4% 4%; background: radial-gradient(ellipse at 50% 55%, color-mix(in srgb, var(--cyan) 14%, transparent), transparent 70%); z-index: 0 }
+.hero-fig img { position: relative; z-index: 1; width: 100%; height: auto; display: block }
+figcaption { font-size: 14px; line-height: 1.5; color: var(--muted); margin-top: 10px; max-width: 72ch }
+
+/* figures strip */
+.facts { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-block: 26px 10px }
+.fact { padding: 16px 14px 16px 0; display: grid; gap: 4px; align-content: start }
+.fact + .fact { padding-left: 14px; border-left: 1px solid var(--line) }
+.fact b { font: 500 30px/1 var(--mono); color: var(--ink); font-variant-numeric: tabular-nums }
+.fact span { font-size: 13.5px; line-height: 1.35; color: var(--muted) }
+@media (max-width: 860px) { .facts { grid-template-columns: repeat(3, minmax(0, 1fr)) } .fact:nth-child(4) { border-left: 0; padding-left: 0 } .fact:nth-child(n+4) { border-top: 1px solid var(--line) } }
+@media (max-width: 480px) { .facts { grid-template-columns: repeat(2, minmax(0, 1fr)) } .fact:nth-child(odd) { border-left: 0; padding-left: 0 } .fact:nth-child(even) { border-left: 1px solid var(--line); padding-left: 14px } .fact:nth-child(n+3) { border-top: 1px solid var(--line) } }
+
+/* sections */
+section { padding-block: 46px 6px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px }
+section > *, .hero > * { min-width: 0 }
+.hero { grid-template-columns: minmax(0, 1fr) }
+section > header { display: grid; gap: 8px }
+.cols { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; align-items: start }
+@media (max-width: 760px) { .cols { grid-template-columns: minmax(0, 1fr) } }
+ul.plain { margin: 0; padding-left: 1.1em; display: grid; gap: 6px }
+ul.plain li::marker { color: var(--cyan) }
+
+/* diagrams */
+.diagram { margin: 0; }
+.scroll { overflow-x: auto; -webkit-overflow-scrolling: touch }
+.diagram svg { display: block; width: 100%; height: auto; min-width: 720px; color: var(--ink) }
+svg text { font-family: var(--body); fill: currentColor }
+svg .t-s { font-size: 12.5px; fill: var(--muted) }
+svg .t-m { font-size: 14px }
+svg .t-b { font-size: 15px; font-weight: 600 }
+svg .t-xl { font-family: var(--display); font-size: 19px; font-weight: 700 }
+svg .t-acc { fill: var(--accent); font-weight: 600 }
+svg .t-stop { fill: var(--stop); font-weight: 600 }
+svg .box { fill: var(--surface); stroke: var(--line); stroke-width: 1.5 }
+svg .box-acc { fill: var(--surface); stroke: var(--cyan); stroke-width: 2.5 }
+svg .box-stop { fill: var(--surface); stroke: var(--stop); stroke-width: 2 }
+svg .ln { stroke: currentColor; stroke-width: 1.6; fill: none }
+svg .ln-acc { stroke: var(--cyan); stroke-width: 2.6; fill: none }
+svg .ln-stop { stroke: var(--stop); stroke-width: 2; fill: none }
+svg .dash { stroke-dasharray: 6 5 }
+svg .pipe { stroke: var(--pipe); stroke-width: 14; stroke-linecap: round; fill: none }
+svg .barrier { stroke: var(--stop); stroke-width: 2; stroke-dasharray: 7 6 }
+svg .zone { fill: color-mix(in srgb, var(--cyan) 7%, transparent); stroke: none }
+
+/* dosing steps */
+
+/* tables */
+.tbl { width: 100%; border-collapse: collapse; font-size: 15px }
+.tbl th, .tbl td { text-align: left; vertical-align: top; padding: 10px 12px 10px 0; border-bottom: 1px solid var(--line) }
+.tbl th { font: 600 12px/1.3 var(--body); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted) }
+.tbl td:first-child { font-weight: 600; white-space: nowrap; padding-right: 18px }
+.tbl .mono { font-size: 13.5px }
+@media (max-width: 640px) {
+  .tbl, .tbl tbody, .tbl tr, .tbl td { display: block; width: 100% }
+  .tbl thead { display: none }
+  .tbl tr { padding-block: 10px; border-bottom: 1px solid var(--line) }
+  .tbl td { border: 0; padding: 2px 0 }
+  .tbl td:first-child { white-space: normal }
+}
+
+/* board map */
+.map { margin: 0 }
+.map .board { position: relative }
+.map .board img { width: 100%; height: auto; display: block }
+.map > img { width: 100%; height: auto; display: block; border-radius: 10px }
+.edge { position: relative; height: 34px }
+.edge span { position: absolute; left: var(--x); transform: translateX(-50%); bottom: 4px; font: 500 11.5px/1.15 var(--mono); color: var(--muted); text-align: center; white-space: nowrap }
+.edge.bottom span { top: 4px; bottom: auto }
+.edge span::after { content: ""; position: absolute; left: 50%; width: 1px; height: 6px; background: var(--line) }
+.edge.top span::after { top: 100%; margin-top: 2px } .edge.bottom span::after { bottom: 100%; margin-bottom: 2px }
+.pin { position: absolute; left: var(--x); top: var(--y); transform: translate(-50%, -50%); width: 26px; height: 26px; border-radius: 50%; background: var(--cyan); color: #06263a; font: 700 13px/26px var(--body); text-align: center; box-shadow: 0 0 0 3px var(--bg) }
+.legend { list-style: none; margin: 14px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 10px 22px }
+.legend li { display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 10px; align-items: start; font-size: 14.5px; line-height: 1.45 }
+.legend i { width: 26px; height: 26px; border-radius: 50%; background: var(--cyan); color: #06263a; font: 700 13px/26px var(--body); font-style: normal; text-align: center }
+@media (max-width: 700px) { .edge { display: none } .pin { width: 20px; height: 20px; font-size: 11px; line-height: 20px } }
+
+.pair { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 22px; align-items: start }
+.pair img { width: 100%; height: auto; display: block }
+@media (max-width: 760px) { .pair { grid-template-columns: minmax(0, 1fr) } }
+
+.note { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; display: grid; gap: 6px }
+footer { margin-top: 56px; border-top: 1px solid var(--line); padding-block: 22px 40px; display: flex; flex-wrap: wrap; gap: 10px 24px; align-items: center; justify-content: space-between; font-size: 14px; color: var(--muted) }
+footer .logo { height: 28px }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top brand">
+    <img class="logo logo-light" src="img/lwv-logo.png" alt="Legacy West Ventures">
+    <img class="logo logo-dark" src="img/lwv-logo-white.png" alt="Legacy West Ventures">
+    <span class="rev">Rev A · November 2026</span>
+  </div>
+
+  <div class="hero">
+    <span class="kicker">LWV GCU sensor</span>
+    <h1>LWV-CS-1 GCU Canopy Sensor</h1>
+    <p class="lead">The CS-1 hangs just above the plants and measures what they live in: CO<sub>2</sub>, air temperature and humidity, leaf temperature, light and air quality. A small fan draws room air through a shaded duct past the sensors, so the readings describe the room, not a box warmed by the grow lights. It joins the pod's four-wire M12 cable next to the IR blasters, and it is built to be calibrated, checked and updated remotely, without a site visit.</p>
+    <figure class="hero-fig">
+      <img src="img/cs1-hero.webp" width="1325" height="905" alt="Render of the LWV-CS-1 case: a long rectangular box with a flat lid carrying the LWV-CS-1 name, a round light window with a raised bezel, hanging lugs at both ends, and a grille over the exhaust fan at one end">
+      <figcaption>Rev A, rendered from the production case model (printed in white ASA). Air enters through louvres at the far end and leaves through the fan grille; the round window on the lid is the light sensor's diffuser.</figcaption>
+    </figure>
+  </div>
+
+  <div class="facts" role="list">
+    <div class="fact" role="listitem"><b>5000</b><span>ppm CO<sub>2</sub> range, dual-wavelength infrared</span></div>
+    <div class="fact" role="listitem"><b>±0.1</b><span>°C air temperature, typical</span></div>
+    <div class="fact" role="listitem"><b>±1.0</b><span>% relative humidity, typical</span></div>
+    <div class="fact" role="listitem"><b>35°</b><span>leaf-temperature view of the canopy</span></div>
+    <div class="fact" role="listitem"><b>11</b><span>light channels: 8 colour bands, clear, near-IR, flicker</span></div>
+    <div class="fact" role="listitem"><b>0.7 W</b><span>from the pod's 24 V bus</span></div>
+  </div>
+
+  <!-- 1 -->
+  <section id="system">
+    <header><span class="kicker">Where it sits</span><h2>At the canopy, on the same cable as the IR blasters</h2></header>
+    <div class="cols">
+      <p class="prose">The IR blasters have to sit where they can see the mini-splits, up high and in the cold air those units blow out. That is the wrong place to measure a room. The CS-1 hangs 20–40 cm above the canopy, away from the mini-split discharge, where the plants actually are.</p>
+      <p class="prose">It plugs into the same daisy-chained M12 cable that already carries 24 V and RS-485 to the blasters: IN on one side, OUT on the other. The GCU reads it once a minute, as it does today's sensor, and passes everything to GCU Cloud. A switch on the board sets its address, so it can replace today's sensor at the same address or run beside it at the next one.</p>
+    </div>
+    <figure class="diagram">
+      <div class="scroll">
+      <svg viewBox="0 0 1000 430" role="img" aria-label="System diagram: GCU Cloud connects over the internet to the GCU pod controller. From the GCU one M12 cable carrying 24 V and RS-485 runs past the front IR blaster, the back IR blaster and the LWV-CS-1, which hangs below the grow lights, above the canopy, and looks down at the leaves with a 35 degree view.">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker>
+          <marker id="arc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--cyan)"/></marker>
+        </defs>
+        <rect class="box" x="40" y="24" width="220" height="56" rx="12"/>
+        <text class="t-b" x="150" y="47" text-anchor="middle">GCU Cloud</text>
+        <text class="t-s" x="150" y="68" text-anchor="middle">charts · alerts · calibration · updates</text>
+        <line class="ln" x1="150" y1="80" x2="150" y2="158" marker-start="url(#ar)" marker-end="url(#ar)"/>
+        <text class="t-s" x="160" y="124">internet</text>
+        <rect class="box" x="40" y="160" width="220" height="60" rx="12"/>
+        <text class="t-b" x="150" y="186" text-anchor="middle">GCU</text>
+        <text class="t-s" x="150" y="206" text-anchor="middle">pod controller</text>
+        <!-- bus -->
+        <line class="ln-acc" x1="260" y1="190" x2="962" y2="190"/>
+        <text class="t-acc" x="290" y="178" font-size="13">M12 cable: 24 V + RS-485, daisy-chained</text>
+        <!-- blasters -->
+        <line class="ln" x1="410" y1="190" x2="410" y2="236"/>
+        <rect class="box" x="330" y="236" width="160" height="54" rx="10"/>
+        <text class="t-m" x="410" y="259" text-anchor="middle">IR blaster</text>
+        <text class="t-s" x="410" y="279" text-anchor="middle">front mini-split</text>
+        <line class="ln" x1="590" y1="190" x2="590" y2="236"/>
+        <rect class="box" x="510" y="236" width="160" height="54" rx="10"/>
+        <text class="t-m" x="590" y="259" text-anchor="middle">IR blaster</text>
+        <text class="t-s" x="590" y="279" text-anchor="middle">back mini-split</text>
+        <!-- lights -->
+        <rect x="712" y="104" width="196" height="12" rx="3" fill="var(--line)"/>
+        <text class="t-s" x="810" y="94" text-anchor="middle">grow lights</text>
+        <line class="ln dash" x1="884" y1="118" x2="884" y2="226" marker-end="url(#ar)"/>
+        <text class="t-s" x="892" y="150">light</text>
+        <!-- CS-1 -->
+        <line class="ln" x1="790" y1="190" x2="790" y2="228"/>
+        <rect class="box-acc" x="700" y="228" width="200" height="74" rx="12"/>
+        <text class="t-xl" x="800" y="260" text-anchor="middle">LWV-CS-1</text>
+        <text class="t-s" x="800" y="284" text-anchor="middle">CO₂ · T · RH · leaf · light · VOC</text>
+        <!-- canopy -->
+        <polyline class="ln-acc dash" points="768,302 726,384"/>
+        <polyline class="ln-acc dash" points="832,302 874,384"/>
+        <text class="t-s" x="912" y="350">35° leaf view</text>
+        <path d="M690 392 q20 -20 40 0 t40 0 t40 0 t40 0 t40 0 t40 0" fill="none" stroke="currentColor" stroke-width="1.6"/>
+        <text class="t-s" x="800" y="420" text-anchor="middle">canopy, 20–40 cm below the sensor</text>
+        <line class="ln" x1="676" y1="304" x2="676" y2="386" marker-start="url(#ar)" marker-end="url(#ar)"/>
+      </svg>
+      </div>
+      <figcaption>One cable, three devices. The blasters stay up by the mini-splits; the CS-1 hangs at the canopy and is moved up as the crop grows.</figcaption>
+    </figure>
+  </section>
+
+  <!-- 2 -->
+  <section id="measures">
+    <header><span class="kicker">What it measures</span><h2>Six readings, each from a best-in-class part</h2></header>
+    <table class="tbl">
+      <thead><tr><th>Reading</th><th>Sensor</th><th>Why this one</th></tr></thead>
+      <tbody>
+        <tr><td>CO<sub>2</sub></td><td>E+E EE895, dual-wavelength infrared, 0–5000 ppm, ±(50 ppm + 3 % of reading)</td><td>Every flash of its lamp is measured at two wavelengths: one that CO<sub>2</sub> absorbs and one it does not. The second cancels lamp ageing, so it stays calibrated in a sealed room that is enriched all day and never sees fresh air. Temperature- and pressure-compensated in the module.</td></tr>
+        <tr><td>Air temperature and humidity</td><td>Sensirion SHT45 with a filter membrane, ±0.1 °C, ±1.0 %RH typical</td><td>Sensirion's top grade, behind a membrane that keeps out dust, spray and spores, with a built-in heater that recovers it after long, very humid nights.</td></tr>
+        <tr><td>Leaf temperature</td><td>Melexis MLX90614, infrared, 35° view</td><td>Reads the leaves without touching them. Leaf temperature gives leaf VPD, which is what the plant responds to, next to the air VPD.</td></tr>
+        <tr><td>Light</td><td>ams AS7341: 8 colour bands plus clear, near-infrared and flicker, under a diffuser</td><td>Lights on and off, dimming steps, the red to far-red balance, flicker, and light leaks during the dark period. Shown as relative light until it is calibrated against a quantum sensor for each fixture type.</td></tr>
+        <tr><td>Air quality</td><td>Sensirion SGP41, VOC and NOx index</td><td>A trend against the room's own normal (100 = normal): a pesticide or cleaning-product application, a sulfur burner, something burning.</td></tr>
+        <tr><td>Barometric pressure</td><td>Inside the EE895</td><td>Keeps the CO<sub>2</sub> reading right at altitude, and is reported too.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 3 -->
+  <section id="airflow">
+    <header><span class="kicker">How it measures</span><h2>Room air, drawn past the sensors in the shade</h2></header>
+    <div class="cols">
+      <p class="prose">A sensor sitting in a box under grow lights reads warm and dry: the box heats up, and every degree of error at 25 °C costs 3–4 % of relative humidity. Greenhouse climate computers solve this with an aspirated measuring box, and the CS-1 is one. A quiet 40 mm Noctua fan at the far end pulls room air in through louvres and a washable screen, past the sensors in a shaded upper duct, and out through a grille.</p>
+      <p class="prose">The circuit board is the shelf that splits the box in two. Above it the upper duct carries only sensors, in the order the air meets them: humidity and temperature first, on a slotted tongue of board that keeps the board's own warmth away, then air quality, then CO<sub>2</sub>. Below it the lower channel carries the processor and power supply, so all of their heat leaves with the exhaust. The leaf thermometer looks down through its own sealed sleeve, out of the air stream.</p>
+    </div>
+    <figure class="diagram">
+      <div class="scroll">
+      <svg viewBox="0 0 1000 360" role="img" aria-label="Side section of the CS-1: air enters through louvres and a screen at the left. The circuit board is a shelf across the middle. Above it, the upper duct carries the SHT45 humidity and temperature sensor on a slotted tongue under a shield plate, then the SGP41 air-quality sensor, then the EE895 CO2 module, then the AS7341 light sensor in a tube under the diffuser in the lid. Below the board, the lower channel carries the infrared leaf thermometer in a sealed sleeve looking down through the floor, then the processor and the power supply. A fan at the right pulls both channels and exhausts through a grille.">
+        <defs>
+          <marker id="arc2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--cyan)"/></marker>
+        </defs>
+        <rect class="box" x="60" y="40" width="880" height="282" rx="14"/>
+        <rect class="zone" x="132" y="44" width="716" height="132"/>
+        <!-- louvres + screen -->
+        <g stroke="currentColor" stroke-width="1.6">
+          <line x1="62" y1="64" x2="84" y2="86"/><line x1="62" y1="104" x2="84" y2="126"/><line x1="62" y1="144" x2="84" y2="166"/>
+          <line x1="62" y1="184" x2="84" y2="206"/><line x1="62" y1="224" x2="84" y2="246"/><line x1="62" y1="264" x2="84" y2="286"/>
+        </g>
+        <line class="ln dash" x1="104" y1="44" x2="104" y2="318"/>
+        <text class="t-s" x="62" y="344">louvres + washable screen</text>
+        <!-- board shelf with tongue -->
+        <rect x="150" y="176" width="70" height="6" rx="2" fill="var(--accent)" opacity="0.55"/>
+        <rect x="220" y="176" width="590" height="9" rx="2" fill="var(--accent)" opacity="0.55"/>
+        <!-- orifice plate (lower channel entry) -->
+        <line class="ln" x1="132" y1="186" x2="132" y2="240"/><line class="ln" x1="132" y1="262" x2="132" y2="318"/>
+        <!-- upper duct sensors -->
+        <rect x="140" y="112" width="96" height="4" fill="currentColor" opacity="0.5"/>
+        <text class="t-s" x="188" y="104" text-anchor="middle">shield</text>
+        <rect class="box-acc" x="172" y="164" width="22" height="12" rx="2"/>
+        <text class="t-m" x="184" y="148" text-anchor="middle">SHT45</text>
+        <rect class="box-acc" x="262" y="162" width="20" height="14" rx="2"/>
+        <text class="t-m" x="272" y="148" text-anchor="middle">SGP41</text>
+        <rect class="box-acc" x="330" y="118" width="230" height="58" rx="6"/>
+        <text class="t-b" x="445" y="144" text-anchor="middle">EE895 CO₂</text>
+        <text class="t-s" x="445" y="164" text-anchor="middle">on a socket, plug-in</text>
+        <rect class="box" x="640" y="44" width="40" height="132"/>
+        <rect x="634" y="34" width="52" height="8" rx="2" fill="var(--surface)" stroke="var(--cyan)" stroke-width="2"/>
+        <text class="t-s" x="700" y="30">diffuser</text>
+        <rect class="box-acc" x="652" y="164" width="16" height="12" rx="2"/>
+        <text class="t-m" x="700" y="132">AS7341</text>
+        <text class="t-s" x="700" y="150">light, in its tube</text>
+        <!-- lower channel -->
+        <path d="M258 186 L300 186 L318 322 L240 322 Z" fill="var(--surface)" stroke="currentColor" stroke-width="1.6"/>
+        <rect class="box-acc" x="268" y="186" width="22" height="16" rx="2"/>
+        <text class="t-s" x="330" y="344">leaf thermometer, sealed sleeve</text>
+        <rect class="box" x="420" y="196" width="150" height="46" rx="8"/>
+        <text class="t-m" x="495" y="224" text-anchor="middle">processor</text>
+        <rect class="box" x="610" y="196" width="170" height="46" rx="8"/>
+        <text class="t-m" x="695" y="224" text-anchor="middle">power supply</text>
+        <!-- fan -->
+        <rect class="box-acc" x="862" y="70" width="34" height="220" rx="6"/>
+        <text class="t-b" x="879" y="62" text-anchor="middle">fan</text>
+        <g stroke="currentColor" stroke-width="1.6"><line x1="920" y1="80" x2="920" y2="280"/><line x1="930" y1="80" x2="930" y2="280"/></g>
+        <!-- flows -->
+        <line class="ln-acc" x1="20" y1="80" x2="140" y2="80" marker-end="url(#arc2)"/>
+        <line class="ln-acc" x1="300" y1="70" x2="620" y2="70" marker-end="url(#arc2)"/>
+        <line class="ln-acc" x1="20" y1="252" x2="126" y2="252" marker-end="url(#arc2)"/>
+        <line class="ln-acc" x1="440" y1="296" x2="840" y2="296" marker-end="url(#arc2)"/>
+        <line class="ln-acc" x1="944" y1="180" x2="994" y2="180" marker-end="url(#arc2)"/>
+        <text class="t-acc" x="460" y="94" text-anchor="middle" font-size="13">upper duct: sensors only, no heat</text>
+        <text class="t-acc" x="640" y="316" text-anchor="middle" font-size="13">lower channel: heat leaves with the exhaust</text>
+      </svg>
+      </div>
+      <figcaption>Every heat source sits downstream of every air sensor. About 4 m³ of air an hour passes through; the half watt of electronics warms the exhaust by roughly 0.4 °C, after the sensors.</figcaption>
+    </figure>
+    <figure class="map"><img src="img/cs1-section.webp" width="1460" height="714" alt="Cut-away render of the CS-1 through its length: louvres and screen at the left, the circuit board as a shelf in the middle, the CO2 module standing on its socket in the upper duct, the black light tube under the diffuser, the cone-shaped leaf thermometer sleeve opening through the floor, the processor below the board, and the fan at the right"><figcaption>Cut-away of the production model along the airflow: louvres, screen, the board as a shelf, the CO<sub>2</sub> module in the upper duct, the black light tube under the diffuser, the leaf thermometer's sleeve through the floor, and the fan.</figcaption></figure>
+  </section>
+
+  <!-- 4 -->
+  <section id="board">
+    <header><span class="kicker">The board</span><h2>Built to be changed without a new board</h2></header>
+    <p class="prose">Rev A is the prototype, so everything we expect to learn about in the test pods can be changed with a part swap, a jumper or a reprinted case part instead of a new circuit board.</p>
+    <figure class="map"><img src="img/cs1-board-iso.webp" width="1470" height="828" alt="3D render of the CS-1 circuit board at an angle: the white CO2 module standing on its two black sockets in the middle, the narrow sensor tongue at the front left, the fan and Qwiic connectors at the right edge"><figcaption>Rev A as routed. The CO<sub>2</sub> module stands on its keyed sockets in the middle; the humidity sensor sits on the slotted tongue at the front, upstream of everything else.</figcaption></figure>
+    <div class="pair">
+      <figure class="map"><img src="img/cs1-board-top.webp" width="1259" height="599" alt="3D render of the CS-1 circuit board from the top: a long green board with a narrow tongue at one end carrying the humidity sensor, the CO2 module socket, the light sensor, the fan and Qwiic connectors and the LWV logo"><figcaption>Top: the duct side. The humidity sensor sits on the slotted tongue at the left; the CO<sub>2</sub> module plugs into the keyed socket.</figcaption></figure>
+      <figure class="map"><img src="img/cs1-board-bottom.webp" width="1259" height="599" alt="3D render of the CS-1 circuit board from the bottom: the round leaf thermometer, the processor module, the power supply, the labelled test points and the cable socket"><figcaption>Bottom: the leaf thermometer, the plug-in processor, the power supply and the socket the M12 connector card plugs into.</figcaption></figure>
+    </div>
+    <ul class="plain prose">
+      <li><b>The CO<sub>2</sub> module plugs in.</b> It sits on a keyed socket that refuses all three wrong ways round, so a module can be swapped in a minute.</li>
+      <li><b>Sensors on their own switched power.</b> The firmware can power-cycle a stuck sensor and clear a stuck bus remotely; every restart of the processor also restarts the sensors cleanly.</li>
+      <li><b>A spare position for the humidity sensor</b> further upstream, a <b>Qwiic connector</b> for a future external probe, spare processor pins, and 24 labelled test points.</li>
+      <li><b>Any 5 V PWM fan fits</b> the standard 4-pin header, behind its own current limit, so a jammed fan cannot take the board down. The header is on the top side: the fan unplugs with the lid off.</li>
+      <li><b>The duct, screen, diffuser, light tube and leaf-thermometer sleeve all belong to the case.</b> Changing any of them is a reprint.</li>
+      <li><b>Address 10 or 11 from a switch</b> through a window in the floor: drop-in for today's sensor, or beside it at the next address, without a setup step anyone can forget.</li>
+      <li><b>Speaks today's protocol too.</b> The first registers mirror today's sensor, so a CS-1 reads as CO<sub>2</sub>, temperature and humidity on any GCU, even before its firmware knows about the CS-1.</li>
+    </ul>
+  </section>
+
+  <!-- 5 -->
+  <section id="care">
+    <header><span class="kicker">Looked after from GCU Cloud</span><h2>No ladder, no carrying it outdoors</h2></header>
+    <div class="cols">
+      <div class="prose" style="display:grid;gap:10px">
+        <h3>Calibration from the cloud</h3>
+        <p>Today's sensor is calibrated by opening its cover, carrying it outdoors and holding a button. The CS-1's CO<sub>2</sub> correction is sent from GCU Cloud through the GCU and written into the module, where it is kept. The dual-wavelength design means it should rarely be needed.</p>
+      </div>
+      <div class="prose" style="display:grid;gap:10px">
+        <h3>Health you can see</h3>
+        <p>Every sensor reports its own status, the fan reports its speed, and a run-hours timer says when the screen is due for a rinse. A reading that is not good is sent as "no data", never as the last good value. Firmware updates go over the same RS-485 cable, with the LWV I/O board's update method, which cannot leave the unit without a working image. The GCU side that sends an update down the cable is still to be built; until then units are updated on the bench.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section id="case">
+    <header><span class="kicker">The case</span><h2>A printed, hanging measuring box</h2></header>
+    <p class="prose">The case is printed in-house in white ASA, which reflects the grow lights and stands up to UV and humidity. Eight parts print flat on our printer without supports. The screen slides out through the floor and the CO<sub>2</sub> module lifts out under the lid, so both can be serviced with the box still hanging. Gaskets are EPDM foam: nothing in the box is silicone, which can poison gas sensors.</p>
+    <div class="pair">
+      <figure class="map"><img src="img/cs1-exploded.webp" width="723" height="622" alt="Exploded render of the CS-1 case: the lid and the diffuser bezel lifted above the board, the base with the fan at its end, and the screen cartridge slid down out of the floor"><figcaption>Exploded: bezel, lid, board in the base, fan, and the screen cartridge that slides down out of the floor.</figcaption></figure>
+      <figure class="map"><img src="img/cs1-base-open.webp" width="1081" height="905" alt="Render of the CS-1 base with the lid removed, showing the board on its standoffs, the CO2 module in the duct, the fan at the end and the M12 connector card on the side wall"><figcaption>Lid off: the board on its four standoffs, the M12 card on the side wall, the fan at the exhaust end.</figcaption></figure>
+    </div>
+    <table class="tbl">
+      <tbody>
+        <tr><td>Size</td><td>143 × 64 × 57 mm, plus two hanging lugs.</td></tr>
+        <tr><td>Material</td><td>White ASA, 8 printed parts; the light tube in black ASA so no light leaks through its wall.</td></tr>
+        <tr><td>Hanging</td><td>Two lugs for a chain bridle or zip ties; hangs level, moved up with the crop.</td></tr>
+        <tr><td>Connections</td><td>M12 IN (female) and OUT (male) on the side wall, the same connector card as the IR blaster.</td></tr>
+        <tr><td>Weather</td><td>Louvres shed drips and block direct light; flat lid with a raised, chamfered diffuser bezel; two weep holes.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 7 -->
+  <section id="compare">
+    <header><span class="kicker">Compared with today's sensor</span><h2>More readings, better ones, and looked after remotely</h2></header>
+    <table class="tbl">
+      <thead><tr><th></th><th>SenseCAP S-CO2-03 (today)</th><th>LWV-CS-1</th></tr></thead>
+      <tbody>
+        <tr><td>CO<sub>2</sub></td><td>Infrared, ±(50 ppm + 3 %)</td><td>Dual-wavelength infrared, ±(50 ppm + 3 %), ageing- and pressure-compensated</td></tr>
+        <tr><td>Calibration</td><td>Open it, carry it outdoors, hold a button</td><td>From GCU Cloud, written into the module</td></tr>
+        <tr><td>Air temperature / humidity</td><td>±0.2 °C / ±1.8 %RH, passive</td><td>±0.1 °C / ±1.0 %RH, fan-drawn and shaded</td></tr>
+        <tr><td>Leaf temperature and leaf VPD</td><td>—</td><td>Yes</td></tr>
+        <tr><td>Light at the canopy, dark-period leaks</td><td>—</td><td>Yes</td></tr>
+        <tr><td>Air quality (VOC, NOx)</td><td>—</td><td>Yes</td></tr>
+        <tr><td>Pressure</td><td>—</td><td>Yes</td></tr>
+        <tr><td>Connector</td><td>M12 fitted by us</td><td>M12 IN and OUT built in, daisy-chains</td></tr>
+        <tr><td>Firmware updates</td><td>None</td><td>Over the RS-485 cable (GCU side to come)</td></tr>
+        <tr><td>Health</td><td>A value or silence</td><td>Per-sensor status, fan speed, screen-service timer</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 8 -->
+  <section id="pilot">
+    <header><span class="kicker">Test pods</span><h2>Side by side with today's sensor first</h2></header>
+    <div class="cols">
+      <p class="prose">The first units go to a few test pods and hang next to the existing sensor on the same cable. The existing sensor keeps address 10 and keeps running the pod. The CS-1 sits at 11, set by its switch, and is <b>monitor only</b>: it is recorded and charted, but the GCU will not hand control to it, even if the other sensor fails. That rule comes off when the data says it should.</p>
+      <div class="prose" style="display:grid;gap:10px">
+        <h3>What the test pods check</h3>
+        <ul class="plain">
+          <li>CO<sub>2</sub>, temperature and humidity against today's sensor beside it, through enrichment and light changes.</li>
+          <li>Air speed past the sensors, and the temperature step when the fan stops under the lights.</li>
+          <li>Leaf temperature with the box at 20 and at 40 cm, to rule out its own shadow.</li>
+          <li>The dark count with the lights off, which sets the dark-period leak alarm.</li>
+          <li>Whether a half-blocked screen shows in the fan's effort, and how fast screens get dirty.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 -->
+  <section id="specs">
+    <header><span class="kicker">Specifications</span><h2>Rev A at a glance</h2></header>
+    <table class="tbl">
+      <tbody>
+        <tr><td>Power</td><td>24 V DC from the M12 bus, about 0.7 W. Fused, reverse-polarity protected, surge clamped.</td></tr>
+        <tr><td>Bus</td><td>RS-485, Modbus RTU, 19 200 baud 8N1 by default; address 10 or 11 by switch, any address by software; 120 Ω termination switch.</td></tr>
+        <tr><td>CO<sub>2</sub></td><td>0–5000 ppm, ±(50 ppm + 3 % of reading), dual-wavelength infrared, temperature and pressure compensated.</td></tr>
+        <tr><td>Air</td><td>±0.1 °C, ±1.0 %RH typical; dew point and VPD; barometric pressure.</td></tr>
+        <tr><td>Leaf temperature</td><td>Infrared, 35° view, ±0.5 °C, emissivity set for leaves.</td></tr>
+        <tr><td>Light</td><td>8 colour bands plus clear, near-infrared and flicker; relative light, on/off, dimming, dark-period leak flag.</td></tr>
+        <tr><td>Air quality</td><td>VOC and NOx index, 1–500.</td></tr>
+        <tr><td>Aspiration</td><td>Noctua NF-A4x10 5V PWM fan, speed monitored; about 1.9 m/s expected past the sensors at the default speed (1.0 m/s required).</td></tr>
+        <tr><td>Processor</td><td>Plug-in Seeed XIAO RP2350; firmware updates over RS-485.</td></tr>
+        <tr><td>Board</td><td>108 × 48 mm including a 26 mm sensor tongue, 2 layers, ENIG finish (lead-free), acrylic conformal coat with the sensors masked.</td></tr>
+        <tr><td>Environment</td><td>Grow-room air, non-condensing at the sensors.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 10 -->
+  <section id="status">
+    <header><span class="kicker">Where it stands</span><h2>Rev A design status</h2></header>
+    <p class="prose">Rev A is designed end to end. Nothing has been ordered, printed or flashed yet.</p>
+    <table class="tbl">
+      <thead><tr><th>Part</th><th>Where it is</th><th>What has been checked</th></tr></thead>
+      <tbody>
+        <tr><td>Circuit board</td><td>Designed and routed, ready to order</td><td>Electrical and design-rule checks clean (0 errors, 0 unconnected); 419 automatic checks against the design brief, including every pin of the sensors and the processor; 88 machine-placed parts, all in stock at JLC on 2026-11-09.</td></tr>
+        <tr><td>Case</td><td>8 parts modelled, ready to print</td><td>63 of 63 fit checks: board, connectors, gaskets, the CO<sub>2</sub> module's air gap, the leaf thermometer's view, light paths to the humidity and light sensors. No supports needed.</td></tr>
+        <tr><td>CS-1 firmware 0.1.0</td><td>Written and building</td><td>8 test suites pass on the bench computer, including the register map, the bus framing and the counters through simulated power cuts. The update code is byte-identical to the LWV I/O board's.</td></tr>
+        <tr><td>GCU firmware</td><td>CS-1 support on a development branch</td><td>Builds. Sensor type per slot with auto-detection, the monitor-only switch, the remote CO<sub>2</sub> correction and the new readings. Not yet on a lab unit.</td></tr>
+        <tr><td>GCU Cloud and the app</td><td>To do</td><td>Sensor-type and monitor-only settings, the CO<sub>2</sub> correction button, charts for the new readings.</td></tr>
+      </tbody>
+    </table>
+    <div class="cols">
+      <div class="prose" style="display:grid;gap:10px">
+        <h3>Before the boards are ordered</h3>
+        <ul class="plain">
+          <li>Check the CO<sub>2</sub> module's pin positions against E+E's drawing or a real module. It is the one dimension taken from the manual's figures rather than measured.</li>
+          <li>Quote and lead time for the EE895 module.</li>
+          <li>Buy the leaf thermometers now: LCSC's stock fell to 42.</li>
+          <li>Final part-orientation check in JLC's placement preview.</li>
+        </ul>
+      </div>
+      <div class="prose" style="display:grid;gap:10px">
+        <h3>Then</h3>
+        <ul class="plain">
+          <li>5–10 boards and cases, built and brought up in the lab.</li>
+          <li>The GCU firmware on a lab unit with a CS-1 on its bus.</li>
+          <li>The first test pods, monitor only, beside today's sensor.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Legacy West Ventures · Your Partner for Smart Building &amp; Agriculture Technology</span>
+    <span class="mono">info@legacywestventures.com</span>
+  </footer>
+</div>
+</body>
+</html>
