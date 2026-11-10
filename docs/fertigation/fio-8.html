@@ -12,19 +12,13 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>
 /* Layout: one reading column on the LWV website palette; diagrams and board images run full column width, specs as quiet tables. */
-:root {
+:root { color-scheme: light;
   --bg: #ffffff; --surface: #f6f9fb; --line: #e2e8f0; --ink: #1e293b; --muted: #5d6b80;
   --accent: #0072a3; --cyan: #22b9e8; --stop: #c2410c; --pipe: #b9e3f3; --plate: transparent;
   --display: "Montserrat", "Segoe UI", system-ui, sans-serif; --body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
   --radius: 14px;
 }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
-  --bg: #0b1220; --surface: #111b2c; --line: #223047; --ink: #e5ecf4; --muted: #9aa8bb;
-  --accent: #62cbf1; --cyan: #22b9e8; --stop: #fb923c; --pipe: #1c4a5d; color-scheme: dark } }
-:root[data-theme="dark"] {
-  --bg: #0b1220; --surface: #111b2c; --line: #223047; --ink: #e5ecf4; --muted: #9aa8bb;
-  --accent: #62cbf1; --cyan: #22b9e8; --stop: #fb923c; --pipe: #1c4a5d; color-scheme: dark }
 * { box-sizing: border-box }
 body { background: var(--bg); color: var(--ink); font: 400 16px/1.6 var(--body); }
 .wrap { max-width: 1040px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
@@ -43,9 +37,6 @@ a { color: var(--accent) }
 .top { padding-block: 22px 0 }
 .brand { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap }
 .logo { height: 40px; width: auto; display: block }
-.logo-dark { display: none }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .logo-light { display: none } :root:not([data-theme="light"]) .logo-dark { display: block } }
-:root[data-theme="dark"] .logo-light { display: none } :root[data-theme="dark"] .logo-dark { display: block }
 .rev { font: 500 13px/1.3 var(--mono); color: var(--muted) }
 .hero { display: grid; gap: 18px; padding-block: 34px 8px }
 .lead { font-size: clamp(17px, 2vw, 19px); line-height: 1.55; color: var(--ink); max-width: 64ch }
@@ -148,7 +139,6 @@ footer .logo { height: 28px }
 <div class="wrap">
   <div class="top brand">
     <img class="logo logo-light" src="img/lwv-logo.png" alt="Legacy West Ventures">
-    <img class="logo logo-dark" src="img/lwv-logo-white.png" alt="Legacy West Ventures">
     <span class="rev">Rev A · November 2026</span>
   </div>
 
