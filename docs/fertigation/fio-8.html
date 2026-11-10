@@ -147,8 +147,8 @@ footer .logo { height: 28px }
     <h1>FIO-8 fertigation board</h1>
     <p class="lead">The FIO-8 drives up to eight nutrient dosing pumps from one flow meter. Ten times a second it turns the recipe into a speed for every pump. Each pump output is electrically isolated, and the board stops dosing on its own the moment a reading or a wire looks wrong. It connects to GCU Cloud over Wi-Fi on its own, can report to an on-site GCU Manager, and is set up and run from the GCU Setup app over Bluetooth. Its RS-485 port reads and powers the water-quality probes.</p>
     <figure class="hero-fig">
-      <img src="img/fio8-3d-hero.webp" width="1800" height="1107" alt="3D render of the FIO-8 board: a green circuit board with grey push-in terminal blocks along the front and back edges, eight output channels along the front, and black power modules">
-      <figcaption>Rendered from the Rev A layout with each part's manufacturer 3D model (Rev B adds the E-stop terminal, the button, the buzzer and the coin-cell clock). Pump outputs run along the front edge, field inputs along the back, and an M3 mounting hole sits in each corner.</figcaption>
+      <img src="img/fio8-3d-hero.webp" width="1729" height="1068" alt="3D render of the FIO-8 board: a green circuit board with grey push-in terminal blocks along the front and back edges, eight output channels along the front, and black power modules">
+      <figcaption>Rev B, rendered from the production placement with simplified part bodies. Pump outputs run along the front edge, field inputs and the E-stop along the back; the button and the status lights sit at the right end, and an M3 mounting hole sits in each corner.</figcaption>
     </figure>
   </div>
 
@@ -393,28 +393,32 @@ footer .logo { height: 28px }
     <header><span class="kicker">Connections</span><h2>What lands where</h2></header>
     <p class="prose">All field wiring lands on push-in terminal blocks along the two long edges: controls and sensors on the back edge, pumps and the contactor on the front edge. The I/O labels are printed on the enclosure.</p>
     <figure class="map">
-      <div class="edge top" aria-hidden="true"><span style="--x:11.16%">24 V IN</span><span style="--x:20.43%">RS-485</span><span style="--x:32.48%">4–20 mA IN</span><span style="--x:44.52%">INPUTS 1–4</span><span style="--x:56.57%">INPUTS 5–8</span><span style="--x:66.21%">IN COM</span><span style="--x:78.84%">FLOW A · B</span><span style="--x:90.15%">STATUS</span></div>
+      <div class="edge top" aria-hidden="true"><span style="--x:9.66%">24 V IN</span><span style="--x:19.32%">RS-485</span><span style="--x:31.82%">4–20 mA IN</span><span style="--x:44.32%">INPUTS 1–4</span><span style="--x:56.82%">INPUTS 5–8</span><span style="--x:66.48%">IN COM</span><span style="--x:78.79%">FLOW A · B</span><span style="--x:90.91%">E-STOP</span></div>
       <div class="board">
-        <img src="img/fio8-3d-top.webp" width="2000" height="1299" alt="Top view of the FIO-8 board with numbered markers over its main areas">
-        <span class="pin" style="--x:21.89%;--y:38.76%" aria-hidden="true">1</span>
-        <span class="pin" style="--x:33.94%;--y:28.08%" aria-hidden="true">2</span>
-        <span class="pin" style="--x:54.02%;--y:25.84%" aria-hidden="true">3</span>
-        <span class="pin" style="--x:84.68%;--y:33.14%" aria-hidden="true">4</span>
-        <span class="pin" style="--x:45.62%;--y:33.7%" aria-hidden="true">5</span>
-        <span class="pin" style="--x:13.5%;--y:63.49%" aria-hidden="true">6</span>
-        <span class="pin" style="--x:50.22%;--y:67.98%" aria-hidden="true">7</span>
+        <img src="img/fio8-3d-top.webp" width="1980" height="1260" alt="Top view of the FIO-8 board with numbered markers over its main areas">
+        <span class="pin" style="--x:25.00%;--y:37.50%" aria-hidden="true">1</span>
+        <span class="pin" style="--x:32.58%;--y:22.02%" aria-hidden="true">2</span>
+        <span class="pin" style="--x:54.39%;--y:24.40%" aria-hidden="true">3</span>
+        <span class="pin" style="--x:85.98%;--y:32.26%" aria-hidden="true">4</span>
+        <span class="pin" style="--x:48.11%;--y:32.74%" aria-hidden="true">5</span>
+        <span class="pin" style="--x:12.12%;--y:64.29%" aria-hidden="true">6</span>
+        <span class="pin" style="--x:50.19%;--y:64.29%" aria-hidden="true">7</span>
+        <span class="pin" style="--x:57.95%;--y:41.31%" aria-hidden="true">8</span>
+        <span class="pin" style="--x:97.16%;--y:50.00%" aria-hidden="true">9</span>
       </div>
-      <div class="edge bottom" aria-hidden="true"><span style="--x:18.02%">PUMP 1·2</span><span style="--x:36.35%">PUMP 3·4</span><span style="--x:50.36%">CONTACTOR · FLUSH</span><span style="--x:64.02%">PUMP 5·6</span><span style="--x:82.34%">PUMP 7·8</span></div>
+      <div class="edge bottom" aria-hidden="true"><span style="--x:16.86%">PUMP 1·2</span><span style="--x:35.80%">PUMP 3·4</span><span style="--x:50.38%">CONTACTOR · FLUSH</span><span style="--x:64.58%">PUMP 5·6</span><span style="--x:83.52%">PUMP 7·8</span></div>
       <ol class="legend">
         <li><i>1</i><span><b>Power in.</b> Fuse, reverse-polarity guard, surge clamp and the 5 V supply for the board.</span></li>
         <li><i>2</i><span><b>RS-485 sensor port.</b> The board is the bus master; 24 V for the probes on its own fuse. The 120 Ω termination is switched on or off from the app, not with a jumper.</span></li>
         <li><i>3</i><span><b>Input isolation.</b> Optocouplers for the eight dry-contact inputs and the two flow meters.</span></li>
         <li><i>4</i><span><b>Processor.</b> A plug-in Seeed XIAO ESP32-S3 with Wi-Fi and Bluetooth, in two sockets. Its antenna lead runs to the case wall.</span></li>
         <li><i>5</i><span><b>Hardware watchdog</b> that holds the contactor and the output driver.</span></li>
-        <li><i>6</i><span><b>One of the eight output cells:</b> isolated supply, isolator and current source, with a status light above each.</span></li>
+        <li><i>6</i><span><b>One of the eight output cells:</b> isolated supply, isolator and current source, with a red/green light above each.</span></li>
         <li><i>7</i><span><b>Pump-power and flush contacts</b> with their fuses and contact feedback.</span></li>
+        <li><i>8</i><span><b>Buzzer</b>, under a sound port in the cover.</span></li>
+        <li><i>9</i><span><b>Button</b>, pressed through the cover, with the six status lights above it.</span></li>
       </ol>
-      <figcaption>Top view, 132 × 84 mm. Status lights for the bus, faults, run, flush and both flow meters sit at the top right.</figcaption>
+      <figcaption>Top view, 132 × 84 mm. Status lights for the bus, faults, run, flush and both flow meters sit in the right end strip above the button.</figcaption>
     </figure>
     <table class="tbl">
       <thead><tr><th>Terminal</th><th>Poles</th><th>Connects to</th></tr></thead>
@@ -431,8 +435,8 @@ footer .logo { height: 28px }
       </tbody>
     </table>
     <div class="pair">
-      <figure class="map"><img src="img/fio8-3d-terminals.webp" width="1400" height="899" alt="3D render of the FIO-8 from the control edge, showing the terminal blocks for power, RS-485, sensor inputs, dry contacts and flow meters"><figcaption>The control edge: power, RS-485, sensor and contact inputs, and the flow meters.</figcaption></figure>
-      <figure class="map"><img src="img/fio8-3d-bottom.webp" width="1400" height="909" alt="Underside of the FIO-8 board with rows of small surface-mount parts"><figcaption>The underside carries 246 of the 396 parts, which keeps the top clear for the terminals and the eight output cells.</figcaption></figure>
+      <figure class="map"><img src="img/fio8-3d-terminals.webp" width="1355" height="801" alt="3D render of the FIO-8 from the control edge, showing the terminal blocks for power, RS-485, sensor inputs, dry contacts, flow meters and the E-stop"><figcaption>The control edge: power, RS-485, sensor and contact inputs, the flow meters and the E-stop.</figcaption></figure>
+      <figure class="map"><img src="img/fio8-3d-bottom.webp" width="1355" height="928" alt="Underside of the FIO-8 board with rows of small surface-mount parts and the black coin-cell holder for the clock"><figcaption>The underside carries 273 of the 430 parts, including the clock's coin cell, which keeps the top clear for the terminals and the eight output cells.</figcaption></figure>
     </div>
   </section>
 
@@ -509,8 +513,8 @@ footer .logo { height: 28px }
     <header><span class="kicker">Companion board</span><h2>FIO-WQ: pH and EC measured on the board, in the water line</h2></header>
     <p class="lead">The FIO-WQ reads two pH electrodes and two conductivity cells, each with its own temperature probe, and hands the readings to the FIO-8 over one four-wire cable. Each of the four measurement circuits is electrically isolated from the others and from the bus, so probes in the same water do not disturb each other and a wiring fault on one stays on one. It checks its own electrodes before it trusts them. The board itself stays dry on the DIN rail: the pH electrodes and conductivity cells sit in the water line, in a tee or a flow cell, and their cables run back to the jacks and terminals.</p>
     <figure class="hero-fig">
-      <img src="img/fiowq-3d-hero.webp" width="1222" height="771" alt="3D render of the FIO-WQ board: a green circuit board with two BNC jacks and four push-in terminal blocks along the front edge, two bus terminal blocks and a row of status lights along the back, and a plug-in processor module at the right end">
-      <figcaption>Rendered from the Rev A layout with simplified part bodies (Rev B adds the button, the buzzer and the coin-cell clock along the bus edge). The two pH BNC jacks and the probe terminals sit along the front edge; bus in and out and the status lights along the back. Same 132 × 84 mm outline and mounting holes as the FIO-8.</figcaption>
+      <img src="img/fiowq-3d-hero.webp" width="1729" height="1057" alt="3D render of the FIO-WQ board: a green circuit board with two BNC jacks and four push-in terminal blocks along the front edge, two bus terminal blocks and a row of status lights along the back, and a plug-in processor module at the right end">
+      <figcaption>Rev B, rendered from the production placement with simplified part bodies. The two pH BNC jacks and the probe terminals sit along the front edge; bus in and out, the status lights, the button and the buzzer along the back. Same 132 × 84 mm outline and mounting holes as the FIO-8.</figcaption>
     </figure>
     <div class="facts" role="list">
       <div class="fact" role="listitem"><b>2</b><span>pH inputs on BNC, glass and reference</span></div>
@@ -581,8 +585,8 @@ footer .logo { height: 28px }
       </tbody>
     </table>
     <div class="pair">
-      <figure class="map"><img src="img/fiowq-3d-terminals.webp" width="1043" height="647" alt="3D render of the FIO-WQ from the bus edge, showing the two bus terminal blocks, the status lights and the processor module"><figcaption>The bus edge: bus in and out, the status lights and the plug-in processor module.</figcaption></figure>
-      <figure class="map"><img src="img/fiowq-3d-bottom.webp" width="1067" height="773" alt="Underside of the FIO-WQ board with its small surface-mount parts"><figcaption>The underside carries the small parts of each channel, which keeps the top clear for the jacks and terminals.</figcaption></figure>
+      <figure class="map"><img src="img/fiowq-3d-terminals.webp" width="1355" height="847" alt="3D render of the FIO-WQ from the bus edge, showing the two bus terminal blocks, the status lights, the button, the buzzer and the processor module"><figcaption>The bus edge: bus in and out, the status lights, the button, the buzzer and the plug-in processor module.</figcaption></figure>
+      <figure class="map"><img src="img/fiowq-3d-bottom.webp" width="1355" height="1061" alt="Underside of the FIO-WQ board with its small surface-mount parts and the black coin-cell holder for the clock"><figcaption>The underside carries the small parts of each channel and the clock's coin cell, which keeps the top clear for the jacks and terminals.</figcaption></figure>
     </div>
     <table class="tbl">
       <tbody>
