@@ -139,7 +139,7 @@ footer .logo { height: 28px }
 <div class="wrap">
   <div class="top brand">
     <img class="logo logo-light" src="img/lwv-logo.png" alt="Legacy West Ventures">
-    <span class="rev">Rev A · November 2026</span>
+    <span class="rev">Rev B · November 2026</span>
   </div>
 
   <div class="hero">
@@ -148,7 +148,7 @@ footer .logo { height: 28px }
     <p class="lead">The FIO-8 drives up to eight nutrient dosing pumps from one flow meter. Ten times a second it turns the recipe into a speed for every pump. Each pump output is electrically isolated, and the board stops dosing on its own the moment a reading or a wire looks wrong. It connects to GCU Cloud over Wi-Fi on its own, can report to an on-site GCU Manager, and is set up and run from the GCU Setup app over Bluetooth. Its RS-485 port reads and powers the water-quality probes.</p>
     <figure class="hero-fig">
       <img src="img/fio8-3d-hero.webp" width="1800" height="1107" alt="3D render of the FIO-8 board: a green circuit board with grey push-in terminal blocks along the front and back edges, eight output channels along the front, and black power modules">
-      <figcaption>Rev A, rendered from the production layout with each part's manufacturer 3D model. Pump outputs run along the front edge, field inputs along the back, and an M3 mounting hole sits in each corner.</figcaption>
+      <figcaption>Rendered from the Rev A layout with each part's manufacturer 3D model (Rev B adds the E-stop terminal, the button, the buzzer and the coin-cell clock). Pump outputs run along the front edge, field inputs along the back, and an M3 mounting hole sits in each corner.</figcaption>
     </figure>
   </div>
 
@@ -336,8 +336,9 @@ footer .logo { height: 28px }
 
   <!-- 4 -->
   <section id="safety">
-    <header><span class="kicker">Built to stop safely</span><h2>Two independent stops on every pump</h2></header>
+    <header><span class="kicker">Built to stop safely</span><h2>Two independent stops on every pump, and a stop button that needs no software</h2></header>
     <p class="prose">A pump stops when its 4–20 mA signal drops to 0 mA, and again when the contactor that feeds the pumps' power opens. The contactor is held in by a hardware watchdog. The processor has to keep sending it pulses; if the firmware stops for any reason, the outputs and the contactor drop within about a third of a second with no software involved.</p>
+    <p class="prose">An emergency-stop terminal sits in the same chain. Wire a normally closed stop button to it, or leave the factory link in place. Opening the loop (the button pressed, a wire cut, the terminal empty) breaks the watchdog's pulse path in hardware, so both stops drop exactly as if the processor had stopped, and the firmware cannot hold anything on. The board then sounds its buzzer, shows the stop on its lights and reports it.</p>
     <figure class="diagram">
       <div class="scroll">
       <svg viewBox="0 0 1000 300" role="img" aria-label="Safety chain: the processor sends keep-alive pulses to a hardware watchdog. The watchdog holds two things up: the output driver enable, which feeds the eight pump outputs, and the K1 contactor coil, which feeds pump power. If the pulses stop, both drop in about 0.3 seconds: outputs go to 0 mA and pump power goes off.">
@@ -360,15 +361,17 @@ footer .logo { height: 28px }
         <rect class="box-stop" x="800" y="40" width="172" height="56" rx="10"/><text class="t-stop" x="886" y="64" text-anchor="middle" font-size="13">STOP 1</text><text class="t-s" x="886" y="84" text-anchor="middle">all outputs to 0 mA</text>
         <rect class="box-stop" x="800" y="204" width="172" height="56" rx="10"/><text class="t-stop" x="886" y="228" text-anchor="middle" font-size="13">STOP 2</text><text class="t-s" x="886" y="248" text-anchor="middle">pump power off</text>
         <text class="t-s" x="369" y="238" text-anchor="middle">pulses stop → both drop in ≈ 0.3 s</text>
+        <text class="t-s" x="369" y="262" text-anchor="middle">an open E-stop loop breaks the pulse path</text>
         <text class="t-s" x="105" y="216" text-anchor="middle">any stop rule in the</text>
         <text class="t-s" x="105" y="234" text-anchor="middle">firmware drops both too</text>
       </svg>
       </div>
-      <figcaption>The firmware can stop the pumps; the watchdog makes sure a stalled or crashed processor stops them too.</figcaption>
+      <figcaption>The firmware can stop the pumps; the watchdog makes sure a stalled or crashed processor stops them too, and so does an open E-stop loop.</figcaption>
     </figure>
     <table class="tbl">
       <thead><tr><th>If this happens</th><th>The board</th></tr></thead>
       <tbody>
+        <tr><td>Someone presses the E-stop, or its wire is cut</td><td>Every output goes to 0 mA and the contactor drops within about 0.3 s, in hardware. The buzzer sounds and the stop is reported. Dosing resumes only when the loop is closed and the stop is cleared.</td></tr>
         <tr><td>The processor hangs or restarts</td><td>The watchdog drops the contactor and every output within about 0.3 s. After a crash restart, dosing stays off until someone clears the fault.</td></tr>
         <tr><td>24 V power is lost</td><td>The contactor opens and the outputs go dead. When power returns, the board picks up again from its saved settings.</td></tr>
         <tr><td>Wi-Fi or the internet drops</td><td>Keeps dosing from the saved recipe and sends what it logged when it reconnects. A site can choose to stop after a set outage instead.</td></tr>
@@ -404,7 +407,7 @@ footer .logo { height: 28px }
       <div class="edge bottom" aria-hidden="true"><span style="--x:18.02%">PUMP 1·2</span><span style="--x:36.35%">PUMP 3·4</span><span style="--x:50.36%">CONTACTOR · FLUSH</span><span style="--x:64.02%">PUMP 5·6</span><span style="--x:82.34%">PUMP 7·8</span></div>
       <ol class="legend">
         <li><i>1</i><span><b>Power in.</b> Fuse, reverse-polarity guard, surge clamp and the 5 V supply for the board.</span></li>
-        <li><i>2</i><span><b>RS-485 sensor port.</b> The board is the bus master; 24 V for the probes on its own fuse, and a jumper for the 120 Ω termination.</span></li>
+        <li><i>2</i><span><b>RS-485 sensor port.</b> The board is the bus master; 24 V for the probes on its own fuse. The 120 Ω termination is switched on or off from the app, not with a jumper.</span></li>
         <li><i>3</i><span><b>Input isolation.</b> Optocouplers for the eight dry-contact inputs and the two flow meters.</span></li>
         <li><i>4</i><span><b>Processor.</b> A plug-in Seeed XIAO ESP32-S3 with Wi-Fi and Bluetooth, in two sockets. Its antenna lead runs to the case wall.</span></li>
         <li><i>5</i><span><b>Hardware watchdog</b> that holds the contactor and the output driver.</span></li>
@@ -422,6 +425,7 @@ footer .logo { height: 28px }
         <tr><td>INPUTS 1–4, 5–8</td><td class="mono">1 2 3 4</td><td>Dry contacts: tank floats, a valve-open contact (input 8), door or alarm switches.</td></tr>
         <tr><td>IN COM</td><td class="mono">+24 +24</td><td>The common side of the dry contacts, wetted from the board at 24 V.</td></tr>
         <tr><td>FLOW A · B</td><td class="mono">+ S G  + S G</td><td>Two pulse-output flow meters, powered from the board at 24 V.</td></tr>
+        <tr><td>E-STOP</td><td class="mono">+24 RET</td><td>A normally closed emergency-stop button (or the factory wire link). An open loop stops every pump in hardware.</td></tr>
         <tr><td>PUMP 1·2 … 7·8</td><td class="mono">+ − + −</td><td>The 4–20 mA speed inputs of the dosing pumps, two pumps per block.</td></tr>
         <tr><td>CONTACTOR · FLUSH</td><td class="mono">K1 K1 K2 K2</td><td>K1 switches the 24 V coil of the contactor that feeds the pumps' power. K2 switches the flush or drain valve (60 V, 2 A, AC or DC).</td></tr>
       </tbody>
@@ -458,9 +462,26 @@ footer .logo { height: 28px }
     <div class="note prose"><b>When the network drops</b><span>The recipe, calibration and limits live in the board's own memory, so a feed carries on through a Wi-Fi or internet outage and the records catch up when it reconnects. On site, the GCU Setup app reaches the board over Bluetooth with no network at all. Firmware updates come over Wi-Fi from GCU Cloud.</span></div>
   </section>
 
+  <!-- 6b -->
+  <section id="onboard">
+    <header><span class="kicker">At the board</span><h2>A button, a buzzer and a light for every pump</h2></header>
+    <p class="prose">The board shows what it is doing without a phone. Each pump channel has a red/green light, a buzzer calls attention to anything that needs a person, and one button covers the jobs you do standing in front of it. A real-time clock with its own coin cell keeps every log record correctly time-stamped through a power or network outage.</p>
+    <table class="tbl">
+      <thead><tr><th>Signal</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td>Channel light green</td><td>That pump is dosing. Blinking: calibration or a cup test is running.</td></tr>
+        <tr><td>Channel light red</td><td>That channel has a fault, such as an open pump loop. Blinking: it needs attention, such as a calibration that is due.</td></tr>
+        <tr><td>Buzzer</td><td>E-stop opened, dosing stopped by a safety rule, a tank float low, a probe fault. Silenced from the app or with a short press of the button.</td></tr>
+        <tr><td>Button, short press</td><td>Identifies the board (the lights chase, one beep) and opens the Bluetooth pairing window for 10 minutes.</td></tr>
+        <tr><td>Button, held 3 s</td><td>Stops dosing locally until it is cleared.</td></tr>
+        <tr><td>Button, held 10 s</td><td>Resets the network settings; three beeps confirm.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
   <!-- 7 -->
   <section id="specs">
-    <header><span class="kicker">Specifications</span><h2>Rev A at a glance</h2></header>
+    <header><span class="kicker">Specifications</span><h2>Rev B at a glance</h2></header>
     <table class="tbl">
       <tbody>
         <tr><td>Power</td><td>24 V DC ±10 %, about 0.3 A plus sensor power. Fused, reverse-polarity protected, surge clamped.</td></tr>
@@ -470,11 +491,14 @@ footer .logo { height: 28px }
         <tr><td>Contact inputs</td><td>8 dry contacts, 24 V wetting, optocoupled.</td></tr>
         <tr><td>Contacts out</td><td>2 solid-state contacts, 60 V, 2 A, AC or DC, each fused, with contact feedback. K1 is held by the hardware watchdog.</td></tr>
         <tr><td>Network</td><td>Wi-Fi to GCU Cloud and the GCU Manager; Bluetooth LE for the GCU Setup app. Firmware updates over Wi-Fi.</td></tr>
-        <tr><td>Sensor port</td><td>RS-485, Modbus RTU master, 24 V sensor supply on its own 0.5 A fuse, jumper for the 120 Ω termination.</td></tr>
+        <tr><td>Sensor port</td><td>RS-485, Modbus RTU master, 24 V sensor supply on its own 0.5 A fuse, 120 Ω termination switched from the app.</td></tr>
+        <tr><td>Emergency stop</td><td>Terminal for a normally closed stop loop, optocoupled; opening it drops every output and the contactor in hardware.</td></tr>
+        <tr><td>On the board</td><td>A push button, a buzzer, a red/green light per pump channel and six status lights.</td></tr>
+        <tr><td>Clock</td><td>Real-time clock with a coin-cell backup (CR1220), set from the network or the phone.</td></tr>
         <tr><td>Processor</td><td>Plug-in Seeed XIAO ESP32-S3 (Wi-Fi, Bluetooth LE), antenna lead to the case wall.</td></tr>
         <tr><td>Board</td><td>132 × 84 mm, 4 layers, four M3 mounting holes, 26 test points.</td></tr>
         <tr><td>Terminals</td><td>Push-in terminal blocks, 3.5 mm pitch.</td></tr>
-        <tr><td>Enclosure</td><td>DIN-rail case with the I/O labels printed on it.</td></tr>
+        <tr><td>Enclosure</td><td>Black DIN-rail case with a clear cover; the I/O labels go on as stickers.</td></tr>
       </tbody>
     </table>
     <div class="note prose"><b>Water quality on the sensor port</b><span>The companion FIO-WQ board, below, measures pH and EC on the board itself, each channel in its own isolated circuit, and plugs into the FIO-8's RS-485 port at its own address on the FIO-8's 24 V.</span></div>
@@ -486,7 +510,7 @@ footer .logo { height: 28px }
     <p class="lead">The FIO-WQ reads two pH electrodes and two conductivity cells, each with its own temperature probe, and hands the readings to the FIO-8 over one four-wire cable. Each of the four measurement circuits is electrically isolated from the others and from the bus, so probes in the same water do not disturb each other and a wiring fault on one stays on one. It checks its own electrodes before it trusts them. The board itself stays dry on the DIN rail: the pH electrodes and conductivity cells sit in the water line, in a tee or a flow cell, and their cables run back to the jacks and terminals.</p>
     <figure class="hero-fig">
       <img src="img/fiowq-3d-hero.webp" width="1222" height="771" alt="3D render of the FIO-WQ board: a green circuit board with two BNC jacks and four push-in terminal blocks along the front edge, two bus terminal blocks and a row of status lights along the back, and a plug-in processor module at the right end">
-      <figcaption>Rev A, rendered from the production layout with simplified part bodies. The two pH BNC jacks and the probe terminals sit along the front edge; bus in and out and the status lights along the back. Same 132 × 84 mm outline and mounting holes as the FIO-8.</figcaption>
+      <figcaption>Rendered from the Rev A layout with simplified part bodies (Rev B adds the button, the buzzer and the coin-cell clock along the bus edge). The two pH BNC jacks and the probe terminals sit along the front edge; bus in and out and the status lights along the back. Same 132 × 84 mm outline and mounting holes as the FIO-8.</figcaption>
     </figure>
     <div class="facts" role="list">
       <div class="fact" role="listitem"><b>2</b><span>pH inputs on BNC, glass and reference</span></div>
@@ -568,7 +592,8 @@ footer .logo { height: 28px }
         <tr><td>Bus</td><td>RS-485 Modbus RTU on the FIO-8's sensor port, at its own address, with the bus passed through to further sensors. Readings and probe health appear in GCU Cloud next to the FIO-8's dosing.</td></tr>
         <tr><td>Power</td><td>24 V from the FIO-8's sensor port, under 1 W typical. Fused and reverse-polarity protected.</td></tr>
         <tr><td>Processor</td><td>Plug-in Seeed XIAO module in two sockets; USB-C for service.</td></tr>
-        <tr><td>Board</td><td>132 × 84 mm, 4 layers, 240 parts, the FIO-8's four M3 mounting holes and case family.</td></tr>
+        <tr><td>On the board</td><td>A push button, a buzzer, a red/green light per measurement channel, bus and fault lights, and a real-time clock with a coin-cell backup. The RS-485 termination is switched from the app (off by default: the FIO-WQ usually sits mid-bus).</td></tr>
+        <tr><td>Board</td><td>132 × 84 mm, 4 layers, 261 parts, the FIO-8's four M3 mounting holes and case family.</td></tr>
       </tbody>
     </table>
   </section>
@@ -576,22 +601,22 @@ footer .logo { height: 28px }
   <!-- 9 -->
   <section id="enclosures">
     <header><span class="kicker">Enclosures</span><h2>Printed DIN-rail cases</h2></header>
-    <p class="prose">Both boards share one case family: a base tray and a cover, printed in ASA with rounded corners and edges, clipped to 35 mm DIN rail. The terminal ends are open, so wires drop straight into the push-in blocks and the levers flip outward with the cover on. The roof is a plain surface: the I/O labels go on as printed stickers, and the four M3 screws that hold board, base and cover together are countersunk underneath.</p>
+    <p class="prose">Both boards share one case family: a black base tray printed in ASA with rounded corners, and a flat 3 mm clear polycarbonate cover, so the board and its lights show through. The case clips to 35 mm DIN rail. The walls open in front of both terminal rows, from the board up, so wires go straight into the push-in blocks and the levers flip outward with the cover on. The button is pressed through the cover by a printed plunger, the buzzer sounds through a small port above it, and the clock's coin cell is changed through a hatch in the floor. The I/O labels go on as stickers.</p>
     <div class="pair">
-      <figure class="map"><img src="img/case-fio8-iso.webp" width="1466" height="924" alt="Render of the FIO-8 in its grey printed DIN-rail case with rounded corners: pump terminals along the front, the sensor and bus terminals along the back, round windows for the channel lights and the status column"><figcaption>FIO-8 case. Pump outputs along the front, inputs and bus along the back, a round window per channel light and for the status column. Labels go on as stickers.</figcaption></figure>
-      <figure class="map"><img src="img/case-fiowq-iso.webp" width="1089" height="718" alt="Render of the FIO-WQ in its light grey printed DIN-rail case with rounded corners: two BNC jacks through the front wall between the probe terminal blocks, bus terminals and the status light slot along the back"><figcaption>FIO-WQ case. The two BNC jacks pass through the front wall and are held by their own panel nuts; the probe terminals sit beside them.</figcaption></figure>
+      <figure class="map"><img src="img/case-fio8-iso.webp" width="1434" height="948" alt="Render of the FIO-8 in its black printed DIN-rail case with a clear cover: the board visible through the cover, pump terminals along the front, sensor and bus terminals along the back, the button at the right end"><figcaption>FIO-8 case. Pump outputs along the front, inputs, bus and the E-stop along the back; the board, its lights and the button under the clear cover.</figcaption></figure>
+      <figure class="map"><img src="img/case-fiowq-iso.webp" width="1060" height="731" alt="Render of the FIO-WQ in its black printed DIN-rail case with a clear cover: two BNC jacks through the front wall between the probe terminal blocks, bus terminals along the back, the board visible through the cover"><figcaption>FIO-WQ case. The two BNC jacks pass through the front wall and are held by their own panel nuts; the probe terminals sit beside them.</figcaption></figure>
     </div>
     <div class="pair">
-      <figure class="map"><img src="img/case-fio8-exploded.webp" width="1466" height="1215" alt="Exploded render of the FIO-8 case: the cover lifted above the board and the base tray"><figcaption>FIO-8 case, cover lifted.</figcaption></figure>
-      <figure class="map"><img src="img/case-fiowq-exploded.webp" width="1028" height="772" alt="Exploded render of the FIO-WQ case: the cover lifted above the board and the base tray"><figcaption>FIO-WQ case, cover lifted.</figcaption></figure>
+      <figure class="map"><img src="img/case-fio8-exploded.webp" width="1434" height="1195" alt="Exploded render of the FIO-8 case: the clear cover lifted above the board and the black base tray"><figcaption>FIO-8 case, cover lifted.</figcaption></figure>
+      <figure class="map"><img src="img/case-fiowq-exploded.webp" width="992" height="747" alt="Exploded render of the FIO-WQ case: the clear cover lifted above the board and the black base tray"><figcaption>FIO-WQ case, cover lifted.</figcaption></figure>
     </div>
     <table class="tbl">
       <tbody>
-        <tr><td>Material</td><td>ASA, printed in two parts (base and cover), 2.6 mm walls, no supports. Labels as stickers.</td></tr>
+        <tr><td>Material</td><td>Black ASA base tray, printed without supports; flat 3 mm clear polycarbonate cover, cut to shape. Labels as stickers.</td></tr>
         <tr><td>Mounting</td><td>35 mm DIN rail clip under the base. The board is held by four M3 screws through its own mounting holes.</td></tr>
-        <tr><td>FIO-8 case</td><td>138 × 90 × 31 mm, 8 DIN modules. A round window over each channel light and the status column, with optional translucent light pipes; the USB-C port reachable through the end wall.</td></tr>
-        <tr><td>FIO-WQ case</td><td>138 × 91 × 26 mm, 8 DIN modules. BNC jacks through the front wall on the base-to-cover seam, held by their own panel nuts; one slot for the status lights.</td></tr>
-        <tr><td>Wiring</td><td>Open terminal ends; levers reachable with the cover on. USB-C notch on the end wall.</td></tr>
+        <tr><td>FIO-8 case</td><td>138 × 90 × 33 mm, 8 DIN modules. The lights show through the cover; button plunger and buzzer port in the cover; coin-cell hatch in the floor; USB-C through the end wall.</td></tr>
+        <tr><td>FIO-WQ case</td><td>138 × 91 × 33 mm, 8 DIN modules. BNC jacks through the front wall, held by their own panel nuts; button plunger and buzzer port in the cover; coin-cell hatch in the floor.</td></tr>
+        <tr><td>Wiring</td><td>The walls open in front of the terminal rows; levers reachable with the cover on.</td></tr>
       </tbody>
     </table>
   </section>
