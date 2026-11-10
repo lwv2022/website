@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>LWV-CS-1 GCU Canopy Sensor</title>
 <meta name="robots" content="noindex,nofollow">
-<meta name="description" content="LWV-CS-1 GCU Canopy Sensor: dual-wavelength CO2, air temperature and humidity, leaf temperature, spectral light and air quality in a fan-drawn measuring box on the pod's M12 bus.">
+<meta name="description" content="LWV-CS-1 GCU Canopy Sensor: dual-channel CO2, air temperature and humidity, leaf temperature, spectral light and air quality in a fan-drawn measuring box on the pod's M12 bus.">
 <link rel="icon" href="/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -145,12 +145,12 @@ footer .logo { height: 28px }
   </div>
 
   <div class="facts" role="list">
-    <div class="fact" role="listitem"><b>5000</b><span>ppm CO<sub>2</sub> range, dual-wavelength infrared</span></div>
+    <div class="fact" role="listitem"><b>10&nbsp;000</b><span>ppm CO<sub>2</sub> range, dual-channel infrared</span></div>
     <div class="fact" role="listitem"><b>±0.1</b><span>°C air temperature, typical</span></div>
     <div class="fact" role="listitem"><b>±1.0</b><span>% relative humidity, typical</span></div>
     <div class="fact" role="listitem"><b>35°</b><span>leaf-temperature view of the canopy</span></div>
     <div class="fact" role="listitem"><b>11</b><span>light channels: 8 colour bands, clear, near-IR, flicker</span></div>
-    <div class="fact" role="listitem"><b>0.7 W</b><span>from the pod's 24 V bus</span></div>
+    <div class="fact" role="listitem"><b>0.8 W</b><span>from the pod's 24 V bus</span></div>
   </div>
 
   <!-- 1 -->
@@ -216,12 +216,12 @@ footer .logo { height: 28px }
     <table class="tbl">
       <thead><tr><th>Reading</th><th>Sensor</th><th>Why this one</th></tr></thead>
       <tbody>
-        <tr><td>CO<sub>2</sub></td><td>E+E EE895, dual-wavelength infrared, 0–5000 ppm, ±(50 ppm + 3 % of reading)</td><td>Every flash of its lamp is measured at two wavelengths: one that CO<sub>2</sub> absorbs and one it does not. The second cancels lamp ageing, so it stays calibrated in a sealed room that is enriched all day and never sees fresh air. Temperature- and pressure-compensated in the module.</td></tr>
+        <tr><td>CO<sub>2</sub></td><td>Sensirion SCD30, dual-channel infrared, 400–10&nbsp;000 ppm, ±(30 ppm + 3 % of reading)</td><td>A second, reference channel tracks the lamp as it ages, so it stays calibrated in a sealed room that is enriched all day and never sees fresh air. Its automatic self-calibration stays off for that reason; corrections come from GCU Cloud. It reads within about 20 s and is stocked by JLC, so the boards come back fully built.</td></tr>
         <tr><td>Air temperature and humidity</td><td>Sensirion SHT45 with a filter membrane, ±0.1 °C, ±1.0 %RH typical</td><td>Sensirion's top grade, behind a membrane that keeps out dust, spray and spores, with a built-in heater that recovers it after long, very humid nights.</td></tr>
         <tr><td>Leaf temperature</td><td>Melexis MLX90614, infrared, 35° view</td><td>Reads the leaves without touching them. Leaf temperature gives leaf VPD, which is what the plant responds to, next to the air VPD.</td></tr>
         <tr><td>Light</td><td>ams AS7341: 8 colour bands plus clear, near-infrared and flicker, under a diffuser</td><td>Lights on and off, dimming steps, the red to far-red balance, flicker, and light leaks during the dark period. Shown as relative light until it is calibrated against a quantum sensor for each fixture type.</td></tr>
         <tr><td>Air quality</td><td>Sensirion SGP41, VOC and NOx index</td><td>A trend against the room's own normal (100 = normal): a pesticide or cleaning-product application, a sulfur burner, something burning.</td></tr>
-        <tr><td>Barometric pressure</td><td>Inside the EE895</td><td>Keeps the CO<sub>2</sub> reading right at altitude, and is reported too.</td></tr>
+        <tr><td>Barometric pressure</td><td>Infineon DPS368</td><td>Fed to the CO<sub>2</sub> sensor so its reading is right at altitude and in weather, and reported too. Built to tolerate water and humidity.</td></tr>
       </tbody>
     </table>
   </section>
@@ -231,11 +231,11 @@ footer .logo { height: 28px }
     <header><span class="kicker">How it measures</span><h2>Room air, drawn past the sensors in the shade</h2></header>
     <div class="cols">
       <p class="prose">A sensor sitting in a box under grow lights reads warm and dry: the box heats up, and every degree of error at 25 °C costs 3–4 % of relative humidity. Greenhouse climate computers solve this with an aspirated measuring box, and the CS-1 is one. A quiet 40 mm Noctua fan at the far end pulls room air in through louvres and a washable screen, past the sensors in a shaded upper duct, and out through a grille.</p>
-      <p class="prose">The circuit board is the shelf that splits the box in two. Above it the upper duct carries only sensors, in the order the air meets them: humidity and temperature first, on a slotted tongue of board that keeps the board's own warmth away, then air quality, then CO<sub>2</sub>. Below it the lower channel carries the processor and power supply, so all of their heat leaves with the exhaust. The leaf thermometer looks down through its own sealed sleeve, out of the air stream.</p>
+      <p class="prose">The circuit board is the shelf that splits the box in two. Above it the upper duct carries only sensors, in the order the air meets them: humidity and temperature first, on a slotted tongue of board that keeps the board's own warmth away, then air quality, then CO<sub>2</sub>. The CO<sub>2</sub> sensor sits in a slotted bay inside the duct: Sensirion wants it out of direct air flow, so the stream passes above and below it and the room air reaches it through the slots. Below the board the lower channel carries the processor and power supply, so all of their heat leaves with the exhaust. The leaf thermometer looks down through its own sealed sleeve, out of the air stream.</p>
     </div>
     <figure class="diagram">
       <div class="scroll">
-      <svg viewBox="0 0 1000 360" role="img" aria-label="Side section of the CS-1: air enters through louvres and a screen at the left. The circuit board is a shelf across the middle. Above it, the upper duct carries the SHT45 humidity and temperature sensor on a slotted tongue under a shield plate, then the SGP41 air-quality sensor, then the EE895 CO2 module, then the AS7341 light sensor in a tube under the diffuser in the lid. Below the board, the lower channel carries the infrared leaf thermometer in a sealed sleeve looking down through the floor, then the processor and the power supply. A fan at the right pulls both channels and exhausts through a grille.">
+      <svg viewBox="0 0 1000 360" role="img" aria-label="Side section of the CS-1: air enters through louvres and a screen at the left. The circuit board is a shelf across the middle. Above it, the upper duct carries the SHT45 humidity and temperature sensor on a slotted tongue under a shield plate, then the SGP41 air-quality sensor, then the SCD30 CO2 sensor in its slotted bay, then the AS7341 light sensor in a tube under the diffuser in the lid. Below the board, the lower channel carries the infrared leaf thermometer in a sealed sleeve looking down through the floor, then the processor and the power supply. A fan at the right pulls both channels and exhausts through a grille.">
         <defs>
           <marker id="arc2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--cyan)"/></marker>
         </defs>
@@ -261,8 +261,8 @@ footer .logo { height: 28px }
         <rect class="box-acc" x="262" y="162" width="20" height="14" rx="2"/>
         <text class="t-m" x="272" y="148" text-anchor="middle">SGP41</text>
         <rect class="box-acc" x="330" y="118" width="230" height="58" rx="6"/>
-        <text class="t-b" x="445" y="144" text-anchor="middle">EE895 CO₂</text>
-        <text class="t-s" x="445" y="164" text-anchor="middle">soldered on header pins</text>
+        <text class="t-b" x="445" y="144" text-anchor="middle">SCD30 CO₂</text>
+        <text class="t-s" x="445" y="164" text-anchor="middle">in a slotted bay</text>
         <rect class="box" x="640" y="44" width="40" height="132"/>
         <rect x="634" y="34" width="52" height="8" rx="2" fill="var(--surface)" stroke="var(--cyan)" stroke-width="2"/>
         <text class="t-s" x="700" y="30">diffuser</text>
@@ -293,20 +293,21 @@ footer .logo { height: 28px }
       </div>
       <figcaption>Every heat source sits downstream of every air sensor. About 4 m³ of air an hour passes through; the half watt of electronics warms the exhaust by roughly 0.4 °C, after the sensors.</figcaption>
     </figure>
-    <figure class="map"><img src="img/cs1-section.webp" width="1460" height="714" alt="Cut-away render of the CS-1 through its length: louvres and screen at the left, the circuit board as a shelf in the middle, the CO2 module on its header pins in the upper duct, the black light tube under the diffuser, the cone-shaped leaf thermometer sleeve opening through the floor, the processor below the board, and the fan at the right"><figcaption>Cut-away of the production model along the airflow: louvres, screen, the board as a shelf, the CO<sub>2</sub> module in the upper duct, the black light tube under the diffuser, the leaf thermometer's sleeve through the floor, and the fan.</figcaption></figure>
+    <figure class="map"><img src="img/cs1-section.webp" width="1460" height="841" alt="Cut-away render of the CS-1 through its length: louvres and screen at the left, the circuit board as a shelf in the middle, the CO2 sensor in its slotted bay in the upper duct, the black light tube under the diffuser, the cone-shaped leaf thermometer sleeve opening through the floor, the processor below the board, and the fan at the right"><figcaption>Cut-away of the production model along the airflow: louvres, screen, the board as a shelf, the CO<sub>2</sub> sensor's bay in the upper duct, the black light tube under the diffuser, the leaf thermometer's sleeve through the floor, and the fan.</figcaption></figure>
+    <figure class="map"><img src="img/cs1-section-bay.webp" width="1448" height="924" alt="Cut-away across the CO2 bay: the SCD30 module mounted face-down on its socket above the board, a slotted floor tray under it and a slotted roof above it, with the duct air passing below the floor and above the roof"><figcaption>The CO<sub>2</sub> bay in section. The SCD30 hangs face-down on its socket between a slotted floor tray and a slotted roof; the duct air passes under the floor and over the roof, and reaches the sensor through the slots, out of the direct stream as Sensirion asks.</figcaption></figure>
   </section>
 
   <!-- 4 -->
   <section id="board">
     <header><span class="kicker">The board</span><h2>Built to be changed without a new board</h2></header>
     <p class="prose">Rev A is the prototype, so everything we expect to learn about in the test pods can be changed with a line in JLC's parts list or a reprinted case part instead of a new circuit board. Every part is fitted by JLC; nothing is soldered by hand.</p>
-    <figure class="map"><img src="img/cs1-board-iso.webp" width="1470" height="828" alt="3D render of the CS-1 circuit board at an angle: the white CO2 module standing on its header pins in the middle, the narrow sensor tongue at the front left, the fan and Qwiic connectors at the right edge"><figcaption>Rev A as routed. The CO<sub>2</sub> module stands on its header pins in the middle; the humidity sensor sits on the slotted tongue at the front, upstream of everything else.</figcaption></figure>
+    <figure class="map"><img src="img/cs1-board-iso.webp" width="1470" height="828" alt="3D render of the CS-1 circuit board at an angle: the CO2 sensor mounted face-down on its socket in the middle, the narrow sensor tongue at the front left, the fan and Qwiic connectors at the right edge"><figcaption>Rev A as routed. The CO<sub>2</sub> sensor sits face-down on its socket in the middle, where it can be unplugged and replaced; the humidity sensor sits on the slotted tongue at the front, upstream of everything else.</figcaption></figure>
     <div class="pair">
-      <figure class="map"><img src="img/cs1-board-top.webp" width="1259" height="599" alt="3D render of the CS-1 circuit board from the top: a long green board with a narrow tongue at one end carrying the humidity sensor, the CO2 module, the light sensor, the fan and Qwiic connectors and the LWV logo"><figcaption>Top: the duct side. The humidity sensor sits on the slotted tongue at the left; the CO<sub>2</sub> module is soldered on header pins at JLC; the terminal at the back edge takes the top connector's wires.</figcaption></figure>
+      <figure class="map"><img src="img/cs1-board-top.webp" width="1259" height="599" alt="3D render of the CS-1 circuit board from the top: a long green board with a narrow tongue at one end carrying the humidity sensor, the CO2 sensor, the barometer, the light sensor, the fan and Qwiic connectors and the LWV logo"><figcaption>Top: the duct side. The humidity sensor sits on the slotted tongue at the left; the CO<sub>2</sub> sensor plugs into its socket (fitted at JLC) next to the new barometer; the terminal at the back edge takes the top connector's wires.</figcaption></figure>
       <figure class="map"><img src="img/cs1-board-bottom.webp" width="1259" height="599" alt="3D render of the CS-1 circuit board from the bottom: the round leaf thermometer, the processor module, the power supply, the labelled test points and the cable socket; the processor plugs in with its parts facing away from the board"><figcaption>Bottom: the leaf thermometer, the plug-in processor (parts facing out, as on the GCU V5), the power supply and the socket the M12 connector card plugs into.</figcaption></figure>
     </div>
     <ul class="plain prose">
-      <li><b>Built by JLC, nothing soldered by hand.</b> The CO<sub>2</sub> module and the leaf thermometer are soldered at the factory. The one part we plug in is the processor, Seeed's XIAO with factory-fitted pins, the same way round as on the GCU V5.</li>
+      <li><b>Built by JLC, nothing soldered by hand.</b> The CO<sub>2</sub> sensor (on a socket, so it can be swapped) and the leaf thermometer are fitted at the factory. The one part we plug in is the processor, Seeed's XIAO with factory-fitted pins, the same way round as on the GCU V5.</li>
       <li><b>Sensors on their own switched power.</b> The firmware can power-cycle a stuck sensor and clear a stuck bus remotely; every restart of the processor also restarts the sensors cleanly.</li>
       <li><b>A spare position for the humidity sensor</b> further upstream, a <b>Qwiic connector</b> for a future external probe, spare processor pins, and 24 labelled test points.</li>
       <li><b>Any 5 V PWM fan fits</b> the standard 4-pin header, behind its own current limit, so a jammed fan cannot take the board down. The header is on the top side: the fan unplugs with the lid off.</li>
@@ -322,7 +323,7 @@ footer .logo { height: 28px }
     <div class="cols">
       <div class="prose" style="display:grid;gap:10px">
         <h3>Calibration from the cloud</h3>
-        <p>Today's sensor is calibrated by opening its cover, carrying it outdoors and holding a button. The CS-1's CO<sub>2</sub> correction is sent from GCU Cloud through the GCU and written into the module, where it is kept. The dual-wavelength design means it should rarely be needed.</p>
+        <p>Today's sensor is calibrated by opening its cover, carrying it outdoors and holding a button. The CS-1's CO<sub>2</sub> correction is sent from GCU Cloud through the GCU and kept in the CS-1. The dual-channel design means it should rarely be needed.</p>
       </div>
       <div class="prose" style="display:grid;gap:10px">
         <h3>Health you can see</h3>
@@ -334,19 +335,19 @@ footer .logo { height: 28px }
   <!-- 6 -->
   <section id="case">
     <header><span class="kicker">The case</span><h2>A printed, hanging measuring box</h2></header>
-    <p class="prose">The case is printed in-house in white ASA, which reflects the grow lights and stands up to UV and humidity. Seven parts print on our printer without supports. It hangs from its M12 cable: the connector sits in a short turret on the lid, right over the box's centre of gravity, so it hangs level, and the sensor duct underneath stays clear. Or it screws flat to a wall with two keyholes. The screen slides out through the floor with the box still up. Gaskets are EPDM foam: nothing in the box is silicone, which can poison gas sensors.</p>
+    <p class="prose">The case is printed in-house in white ASA, which reflects the grow lights and stands up to UV and humidity. Eight parts print on our printer without supports, including a small slotted tray that slides in under the CO<sub>2</sub> sensor. It hangs from its M12 cable: the connector sits in a short turret on the lid, right over the box's centre of gravity, so it hangs level, and the sensor duct underneath stays clear. Or it screws flat to a wall with two keyholes. The screen slides out through the floor with the box still up. Gaskets are EPDM foam: nothing in the box is silicone, which can poison gas sensors.</p>
     <div class="pair">
       <figure class="map"><img src="img/cs1-hanging.webp" width="517" height="600" alt="Render of the CS-1 hanging from its M12 drop cable: the cable comes straight down into the connector turret on the lid"><figcaption>Hanging from its M12 drop cable. The connector is over the centre of gravity, so the box hangs level; the height is set with the cable.</figcaption></figure>
       <figure class="map"><img src="img/cs1-wall.webp" width="1292" height="924" alt="Render of the CS-1 on a wall: its plain side against the wall, the side with the BUS IN and BUS OUT connectors and the Qwiic knock-out facing the room"><figcaption>On a wall: the plain side hangs on two screws in keyholes (a printed drill template comes with it); BUS IN and BUS OUT face the room.</figcaption></figure>
     </div>
     <div class="pair">
       <figure class="map"><img src="img/cs1-exploded.webp" width="671" height="659" alt="Exploded render of the CS-1 case: the lid and the diffuser bezel lifted above the board, the base with the fan at its end, and the screen cartridge slid down out of the floor"><figcaption>Exploded: bezel, lid, board in the base, fan, and the screen cartridge that slides down out of the floor.</figcaption></figure>
-      <figure class="map"><img src="img/cs1-base-open.webp" width="1081" height="905" alt="Render of the CS-1 base with the lid removed, showing the board on its standoffs, the CO2 module in the duct, the fan at the end and the M12 connector card on the side wall"><figcaption>Lid off: the board on its four standoffs, the M12 card on the side wall, the fan at the exhaust end.</figcaption></figure>
+      <figure class="map"><img src="img/cs1-base-open.webp" width="1081" height="905" alt="Render of the CS-1 base with the lid removed, showing the board on its standoffs, the CO2 sensor in its bay, the fan at the end and the M12 connector card on the side wall"><figcaption>Lid off: the board on its four standoffs, the M12 card on the side wall, the fan at the exhaust end.</figcaption></figure>
     </div>
     <table class="tbl">
       <tbody>
         <tr><td>Size</td><td>143 × 64 × 57 mm; the connector turret rises 13.5 mm above the lid.</td></tr>
-        <tr><td>Material</td><td>White ASA, 7 printed parts; the light tube in black ASA so no light leaks through its wall.</td></tr>
+        <tr><td>Material</td><td>White ASA, 8 printed parts; the light tube in black ASA so no light leaks through its wall.</td></tr>
         <tr><td>Hanging</td><td>From its M12 drop cable, plugged into the top connector over the centre of gravity; hangs level, raised with the cable as the crop grows.</td></tr>
         <tr><td>Wall</td><td>Two keyholes in the plain side for M4 or #8 pan-head screws, 70 mm apart; closed pockets, so no air leaks in.</td></tr>
         <tr><td>Connections</td><td>M12 on top (female) to hang from; M12 IN (female) and OUT (male) on the side wall, the same connector card as the IR blaster.</td></tr>
@@ -361,8 +362,9 @@ footer .logo { height: 28px }
     <table class="tbl">
       <thead><tr><th></th><th>SenseCAP S-CO2-03 (today)</th><th>LWV-CS-1</th></tr></thead>
       <tbody>
-        <tr><td>CO<sub>2</sub></td><td>Infrared, ±(50 ppm + 3 %)</td><td>Dual-wavelength infrared, ±(50 ppm + 3 %), ageing- and pressure-compensated</td></tr>
-        <tr><td>Calibration</td><td>Open it, carry it outdoors, hold a button</td><td>From GCU Cloud, written into the module</td></tr>
+        <tr><td>CO<sub>2</sub></td><td>ZyAura ZG09 infrared module, ±(50 ppm + 3 %), sealed inside the box</td><td>Sensirion SCD30 dual-channel infrared, ±(30 ppm + 3 %), pressure-compensated, in a bay off the moving air</td></tr>
+        <tr><td>Response</td><td>About 5 minutes to settle (diffusion into a closed box)</td><td>About 20 seconds</td></tr>
+        <tr><td>Calibration</td><td>Open it, carry it outdoors, hold a button</td><td>From GCU Cloud</td></tr>
         <tr><td>Air temperature / humidity</td><td>±0.2 °C / ±1.8 %RH, passive</td><td>±0.1 °C / ±1.0 %RH, fan-drawn and shaded</td></tr>
         <tr><td>Leaf temperature and leaf VPD</td><td>—</td><td>Yes</td></tr>
         <tr><td>Light at the canopy, dark-period leaks</td><td>—</td><td>Yes</td></tr>
@@ -398,14 +400,14 @@ footer .logo { height: 28px }
     <header><span class="kicker">Specifications</span><h2>Rev A at a glance</h2></header>
     <table class="tbl">
       <tbody>
-        <tr><td>Power</td><td>24 V DC from the M12 bus, about 0.7 W. Fused, reverse-polarity protected, surge clamped.</td></tr>
-        <tr><td>Bus</td><td>RS-485, Modbus RTU. Address, baud rate (9600–115 200), parity, stop bits, reply delay and the 120 Ω terminator are all set in software; factory setting address 10, 19 200 8N1, terminator off. A new setting that nothing confirms reverts by itself.</td></tr>
-        <tr><td>CO<sub>2</sub></td><td>0–5000 ppm, ±(50 ppm + 3 % of reading), dual-wavelength infrared, temperature and pressure compensated.</td></tr>
-        <tr><td>Air</td><td>±0.1 °C, ±1.0 %RH typical; dew point and VPD; barometric pressure.</td></tr>
+        <tr><td>Power</td><td>24 V DC from the M12 bus, about 0.8 W. Fused, reverse-polarity protected, surge clamped.</td></tr>
+        <tr><td>Bus</td><td>RS-485, Modbus RTU. Address, baud rate (9600–115&nbsp;200), parity, stop bits, reply delay and the 120 Ω terminator are all set in software; factory setting address 10, 19&nbsp;200 8N1, terminator off. A new setting that nothing confirms reverts by itself.</td></tr>
+        <tr><td>CO<sub>2</sub></td><td>400–10&nbsp;000 ppm, ±(30 ppm + 3 % of reading), dual-channel infrared (Sensirion SCD30), pressure-compensated from the on-board barometer; about 20 s response.</td></tr>
+        <tr><td>Air</td><td>±0.1 °C, ±1.0 %RH typical; dew point and VPD; barometric pressure (Infineon DPS368).</td></tr>
         <tr><td>Leaf temperature</td><td>Infrared, 35° view, ±0.5 °C, emissivity set for leaves.</td></tr>
         <tr><td>Light</td><td>8 colour bands plus clear, near-infrared and flicker; relative light, on/off, dimming, dark-period leak flag.</td></tr>
         <tr><td>Air quality</td><td>VOC and NOx index, 1–500.</td></tr>
-        <tr><td>Aspiration</td><td>Noctua NF-A4x10 5V PWM fan, speed monitored; about 1.9 m/s expected past the sensors at the default speed (1.0 m/s required).</td></tr>
+        <tr><td>Aspiration</td><td>Noctua NF-A4x10 5V PWM fan, speed monitored; about 1.4 m/s expected past the humidity sensor at the default speed (1.0 m/s required; measured in the pilot).</td></tr>
         <tr><td>Processor</td><td>Seeed XIAO RP2350 with factory-fitted pins, plugged in; firmware updates over RS-485.</td></tr>
         <tr><td>Mounting</td><td>Hangs from its M12 cable, or screws to a wall.</td></tr>
         <tr><td>Board</td><td>108 × 48 mm including a 26 mm sensor tongue, 2 layers, ENIG finish (lead-free), acrylic conformal coat with the sensors masked.</td></tr>
@@ -417,31 +419,31 @@ footer .logo { height: 28px }
   <!-- 10 -->
   <section id="status">
     <header><span class="kicker">Where it stands</span><h2>Rev A design status</h2></header>
-    <p class="prose">Rev A is designed end to end. Nothing has been ordered, printed or flashed yet.</p>
+    <p class="prose">Rev A is designed end to end and its boards are in the JLC cart for 3 sensors, waiting for payment. Nothing has been paid, printed or flashed yet. Revision 5 of the design (November 9) replaced the original E+E CO<sub>2</sub> module, which JLC cannot source, with the Sensirion SCD30, and added a barometer.</p>
     <table class="tbl">
       <thead><tr><th>Part</th><th>Where it is</th><th>What has been checked</th></tr></thead>
       <tbody>
-        <tr><td>Circuit board</td><td>Designed and routed, ready to order</td><td>Electrical and design-rule checks clean (0 errors, 0 unconnected); 456 automatic checks against the design brief, including every pin of the sensors, the processor's orientation and the leaf thermometer's copper-free island; 91 parts, every one fitted by JLC except the plug-in processor, all in stock at JLC on 2026-11-09.</td></tr>
-        <tr><td>Case</td><td>7 parts modelled, ready to print</td><td>71 of 71 fit checks: board, connectors, gaskets, the CO<sub>2</sub> module's air gap, the leaf thermometer's view, light paths to the humidity and light sensors, the hang balance from the model's weights, the connector turret and the wall keyholes. No supports needed.</td></tr>
-        <tr><td>CS-1 firmware 0.2.0</td><td>Written and building</td><td>10 test suites pass on the bench computer, plus 20 end-to-end tests of the setup and update tools against a simulated unit: software bus settings with automatic fallback, moving a unit by serial number, the update image check. Not yet run on hardware.</td></tr>
+        <tr><td>Circuit board</td><td>In the JLC cart: 5 boards, 3 assembled</td><td>Electrical and design-rule checks clean (0 errors, 0 unconnected); 510 automatic checks against the design brief, including every pin of the sensors, the processor's orientation and the leaf thermometer's copper-free island; rebuilt in EasyEDA and checked again against JLC's own footprints (491 checks, copper identical); every part fitted by JLC except the plug-in processor, all in stock on 2026-11-09. Part orientations checked in JLC's placement preview.</td></tr>
+        <tr><td>Case</td><td>8 parts modelled, ready to print</td><td>77 of 77 fit checks: board, connectors, gaskets, the CO<sub>2</sub> bay and its slide-in tray, the leaf thermometer's view, light paths to the humidity and light sensors, the hang balance from the model's weights, the connector turret and the wall keyholes. No supports needed.</td></tr>
+        <tr><td>CS-1 firmware 0.3.0</td><td>Written and building</td><td>All host test suites pass, plus 20 end-to-end tests of the setup and update tools against a simulated unit: the SCD30 and barometer drivers (checked against Sensirion's published examples), software bus settings with automatic fallback, moving a unit by serial number, the update image check. Not yet run on hardware.</td></tr>
         <tr><td>GCU firmware</td><td>CS-1 support on a development branch</td><td>Builds. Sensor type per slot with auto-detection, the monitor-only switch, the remote CO<sub>2</sub> correction and the new readings. Not yet on a lab unit.</td></tr>
         <tr><td>GCU Cloud and the app</td><td>To do</td><td>Sensor-type and monitor-only settings, the CO<sub>2</sub> correction button, charts for the new readings.</td></tr>
       </tbody>
     </table>
     <div class="cols">
       <div class="prose" style="display:grid;gap:10px">
-        <h3>Before the boards are ordered</h3>
+        <h3>Before and right after paying</h3>
         <ul class="plain">
-          <li>Order the leaf thermometers into JLC's parts library now (LCSC C7501763; stock fell to 42). JLC keeps them for our assembly order.</li>
-          <li>Quote and lead time for the EE895 module; JLC buys it through Global Sourcing, or we ship modules to JLC.</li>
-          <li>Check the CO<sub>2</sub> module's pin positions against E+E's drawing or a real module. It is the one dimension taken from the manual's figures rather than measured.</li>
-          <li>Final part-orientation check in JLC's placement preview.</li>
+          <li>The 3 connector cards (the IR blaster's card) go in the same order.</li>
+          <li>Buy the parts JLC does not sell: the XIAO processors with factory-fitted pins, the top M12 connectors and nuts, the fans, heat-set inserts, screws, foam, PTFE diffuser sheet and mesh.</li>
+          <li>Within 72 hours of payment, check JLC's placement photos: the bottom-side parts, the leaf thermometer's tab and the CO<sub>2</sub> sensor stack.</li>
+          <li>For larger runs, pre-order the leaf thermometers and CO<sub>2</sub> sensors into JLC's parts library; both have modest stock.</li>
         </ul>
       </div>
       <div class="prose" style="display:grid;gap:10px">
         <h3>Then</h3>
         <ul class="plain">
-          <li>5–10 boards and cases, built and brought up in the lab; weigh the first unit and trim the top connector's position so it hangs level.</li>
+          <li>3 sensors built and brought up in the lab; weigh the first and trim the top connector's position so it hangs level; measure the air speed past the humidity sensor.</li>
           <li>The GCU firmware on a lab unit with a CS-1 on its bus.</li>
           <li>The first test pods, monitor only, beside today's sensor.</li>
         </ul>
