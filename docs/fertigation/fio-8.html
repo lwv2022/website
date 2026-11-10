@@ -154,7 +154,7 @@ footer .logo { height: 28px }
     <h1>FIO-8 fertigation board</h1>
     <p class="lead">The FIO-8 drives up to eight nutrient dosing pumps from one flow meter. Ten times a second it turns the recipe into a speed for every pump. Each pump output is electrically isolated, and the board stops dosing on its own the moment a reading or a wire looks wrong. It connects to GCU Cloud over Wi-Fi on its own, can report to an on-site GCU Manager, and is set up and run from the GCU Setup app over Bluetooth. Its RS-485 port reads and powers the water-quality probes. It comes in a sealed wall-mount box: every pump, sensor and input plugs in on a standard M12 connector, so there are no terminals to wire and no cabinet to build.</p>
     <figure class="hero-fig">
-      <img src="img/revc-fio8-closed.webp" width="1600" height="1199" alt="Render of the FIO-8 in its sealed black wall-mount box with a clear cover: rows of M12 connectors on the walls, the circuit board visible through the cover">
+      <img src="img/revc-fio8-closed.webp" width="1600" height="1234" alt="Render of the FIO-8 in its sealed black wall-mount box with a clear cover: rows of M12 connectors on the walls, the circuit board visible through the cover">
       <figcaption>Rev C, rendered from the design. Pump ports on the front wall, sensor and input ports on the back, power, sensor bus, E-stop and the contactor and flush ports together on one end. The board and its lights show through the clear cover.</figcaption>
     </figure>
   </div>
@@ -402,7 +402,7 @@ footer .logo { height: 28px }
     <div class="walls" role="group" aria-label="Port layout of the three connector walls, seen from outside">
       <div class="wall"><h3>Front wall · pumps</h3><div class="ports"><span class="port">PUMP 1</span><span class="port">PUMP 2</span><span class="port">PUMP 3</span><span class="port">PUMP 4</span><span class="port">PUMP 5</span><span class="port">PUMP 6</span><span class="port">PUMP 7</span><span class="port">PUMP 8</span></div></div>
       <div class="wall"><h3>Back wall · sensors and inputs</h3><div class="ports"><span class="port">FLOW A</span><span class="port">FLOW B</span><span class="port">4–20 IN 1</span><span class="port">4–20 IN 2</span><span class="port">IN 1·2</span><span class="port">IN 3·4</span><span class="port">IN 5·6</span><span class="port">IN 7·8</span></div></div>
-      <div class="wall"><h3>Service end</h3><div class="ports"><span class="port pwr">24 V DC</span><span class="port">BUS</span><span class="port">SENSOR BUS</span><span class="port none">vent</span><span class="port none">–</span><span class="port">E-STOP</span><span class="port">CON&shy;TACTOR</span><span class="port">FLUSH</span></div></div>
+      <div class="wall"><h3>Service end</h3><div class="ports"><span class="port">BUS</span><span class="port">SENSOR BUS</span><span class="port pwr">24 V DC</span><span class="port none">vent</span><span class="port none">–</span><span class="port">E-STOP</span><span class="port">CON&shy;TACTOR</span><span class="port">FLUSH</span></div></div>
     </div>
     <p class="muted" style="font-size:14px">Each wall as seen from outside. The fourth wall is blank, so the box can hang with no connector facing up.</p>
     <table class="tbl">
@@ -419,8 +419,8 @@ footer .logo { height: 28px }
       </tbody>
     </table>
     <div class="pair">
-      <figure class="map"><img src="img/revc-fio8-service.webp" width="1434" height="685" alt="Render of the service end of the FIO-8 box: power, the two bus ports and the vent in the top row, E-stop, contactor and flush in the bottom row"><figcaption>The service end: power, sensor bus and vent above; E-stop, contactor and flush below.</figcaption></figure>
-      <figure class="map"><img src="img/revc-fio8-open.webp" width="1600" height="1377" alt="Render of the FIO-8 box with the cover off: the main board lying flat and a connector board standing behind each wall of ports"><figcaption>Cover off. Each wall's ports sit on a connector board that links to the main board with a keyed ribbon cable.</figcaption></figure>
+      <figure class="map"><img src="img/revc-fio8-service.webp" width="1434" height="693" alt="Render of the service end of the FIO-8 box: the two bus ports, power and the vent in the top row, E-stop, contactor and flush in the bottom row"><figcaption>The service end: the two bus ports, power and the vent above; E-stop, contactor and flush below.</figcaption></figure>
+      <figure class="map"><img src="img/revc-fio8-open.webp" width="1600" height="1416" alt="Render of the FIO-8 box with the cover off: the main board lying flat and a connector board standing behind each wall of ports"><figcaption>Cover off. Each wall's ports sit on a connector board that links to the main board with a keyed ribbon cable.</figcaption></figure>
     </div>
   </section>
 
@@ -484,7 +484,7 @@ footer .logo { height: 28px }
         <tr><td>Processor</td><td>Plug-in Seeed XIAO ESP32-S3 (Wi-Fi, Bluetooth LE), antenna inside the box.</td></tr>
         <tr><td>Board</td><td>132 × 84 mm, 6 layers, plus four small connector boards.</td></tr>
         <tr><td>Connectors</td><td>M12 A-coded 4-pin on all 21 field ports; M12 T-coded for the 24 V supply.</td></tr>
-        <tr><td>Enclosure</td><td>Sealed wall-mount box, black ASA with a clear polycarbonate cover on a gasket, designed for IP65. 167 × 141 × 76 mm.</td></tr>
+        <tr><td>Enclosure</td><td>Sealed wall-mount box, black ASA with a clear polycarbonate cover on a gasket, designed for IP65. 167 × 141 × 77 mm.</td></tr>
       </tbody>
     </table>
     <div class="note prose"><b>Water quality on the sensor port</b><span>The companion FIO-WQ board, below, measures pH and EC on the board itself, each channel in its own isolated circuit, and plugs into the FIO-8's RS-485 port at its own address on the FIO-8's 24 V.</span></div>
@@ -589,7 +589,7 @@ footer .logo { height: 28px }
     <header><span class="kicker">Enclosures</span><h2>Sealed wall-mount boxes</h2></header>
     <p class="prose">Both boards share one box family: a black ASA base printed solid, and a flat clear polycarbonate cover that sits on a silicone gasket under a ring of stainless screws, so the board and its lights stay visible. Every M12 connector seals against the wall where it passes through, a membrane vent lets the box breathe without letting water in, and there is no button, no programming port and no hatch to leak. The box screws to a wall or a panel through four lugs outside the sealed space. Port names go on as labels.</p>
     <div class="pair">
-      <figure class="map"><img src="img/revc-fio8-closed.webp" width="1600" height="1199" alt="Render of the FIO-8 box, closed"><figcaption>FIO-8 box: 22 M12 ports on three walls.</figcaption></figure>
+      <figure class="map"><img src="img/revc-fio8-closed.webp" width="1600" height="1234" alt="Render of the FIO-8 box, closed"><figcaption>FIO-8 box: 22 M12 ports on three walls.</figcaption></figure>
       <figure class="map"><img src="img/revc-fiowq-closed.webp" width="1073" height="854" alt="Render of the FIO-WQ box, closed"><figcaption>FIO-WQ box: six M12 ports and two BNC jacks.</figcaption></figure>
     </div>
     <table class="tbl">
@@ -597,7 +597,7 @@ footer .logo { height: 28px }
         <tr><td>Protection</td><td>Designed for IP65: gasketed cover, sealed connectors, membrane vent. The rating is confirmed by test before release.</td></tr>
         <tr><td>Material</td><td>Black ASA base; 3 mm clear polycarbonate cover; silicone gasket; stainless screws into brass inserts.</td></tr>
         <tr><td>Mounting</td><td>Four screw lugs, reachable with the cover on. Mount with the blank wall up, so no connector faces the sky.</td></tr>
-        <tr><td>FIO-8 box</td><td>167 × 141 × 76 mm (205 mm over the lugs).</td></tr>
+        <tr><td>FIO-8 box</td><td>167 × 141 × 77 mm (205 mm over the lugs).</td></tr>
         <tr><td>FIO-WQ box</td><td>141 × 114 × 68 mm (173 mm over the lugs).</td></tr>
         <tr><td>Service</td><td>Firmware updates arrive over the air. Unused ports take a screw cap.</td></tr>
       </tbody>
