@@ -151,7 +151,7 @@
     </ul>
 
     <h3>Activity and security records</h3>
-    <p>We keep a log of sign-ins, account changes and the changes people make to GCUs: who changed what, and when. For sign-ups and failed sign-ins it includes the internet (IP) address the request came from. We use this log to protect accounts and so your team can see who changed what.</p>
+    <p>We keep a log of sign-ins, account changes and the changes people make to GCUs: who changed what, and when. For sign-ups and failed sign-ins it includes the internet (IP) address the request came from. We use this log to protect accounts and so your team can see who changed what. When an account is deleted, its name, email address and IP address are removed from this log; the record of what happened, and when, stays.</p>
 
     <h3>On your phone</h3>
     <p>The app keeps a few things on the phone itself: which server you use, your sign-in, a copy of your site and its units so the app works with no internet, the GCUs paired with this phone, the passwords the app set on your GCUs (in the phone's secure storage), and photos waiting to upload. Deleting the app removes them.</p>
@@ -176,7 +176,7 @@
       <li><strong>AI Insights:</strong> each night, a summary of each room's readings, how its equipment ran and its grow program.</li>
       <li><strong>Photo analysis:</strong> a photo, earlier photos of the same spot, your note and the room's conditions since the last photo.</li>
     </ul>
-    <p>Photo analysis and AI Insights run only on sites where they are turned on. On GCU Cloud, none of these features runs on the Bluetooth plan. We send OpenAI what each feature needs, never your password or your email address. The AI only writes notes and answers: it cannot change a setting or switch anything on or off.</p>
+    <p>Photo analysis and AI Insights run only on sites where they are turned on. On GCU Cloud, none of these features runs on the Bluetooth plan. We send OpenAI what each feature needs, never your password or your email address, and we ask OpenAI not to store it. OpenAI does not use what is sent through its API to train its models. The AI only writes notes and answers: it cannot change a setting or switch anything on or off.</p>
 
     <h2 id="others">5. Who else handles your information</h2>
     <p>These companies handle your information so that we can provide the service:</p>
@@ -240,7 +240,8 @@
     <ul>
       <li><strong>Always:</strong> your login, that is your name, email address and password.</li>
       <li><strong>If you are the only member of a site you created through the app's sign-up:</strong> that site as well, with its history of readings and its photos. Its GCUs are released, so they can be set up again by you or by a new owner.</li>
-      <li><strong>If your site has other members:</strong> the site and its records carry on for them. Only your login is removed.</li>
+      <li><strong>If your site has other members:</strong> the site and its records carry on for them. Only your login is removed, and your email address comes off the site's alert emails.</li>
+      <li><strong>Our security log:</strong> your name, email address and IP address are removed from it. The record of what happened, and when, stays.</li>
     </ul>
     <p>You can also email <a href="mailto:support@legacywestventures.com">support@legacywestventures.com</a> and ask us to delete your account. A GCU Manager login is removed by the site's administrator, or by us on request.</p>
     <p>To clear a GCU itself, use Factory reset in the app (<span class="path">Settings → This GCU</span>). It erases the GCU's WiFi details, cloud login and settings. To clear your phone, delete the app.</p>
