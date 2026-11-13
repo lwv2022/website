@@ -73,14 +73,14 @@
   .ds-links a { font-size: 13px; font-weight: 700; color: #0072a3; text-decoration: none; border: 1px solid #bae6fd; background: #f0f9ff; border-radius: 999px; padding: 6px 12px; }
   .ds-links a:hover { background: #e0f2fe; }
   .ds-head { margin: 48px 0 6px; font-size: 22px; color: #0f172a; scroll-margin-top: 90px; }
-  .ds-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; margin-top: 20px; }
+  .ds-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 14px; margin-top: 20px; }
   .ds-card { display: flex; flex-direction: column; text-decoration: none; color: inherit; }
   .ds-card img { width: 100%; height: auto; border: 1px solid var(--border); border-radius: 8px; box-shadow: 0 8px 24px rgba(2,6,23,.08); background: #fff; }
   .ds-card:hover img { border-color: #22b9e8; }
   .ds-name { font-weight: 700; font-size: 14px; color: #0f172a; margin-top: 10px; }
   .ds-meta { font-size: 12px; color: var(--muted); margin-top: 2px; }
   .ds-get { font-size: 12px; font-weight: 700; color: #0072a3; margin-top: 4px; }
-  @media (max-width: 1000px) { .ds-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 1000px) { .ds-grid { grid-template-columns: repeat(4, 1fr); } }
   @media (max-width: 560px) { .ds-grid { grid-template-columns: repeat(2, 1fr); } }
   .badge.new { background: #ccfbf1; color: #0f766e; }
   .badge.soon { background: #fef3c7; color: #92400e; }
@@ -238,26 +238,18 @@
         </div>
 
         <div class="product-card">
-          <div class="img">
-            <svg width="200" height="150" viewBox="0 0 200 150" role="img" aria-label="DIN-rail I/O module with four switched contacts and two 0-10 V channels">
-              <rect x="10" y="20" width="180" height="110" rx="10" fill="#334155"/>
-              <rect x="22" y="32" width="156" height="60" rx="6" fill="#1e293b"/>
-              <g fill="#14b8a6"><rect x="32" y="42" width="26" height="40" rx="3"/><rect x="66" y="42" width="26" height="40" rx="3"/><rect x="100" y="42" width="26" height="40" rx="3"/><rect x="134" y="42" width="26" height="40" rx="3"/></g>
-              <g fill="#22b9e8"><circle cx="40" cy="110" r="5"/><circle cx="60" cy="110" r="5"/></g>
-              <g fill="#94a3b8"><rect x="80" y="104" width="12" height="12" rx="2"/><rect x="98" y="104" width="12" height="12" rx="2"/><rect x="116" y="104" width="12" height="12" rx="2"/><rect x="134" y="104" width="12" height="12" rx="2"/><rect x="152" y="104" width="12" height="12" rx="2"/></g>
-              <rect x="0" y="136" width="200" height="8" rx="2" fill="#cbd5e1"/>
-            </svg>
-          </div>
+          <div class="img photo"><img src="../images/products/io-4r2d.webp" alt="LWV-IO-4R2D I/O module in its DIN-rail case with lever terminals at both ends" width="800" height="600" loading="lazy"></div>
           <h4>LWV-IO-4R2D <span class="badge soon">Coming soon</span></h4>
           <div class="model">GCU I/O MODULE</div>
           <ul class="features">
-            <li>Four solid-state dry contacts for low-voltage control circuits, up to 60 V AC or DC and 2 A: contactor coils for fans, pumps and dehumidifiers, CO<sub>2</sub> valves and equipment control inputs</li>
+            <li>Four solid-state dry contacts for 24 V AC or DC control circuits, 2 A each: contactor coils for fans, pumps and dehumidifiers, CO<sub>2</sub> valves and equipment control inputs</li>
             <li>A wiring check on every contact, so an open wire or a blown fuse shows up before the load is needed</li>
             <li>Two 0-10 V outputs for dimming, valves or fan speed, sink or source, set in software, with the line read back</li>
             <li>Comms watchdog with a safe state per channel if the bus goes quiet</li>
             <li>35 mm DIN-rail module with lever terminals, 24 VDC, firmware updates over RS-485</li>
           </ul>
           <div class="use-case">→ Switch it. Dim it. One DIN-rail module per room</div>
+          <div class="ds-links"><a href="../datasheets/LWV-IO-4R2D-RevC-Datasheet.pdf">LWV-IO-4R2D datasheet (PDF)</a></div>
         </div>
 
         <div class="product-card">
@@ -336,6 +328,12 @@
           <img src="../images/datasheets/gcu-v5.webp" alt="First page of the LWV GCU V5 datasheet" width="612" height="792" loading="lazy">
           <span class="ds-name">LWV GCU V5</span>
           <span class="ds-meta">Greenhouse control unit · Rev B</span>
+          <span class="ds-get">Download PDF</span>
+        </a>
+        <a class="ds-card" href="../datasheets/LWV-IO-4R2D-RevC-Datasheet.pdf">
+          <img src="../images/datasheets/io-4r2d.webp" alt="First page of the LWV-IO-4R2D datasheet" width="612" height="792" loading="lazy">
+          <span class="ds-name">LWV-IO-4R2D</span>
+          <span class="ds-meta">GCU I/O module · Rev C</span>
           <span class="ds-get">Download PDF</span>
         </a>
         <a class="ds-card" href="../datasheets/LWV-IR-BLASTER-RevC-Datasheet.pdf">
