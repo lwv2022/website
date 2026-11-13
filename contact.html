@@ -67,14 +67,16 @@
       </div>
     </div>
 
-    <!-- Option A: Formspree (replace YOUR_FORM_ID) -->
-    <form class="form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+    <!-- No form backend yet: on submit the script below opens the visitor's email app with the message
+         addressed to sales@ and filled in. Swap in a real endpoint (action + method="POST") when one exists. -->
+    <form class="form" id="contact-form" action="mailto:sales@legacywestventures.com" method="get">
       <input name="name" placeholder="Your name" required>
       <input name="company" placeholder="Company" required>
       <input name="email" type="email" placeholder="Email" required>
       <input name="phone" placeholder="Phone">
       <textarea name="needs" rows="5" placeholder="Project needs (sites, devices, timelines)"></textarea>
       <button class="btn" type="submit">Send</button>
+      <p class="notice" style="margin:0">Send opens your email app with this message addressed to us.</p>
     </form>
 
     <p class="notice">Prefer email? Write us at <a href="mailto:sales@legacywestventures.com">sales@legacywestventures.com</a>.</p>
@@ -94,5 +96,21 @@
   </div>
 </footer>
 <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
+<script>
+(function () {
+  var f = document.getElementById('contact-form');
+  if (!f) return;
+  f.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!f.reportValidity()) return;
+    var v = function (n) { return (f.elements[n].value || '').trim(); };
+    var subject = 'Project inquiry from ' + v('name') + (v('company') ? ' (' + v('company') + ')' : '');
+    var body = 'Name: ' + v('name') + '\nCompany: ' + v('company') + '\nEmail: ' + v('email') +
+      '\nPhone: ' + v('phone') + '\n\nProject needs:\n' + v('needs') + '\n';
+    window.location.href = 'mailto:sales@legacywestventures.com?subject=' +
+      encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  });
+})();
+</script>
 </body>
 </html>

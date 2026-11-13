@@ -98,7 +98,7 @@ Homepage includes JSON-LD for organization schema. Add to new pages if needed:
 
 ## Documentation & Reference Files
 - `docs/brand-guidelines.html` — Standalone brand guide (self-contained CSS, print-ready)
-- `docs/teltonika/` — Product spec sheets (RUT241, RUT956 routers)
+- Customer documents and vendor sheets live in `../website-private`, never in this repo
 - `IoT-Connectivity-Services.md`, `Milesight*.md` — Pricing/product reference (not published)
 
 ## Content Guidelines
@@ -106,11 +106,16 @@ Homepage includes JSON-LD for organization schema. Add to new pages if needed:
 - **CTAs**: "Get Started", "Talk to an expert", "Explore Services"
 - **Email addresses**: sales@, support@, consulting@legacywestventures.com
 
-## Formspree Contact Form
-`contact.html` uses Formspree. Replace `YOUR_FORM_ID` with actual ID when deploying:
-```html
-<form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-```
+## Contact Form
+`contact.html` has no form backend: a small script under the form opens the visitor's email app with the
+message addressed to sales@. To use a form service instead, set the form's `action` and `method="POST"`
+and delete that script.
+
+## House rules
+- No prices anywhere on the site; plans and hardware are quoted per site.
+- Products not yet built are shown with a "Coming soon" badge, with no tested-spec claims.
+- The phone app is called **LWV-GCU**.
+- Customer documents live in `../website-private`, never in this public repo.
 
 ## Deployment
 ```bash

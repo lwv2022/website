@@ -66,6 +66,10 @@
   .product-card .use-case { font-size: 13px; color: #0f172a; font-weight: 600; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
   .render-note { font-size: 12px; color: var(--muted); margin-top: 8px; }
   .badge.new { background: #ccfbf1; color: #0f766e; }
+  .badge.soon { background: #fef3c7; color: #92400e; }
+  .app-note { margin-top: 28px; padding: 20px 24px; border: 1px solid var(--border); border-left: 4px solid #14b8a6; border-radius: 12px; background: #fff; }
+  .app-note h3 { margin: 0 0 6px; font-size: 18px; }
+  .app-note p { margin: 0; }
 
   .photo-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); }
   .photo-card img { width: 100%; height: 200px; object-fit: cover; display: block; }
@@ -112,13 +116,13 @@
     <div class="container">
       <span class="kicker">Two Ways to Run It</span>
       <h2 class="h2">Same Platform. On Site or in the Cloud.</h2>
-      <p class="muted" style="max-width:720px">Both products talk to the same GCUs, run the same grow programs and send the same alerts. The difference is where the software lives and who looks after it.</p>
+      <p class="muted" style="max-width:720px">Both give your team grow programs, alerts, crop records and AI review. The difference is where the software lives and who looks after it.</p>
 
       <div class="spotlight">
         <div class="spot manager">
           <span class="kicker">On-Site Solution</span>
           <h3>GCU Manager</h3>
-          <p class="tag">A server at your facility. Your data never leaves the building.</p>
+          <p class="tag">A server at your facility. Your records live on site, and it keeps working with no internet.</p>
           <ul>
             <li>Runs on a compact appliance on your own network, with or without internet</li>
             <li>Built for large fleets: proven on a 76-room cultivation facility</li>
@@ -157,6 +161,11 @@
           <tr><td>Integrator API</td><td>Yes, with self-documenting reference</td><td>On request</td></tr>
         </tbody>
       </table>
+
+      <div class="app-note">
+        <h3>LWV-GCU app <span class="badge soon">Coming soon</span></h3>
+        <p class="muted">Set up a GCU from your phone over Bluetooth, using the PIN printed on its label, and run the room on site even where there is no signal. The same app opens your rooms in GCU Cloud and on GCU Manager sites.</p>
+      </div>
     </div>
   </section>
 
@@ -193,7 +202,7 @@
 
       <div class="product-grid">
         <div class="product-card">
-          <div class="img"><img src="../images/products/gcu-controller.png" alt="GCU controller in its sealed enclosure with clear lid"></div>
+          <div class="img"><img src="../images/products/gcu-controller.png" alt="GCU controller in its sealed enclosure"></div>
           <h4>GCU</h4>
           <div class="model">GREENHOUSE CONTROL UNIT</div>
           <ul class="features">
@@ -202,16 +211,17 @@
             <li>Two 0-10 V dimming outputs for grow lights</li>
             <li>On-board alarm flasher and sounder</li>
             <li>Battery-backed clock, 24 VDC, single sealed M12 connection</li>
-            <li>Sealed enclosure with clear lid for high-humidity rooms</li>
-            <li>Local web page on site, Wi-Fi or wired network to the software</li>
+            <li>Sealed enclosure built for high-humidity rooms</li>
+            <li>Wi-Fi to GCU Manager or GCU Cloud, with firmware updates over the air</li>
+            <li>Set up on site from the LWV-GCU app over Bluetooth (coming soon)</li>
           </ul>
           <div class="use-case">→ One per room, pod or container</div>
-          <div class="render-note">Engineering render of the current enclosure.</div>
+          <div class="render-note">Engineering render. Product photos and datasheet coming soon.</div>
         </div>
 
         <div class="product-card">
           <div class="img">
-            <svg width="200" height="150" viewBox="0 0 200 150" role="img" aria-label="DIN-rail I/O module with four relays and two dimming channels">
+            <svg width="200" height="150" viewBox="0 0 200 150" role="img" aria-label="DIN-rail I/O module with four switched contacts and two 0-10 V channels">
               <rect x="10" y="20" width="180" height="110" rx="10" fill="#334155"/>
               <rect x="22" y="32" width="156" height="60" rx="6" fill="#1e293b"/>
               <g fill="#14b8a6"><rect x="32" y="42" width="26" height="40" rx="3"/><rect x="66" y="42" width="26" height="40" rx="3"/><rect x="100" y="42" width="26" height="40" rx="3"/><rect x="134" y="42" width="26" height="40" rx="3"/></g>
@@ -220,14 +230,14 @@
               <rect x="0" y="136" width="200" height="8" rx="2" fill="#cbd5e1"/>
             </svg>
           </div>
-          <h4>LWV-IO-4R2D <span class="badge new">New</span></h4>
+          <h4>LWV-IO-4R2D <span class="badge soon">Coming soon</span></h4>
           <div class="model">GCU I/O MODULE</div>
           <ul class="features">
-            <li>Four 10 A relays for fans, pumps, CO<sub>2</sub> valves and dehumidifiers</li>
-            <li>Two 0-10 V dimming outputs, sink or source, set in software</li>
+            <li>Four solid-state dry contacts for low-voltage control circuits, up to 60 V AC or DC and 2 A: contactor coils for fans, pumps and dehumidifiers, CO<sub>2</sub> valves and equipment control inputs</li>
+            <li>A wiring check on every contact, so an open wire or a blown fuse shows up before the load is needed</li>
+            <li>Two 0-10 V outputs for dimming, valves or fan speed, sink or source, set in software, with the line read back</li>
             <li>Comms watchdog with a safe state per channel if the bus goes quiet</li>
-            <li>Supply voltage, relay cycle counts and bus errors reported to the GCU</li>
-            <li>35 mm DIN-rail module, 24 VDC, firmware updates over RS-485</li>
+            <li>35 mm DIN-rail module with lever terminals, 24 VDC, firmware updates over RS-485</li>
           </ul>
           <div class="use-case">→ Switch it. Dim it. One DIN-rail module per room</div>
         </div>
@@ -240,7 +250,7 @@
             <li>Lets the GCU set power, mode, temperature and fan on a mini-split</li>
             <li>Carrier, Samsung and Midea protocols built in</li>
             <li>Wired to the GCU bus: no Wi-Fi, no cloud account on the unit</li>
-            <li>Built-in light and temperature sensors for a second reading at the head</li>
+            <li>Built-in light sensing (lights on or off) and a backup temperature reading</li>
             <li>Firmware updates over the same cable</li>
           </ul>
           <div class="use-case">→ One per mini-split head, usually two per container</div>
@@ -269,6 +279,55 @@
           </ul>
           <div class="use-case">→ Specified per room during design</div>
         </div>
+
+        <div class="product-card">
+          <div class="img">
+            <svg width="200" height="150" viewBox="0 0 200 150" role="img" aria-label="Canopy sensor hanging on its cable above plants">
+              <path d="M100 0 V38" stroke="#334155" stroke-width="5"/>
+              <rect x="88" y="34" width="24" height="12" rx="3" fill="#64748b"/>
+              <rect x="40" y="46" width="120" height="40" rx="14" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+              <circle cx="70" cy="66" r="8" fill="#14b8a6"/>
+              <g fill="#cbd5e1"><rect x="92" y="60" width="44" height="4" rx="2"/><rect x="92" y="68" width="32" height="4" rx="2"/></g>
+              <g fill="#22c55e"><path d="M30 140 C40 110 60 110 70 140 Z"/><path d="M75 140 C88 105 112 105 125 140 Z"/><path d="M130 140 C140 110 160 110 170 140 Z"/></g>
+            </svg>
+          </div>
+          <h4>LWV-CS-1 <span class="badge soon">Coming soon</span></h4>
+          <div class="model">CANOPY SENSOR</div>
+          <ul class="features">
+            <li>Hangs just above the canopy on one sealed M12 cable</li>
+            <li>CO<sub>2</sub>, air temperature and humidity, leaf temperature, air quality and pressure in one unit</li>
+            <li>Air and leaf VPD and dew point worked out on the sensor</li>
+            <li>Sees the lights go on and off, and any light leaking in during the dark period</li>
+            <li>Made to be washed down: wash mode, wet detection and self dry-out</li>
+          </ul>
+          <div class="use-case">→ One per room or pod, on the GCU bus</div>
+          <div class="render-note">Specifications are preliminary until the first units are tested.</div>
+        </div>
+
+        <div class="product-card">
+          <div class="img">
+            <svg width="200" height="150" viewBox="0 0 200 150" role="img" aria-label="Fertigation controller and pump modules on a wall">
+              <rect x="8" y="30" width="56" height="80" rx="8" fill="#1e293b"/>
+              <rect x="72" y="30" width="56" height="80" rx="8" fill="#1e293b"/>
+              <rect x="136" y="30" width="56" height="80" rx="8" fill="#1e293b"/>
+              <g fill="#475569"><rect x="16" y="40" width="40" height="28" rx="4"/><rect x="80" y="40" width="40" height="28" rx="4"/><rect x="144" y="40" width="40" height="28" rx="4"/></g>
+              <g fill="#14b8a6"><circle cx="24" cy="84" r="4"/><circle cx="36" cy="84" r="4"/><circle cx="88" cy="84" r="4"/><circle cx="100" cy="84" r="4"/><circle cx="112" cy="84" r="4"/><circle cx="152" cy="84" r="4"/><circle cx="164" cy="84" r="4"/><circle cx="176" cy="84" r="4"/></g>
+              <circle cx="48" cy="84" r="5" fill="#ef4444"/>
+              <g stroke="#94a3b8" stroke-width="4"><path d="M24 110 V132"/><path d="M40 110 V132"/><path d="M88 110 V132"/><path d="M104 110 V132"/><path d="M152 110 V132"/><path d="M168 110 V132"/></g>
+            </svg>
+          </div>
+          <h4>FIO Fertigation <span class="badge soon">Coming soon</span></h4>
+          <div class="model">FIO-C · FIO-P4 · FIO-WQ</div>
+          <ul class="features">
+            <li>FIO-C controller paces nutrient dosing to the flow meter and the recipe, and keeps dosing with no network</li>
+            <li>FIO-P4 pump modules run four dosing pumps each, up to sixteen pumps on one controller</li>
+            <li>FIO-WQ water-quality module reads pH and EC</li>
+            <li>STOP button and stop-loop input that cut the pumps in hardware</li>
+            <li>Sealed wall-mount boxes with every plug on the bottom edge, set up from the LWV-GCU app</li>
+          </ul>
+          <div class="use-case">→ Start with one controller, add modules as you grow</div>
+          <div class="render-note">Specifications are preliminary until the first units are tested.</div>
+        </div>
       </div>
     </div>
   </section>
@@ -286,7 +345,7 @@
         <div class="photo-card">
           <img src="../images/grow/rack-seedlings.jpg" alt="Indoor grow rack with seedlings under white LED lighting" loading="lazy">
           <div class="body"><h3>Container farm fleets</h3>
-          <p class="muted" style="margin:0">GCU Cloud watching containers across several sites, with mini-splits driven by RS485 IR blasters and alerts to the grower's phone.</p></div>
+          <p class="muted" style="margin:0">GCU Cloud watching containers across several sites, with mini-splits driven by RS485 IR blasters and email alerts to the grower.</p></div>
         </div>
         <div class="photo-card">
           <img src="../images/grow/greenhouse-lettuce.jpg" alt="Greenhouse with long rows of lettuce" loading="lazy">
@@ -294,6 +353,7 @@
           <p class="muted" style="margin:0">Rooms that need tight day and night targets, VPD control and an audit trail of who changed what, and when.</p></div>
         </div>
       </div>
+      <p class="render-note">Photos are illustrative.</p>
     </div>
   </section>
 

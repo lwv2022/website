@@ -119,7 +119,7 @@
             <li><span class="check">✓</span> <strong>GCU</strong> runs lights, climate, CO<sub>2</sub> and irrigation on its own, online or not</li>
             <li><span class="check">✓</span> <strong>Wired sensors</strong> for CO<sub>2</sub>, temperature, humidity, light and leaf wetness, with a backup on the critical readings</li>
             <li><span class="check">✓</span> <strong>Mini-split HVAC</strong> driven directly by RS485 IR blasters, one per head</li>
-            <li><span class="check">✓</span> <strong>LWV-IO-4R2D</strong> switches fans, pumps, valves and dehumidifiers and dims the lights</li>
+            <li><span class="check">✓</span> <strong>LWV-IO-4R2D</strong> switches fans, pumps, valves and dehumidifiers (through contactors for mains loads) and dims the lights</li>
             <li><span class="check">✓</span> <strong>Alarm flasher and sounder</strong> on the container when a room needs a person</li>
             <li><span class="check">✓</span> <strong>Managed LTE gateway</strong> so the container is online wherever it is parked</li>
             <li><span class="check">✓</span> <strong>GCU Cloud or GCU Manager</strong> to watch, adjust and keep records</li>
@@ -129,12 +129,12 @@
           <div class="box" aria-label="Diagram of the systems inside a smart container">
             <div class="title"><span>Inside the container</span><span class="pill">One RS-485 bus</span></div>
             <div class="parts">
-              <div class="part gcu"><b>GCU · Greenhouse Control Unit</b><span>Schedules, sensor rules, grow program, alarms, local web page</span></div>
+              <div class="part gcu"><b>GCU · Greenhouse Control Unit</b><span>Schedules, sensor rules, grow program, alarms</span></div>
               <div class="part"><b>Climate sensors</b><span>CO₂ · temp · RH · primary + backup</span></div>
               <div class="part"><b>Light &amp; leaf sensors</b><span>Lux · leaf wetness · lights-on check</span></div>
               <div class="part"><b>RS485 IR blasters</b><span>Front and back mini-split heads</span></div>
-              <div class="part"><b>LWV-IO-4R2D</b><span>4 relays · 2 dimming channels</span></div>
-              <div class="part"><b>Alarm outputs</b><span>Flasher bar · sounder</span></div>
+              <div class="part"><b>LWV-IO-4R2D</b><span>4 switched contacts · 2 dimming channels</span></div>
+              <div class="part"><b>Alarm outputs</b><span>Flasher · sounder</span></div>
               <div class="part"><b>LTE gateway</b><span>Managed cellular, static IP option</span></div>
             </div>
             <div class="link">↑ Reports to GCU Cloud or GCU Manager · AI review every night</div>

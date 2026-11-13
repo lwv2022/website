@@ -153,7 +153,7 @@ footer .logo { height: 28px }
   <div class="hero">
     <span class="kicker">LWV fertigation solution</span>
     <h1>FIO-8 fertigation board</h1>
-    <p class="lead">The FIO-8 drives up to eight nutrient dosing pumps from one flow meter. Ten times a second it turns the recipe into a speed for every pump. Each pump output is electrically isolated, and the board stops dosing on its own the moment a reading or a wire looks wrong. It connects to GCU Cloud over Wi-Fi on its own, can report to an on-site GCU Manager, and is set up and run from the GCU Setup app over Bluetooth. Its RS-485 port reads and powers the water-quality probes. It comes in a sealed wall-mount box: every pump, sensor and input plugs in on a standard M12 connector, so there are no terminals to wire and no cabinet to build.</p>
+    <p class="lead">The FIO-8 drives up to eight nutrient dosing pumps from one flow meter. Ten times a second it turns the recipe into a speed for every pump. Each pump output is electrically isolated, and the board stops dosing on its own the moment a reading or a wire looks wrong. It connects to GCU Cloud over Wi-Fi on its own, can report to an on-site GCU Manager, and is set up and run from the LWV-GCU app over Bluetooth. Its RS-485 port reads and powers the water-quality probes. It comes in a sealed wall-mount box: every pump, sensor and input plugs in on a standard M12 connector, so there are no terminals to wire and no cabinet to build.</p>
     <figure class="hero-fig">
       <img src="img/revc-fio8-closed.webp" width="1600" height="1313" alt="Render of the FIO-8 in its sealed black wall-mount box with a clear cover: rows of M12 connectors on the walls, the circuit board visible through the cover">
       <figcaption>Rev C, rendered from the design. Pump ports on the front wall, sensor and input ports on the back, power, sensor bus, E-stop and the contactor and flush ports together on one end. The board and its lights show through the clear window in the cover.</figcaption>
@@ -174,11 +174,11 @@ footer .logo { height: 28px }
     <header><span class="kicker">Where it sits</span><h2>One networked board between the water line and the pumps</h2></header>
     <div class="cols">
       <p class="prose">The FIO-8 runs a feed on its own. It counts the flow meter, sets each pump, watches every interlock and reads its own water-quality probes. The recipe, calibration and limits live on the board, so a network outage does not interrupt a feed.</p>
-      <p class="prose">It reports to GCU Cloud over Wi-Fi, and an on-site GCU Manager can supervise it over the local network. The GCU Setup app sets it up and runs it over Bluetooth, just as it does a GCU. pH and EC probes plug into the board's RS-485 port, which also powers them, so water quality and dosing land side by side in GCU Cloud. The board also switches the contactor that powers the pumps, which gives every pump a second, independent way to stop.</p>
+      <p class="prose">It reports to GCU Cloud over Wi-Fi, and an on-site GCU Manager can supervise it over the local network. The LWV-GCU app sets it up and runs it over Bluetooth, just as it does a GCU. pH and EC probes plug into the board's RS-485 port, which also powers them, so water quality and dosing land side by side in GCU Cloud. The board also switches the contactor that powers the pumps, which gives every pump a second, independent way to stop.</p>
     </div>
     <figure class="diagram">
       <div class="scroll">
-      <svg viewBox="0 0 1000 600" role="img" aria-label="System diagram: the FIO-8 board connects to GCU Cloud over Wi-Fi, to an on-site GCU Manager over the local network, and to the GCU Setup phone app over Bluetooth. Its RS-485 port reads and powers pH and EC probes in the water line. It sends eight isolated 4-20 mA signals to eight dosing pumps, switches the pump-power contactor with K1 and the flush valve with K2, and reads tank floats, valve contacts, pressure and tank level. A flow meter on the water line sends pulses to the FIO-8, and the pumps dose nutrient into the same line on its way to the rooms.">
+      <svg viewBox="0 0 1000 600" role="img" aria-label="System diagram: the FIO-8 board connects to GCU Cloud over Wi-Fi, to an on-site GCU Manager over the local network, and to the LWV-GCU phone app over Bluetooth. Its RS-485 port reads and powers pH and EC probes in the water line. It sends eight isolated 4-20 mA signals to eight dosing pumps, switches the pump-power contactor with K1 and the flush valve with K2, and reads tank floats, valve contacts, pressure and tank level. A flow meter on the water line sends pulses to the FIO-8, and the pumps dose nutrient into the same line on its way to the rooms.">
         <defs>
           <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker>
           <marker id="arc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--cyan)"/></marker>
@@ -191,7 +191,7 @@ footer .logo { height: 28px }
         <text class="t-b" x="150" y="119" text-anchor="middle">GCU Manager</text>
         <text class="t-s" x="150" y="140" text-anchor="middle">on-site supervisor</text>
         <rect class="box" x="40" y="168" width="220" height="56" rx="12"/>
-        <text class="t-b" x="150" y="191" text-anchor="middle">GCU Setup app</text>
+        <text class="t-b" x="150" y="191" text-anchor="middle">LWV-GCU app</text>
         <text class="t-s" x="150" y="212" text-anchor="middle">set up and run from a phone</text>
         <polyline class="ln" points="260,52 364,52 364,160 378,160" fill="none" marker-start="url(#ar)" marker-end="url(#ar)"/>
         <text class="t-s" x="268" y="44">Wi-Fi</text>
@@ -262,7 +262,7 @@ footer .logo { height: 28px }
         <text class="t-s" x="460" y="410" text-anchor="end">pulses</text>
       </svg>
       </div>
-      <figcaption>The FIO-8 does the fast, safety-critical work next to the pumps and reads its own probes. GCU Cloud, the GCU Manager and the GCU Setup app are where people see it and change it.</figcaption>
+      <figcaption>The FIO-8 does the fast, safety-critical work next to the pumps and reads its own probes. GCU Cloud, the GCU Manager and the LWV-GCU app are where people see it and change it.</figcaption>
     </figure>
   </section>
 
@@ -435,7 +435,7 @@ footer .logo { height: 28px }
           <li>The recipe for each pump, in ml per gallon.</li>
           <li>Each pump's capacity from its cup test, and the flow and time limits.</li>
           <li>Dosing on or off, where the valve signal comes from, and the probes on the sensor port.</li>
-          <li>From the GCU Setup app on site, from GCU Cloud anywhere, or from the GCU Manager on the site network.</li>
+          <li>From the LWV-GCU app on site, from GCU Cloud anywhere, or from the GCU Manager on the site network.</li>
         </ul>
       </div>
       <div class="prose" style="display:grid;gap:10px">
@@ -448,13 +448,13 @@ footer .logo { height: 28px }
         </ul>
       </div>
     </div>
-    <div class="note prose"><b>When the network drops</b><span>The recipe, calibration and limits live in the board's own memory, so a feed carries on through a Wi-Fi or internet outage and the records catch up when it reconnects. On site, the GCU Setup app reaches the board over Bluetooth with no network at all. Firmware updates come over Wi-Fi from GCU Cloud.</span></div>
+    <div class="note prose"><b>When the network drops</b><span>The recipe, calibration and limits live in the board's own memory, so a feed carries on through a Wi-Fi or internet outage and the records catch up when it reconnects. On site, the LWV-GCU app reaches the board over Bluetooth with no network at all. Firmware updates come over Wi-Fi from GCU Cloud.</span></div>
   </section>
 
   <!-- 6b -->
   <section id="onboard">
     <header><span class="kicker">At the box</span><h2>A light for every pump, and a buzzer</h2></header>
-    <p class="prose">The board shows what it is doing through the clear cover. Each pump channel has a red/green light, six status lights show the bus, faults, run, flush and both flow meters, and a buzzer calls attention to anything that needs a person. Identify, pairing and silencing are done from the GCU Setup app, so the box has no button and no opening to seal. A real-time clock with its own coin cell keeps every log record correctly time-stamped through a power or network outage.</p>
+    <p class="prose">The board shows what it is doing through the clear cover. Each pump channel has a red/green light, six status lights show the bus, faults, run, flush and both flow meters, and a buzzer calls attention to anything that needs a person. Identify, pairing and silencing are done from the LWV-GCU app, so the box has no button and no opening to seal. A real-time clock with its own coin cell keeps every log record correctly time-stamped through a power or network outage.</p>
     <table class="tbl">
       <thead><tr><th>Signal</th><th>Meaning</th></tr></thead>
       <tbody>
@@ -477,7 +477,7 @@ footer .logo { height: 28px }
         <tr><td>Sensor inputs</td><td>2 × 4–20 mA, loop powered, 0.1 % precision shunt, 16-bit converter.</td></tr>
         <tr><td>Contact inputs</td><td>8 dry contacts, 24 V wetting, optocoupled.</td></tr>
         <tr><td>Contacts out</td><td>2 solid-state contacts, 60 V, 2 A, AC or DC, each fused, with contact feedback. K1 is held by the hardware watchdog.</td></tr>
-        <tr><td>Network</td><td>Wi-Fi to GCU Cloud and the GCU Manager; Bluetooth LE for the GCU Setup app. Firmware updates over Wi-Fi.</td></tr>
+        <tr><td>Network</td><td>Wi-Fi to GCU Cloud and the GCU Manager; Bluetooth LE for the LWV-GCU app. Firmware updates over Wi-Fi.</td></tr>
         <tr><td>Sensor port</td><td>RS-485, Modbus RTU master, 24 V sensor supply on its own 0.5 A fuse, 120 Ω termination switched from the app.</td></tr>
         <tr><td>Emergency stop</td><td>Port for a normally closed stop loop, optocoupled; opening it drops every output and the contactor in hardware.</td></tr>
         <tr><td>Indicators</td><td>A buzzer, a red/green light per pump channel and six status lights, visible through the cover.</td></tr>
