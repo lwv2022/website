@@ -35,22 +35,20 @@
   .stat-number { font-size: 40px; font-weight: 800; color: #bae6fd; }
   .stat-label { font-size: 14px; color: rgba(255,255,255,0.75); }
 
-  /* Illustrative phone card */
-  .phone { background: #0f172a; border-radius: 28px; padding: 14px; box-shadow: 0 24px 48px rgba(2,6,23,.35); max-width: 320px; margin: 0 auto; }
-  .screen { background: #fff; color: #0f172a; border-radius: 18px; padding: 16px; }
-  .screen .site { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
-  .screen .room { display: flex; justify-content: space-between; align-items: center; margin: 8px 0 12px; font-weight: 700; }
-  .screen .ok { font-size: 11px; font-weight: 700; color: #0369a1; background: #e0f2fe; padding: 3px 10px; border-radius: 999px; }
-  .screen .warn { font-size: 11px; font-weight: 700; color: #92400e; background: #fef3c7; padding: 3px 10px; border-radius: 999px; }
-  .screen .tiles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
-  .screen .tile { background: #f8fafc; border: 1px solid var(--border); border-radius: 10px; padding: 10px; }
-  .screen .tile .v { font-size: 20px; font-weight: 800; line-height: 1.1; }
-  .screen .tile .l { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
-  .screen .tile svg { width: 100%; height: 20px; margin-top: 6px; }
-  .screen .alert { margin-top: 12px; background: #fef3c7; border: 1px solid #fcd34d; border-radius: 10px; padding: 10px; font-size: 12px; color: #78350f; }
-  .screen .ctl { display: flex; gap: 6px; margin-top: 12px; }
-  .screen .ctl span { flex: 1; text-align: center; font-size: 12px; font-weight: 700; padding: 8px 0; border-radius: 8px; border: 1px solid var(--border); color: var(--muted); }
-  .screen .ctl span.on { background: #0284c7; color: #fff; border-color: #0284c7; }
+  /* Real app screens in a phone frame */
+  .device { background: #0f172a; border-radius: 42px; padding: 10px; box-shadow: 0 24px 48px rgba(2,6,23,.35); max-width: 300px; margin: 0 auto; }
+  .device img { display: block; width: 100%; height: auto; border-radius: 32px; }
+  .app-gallery .device img { border-radius: 28px; }
+  .app-section { padding: 64px 0; background: #e7edf4; }
+  .app-gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; margin-top: 36px; align-items: start; }
+  @media(max-width:1100px) { .app-gallery { grid-template-columns: repeat(2, 1fr); gap: 40px 28px; } }
+  @media(max-width:620px) { .app-gallery { grid-template-columns: 1fr; } }
+  .app-gallery figure { margin: 0; }
+  .app-gallery .device { max-width: 260px; padding: 8px; border-radius: 36px; box-shadow: 0 18px 36px rgba(15,23,42,.22); }
+  .app-gallery figcaption { margin: 18px auto 0; max-width: 300px; text-align: center; }
+  .app-gallery figcaption h3 { margin: 0 0 6px; font-size: 18px; }
+  .app-gallery figcaption p { margin: 0; color: var(--muted); font-size: 15px; }
+  .app-note { text-align: center; color: var(--muted); font-size: 13px; margin-top: 28px; }
   .mock-note { font-size: 12px; color: rgba(255,255,255,0.7); margin-top: 10px; text-align: center; }
 
   .solution-section { padding: 64px 0; }
@@ -110,28 +108,42 @@
         <p class="lead">Where you watch, adjust and keep records for your grow rooms. Your GCU runs each room on site. GCU Cloud connects to every one of them so you and your team can see what is happening, change how it runs and hear about problems, from a phone or a computer, wherever you are.</p>
         <p style="margin-top:28px"><a class="btn" href="../contact.html" style="background:#fff;color:#0c4a6e">Get Started</a> <a class="btn ghost" href="https://gcu.legacywestventures.com" rel="noopener">Sign in</a></p>
         <div class="stats-row">
-          <div class="stat"><div class="stat-number">0</div><div class="stat-label">Software to install</div></div>
+          <div class="stat"><div class="stat-number">0</div><div class="stat-label">Servers to run on site</div></div>
           <div class="stat"><div class="stat-number">5 yr</div><div class="stat-label">History kept for every room</div></div>
           <div class="stat"><div class="stat-number">24/7</div><div class="stat-label">Hosted, monitored and backed up</div></div>
         </div>
       </div>
       <div>
-        <div class="phone" aria-hidden="true">
-          <div class="screen">
-            <div class="site">North Farm · 6 rooms</div>
-            <div class="room"><span>Room 3 · Veg day 11</span><span class="warn">Check CO₂</span></div>
-            <div class="tiles">
-              <div class="tile"><div class="v">640</div><div class="l">CO₂ ppm</div><svg viewBox="0 0 100 20" preserveAspectRatio="none"><polyline fill="none" stroke="#f59e0b" stroke-width="2" points="0,6 20,7 40,6 55,12 70,15 85,16 100,17"/></svg></div>
-              <div class="tile"><div class="v">75°</div><div class="l">Temp</div><svg viewBox="0 0 100 20" preserveAspectRatio="none"><polyline fill="none" stroke="#0284c7" stroke-width="2" points="0,10 20,9 40,11 60,10 80,9 100,10"/></svg></div>
-              <div class="tile"><div class="v">64%</div><div class="l">RH</div><svg viewBox="0 0 100 20" preserveAspectRatio="none"><polyline fill="none" stroke="#0284c7" stroke-width="2" points="0,8 20,9 40,10 60,9 80,11 100,10"/></svg></div>
-              <div class="tile"><div class="v">0.98</div><div class="l">VPD</div><svg viewBox="0 0 100 20" preserveAspectRatio="none"><polyline fill="none" stroke="#0284c7" stroke-width="2" points="0,12 20,11 40,12 60,10 80,11 100,11"/></svg></div>
-            </div>
-            <div class="alert">CO₂ sensor stopped changing at 2:10 pm. Backup sensor reads 1,150 ppm.</div>
-            <div class="ctl"><span>Off</span><span>On</span><span class="on">Auto</span></div>
-          </div>
-        </div>
-        <div class="mock-note">Illustration of a room in GCU Cloud on a phone.</div>
+        <div class="device"><img src="../images/app/rooms.webp" width="720" height="1280" alt="The LWV-GCU app showing every room on a site: each card gives live CO2, temperature, humidity and VPD, the state of its outputs and a Healthy status"></div>
+        <div class="mock-note">A real screen from a GCU Cloud site in the LWV-GCU app. Site and room names changed.</div>
       </div>
+    </div>
+  </section>
+
+  <section class="app-section">
+    <div class="container">
+      <span class="kicker">On Your Phone</span>
+      <h2 class="h2">The Whole Room in Your Pocket</h2>
+      <p class="muted" style="max-width:720px">These are real screens from a GCU Cloud site, taken on a phone running the LWV-GCU app. The same views open in any web browser.</p>
+      <div class="app-gallery">
+        <figure>
+          <div class="device"><img src="../images/app/room.webp" width="720" height="1296" loading="lazy" alt="A room's overview in the LWV-GCU app: sensors reporting, live CO2, humidity, temperature and VPD with sparklines, the alarm state, and each light and relay with what is driving it"></div>
+          <figcaption><h3>Each Room in Detail</h3><p>Live readings with their trend, the alarm, and every output with what is driving it right now.</p></figcaption>
+        </figure>
+        <figure>
+          <div class="device"><img src="../images/app/sensors.webp" width="720" height="1296" loading="lazy" alt="The Sensors view: CO2, humidity, temperature and VPD over the last four hours, each with its range, every read good, and a Calibrate link"></div>
+          <figcaption><h3>Sensors You Can Trust</h3><p>Every reading with its last four hours, its range and whether each read was good, with calibration one tap away.</p></figcaption>
+        </figure>
+        <figure>
+          <div class="device"><img src="../images/app/trend.webp" width="720" height="1296" loading="lazy" alt="The Trend view: CO2, temperature and humidity over 24 hours on one chart, with the lights shaded where they were on"></div>
+          <figcaption><h3>Cause and Effect</h3><p>Sensors and equipment on one chart, so you can see the lights come on and the room respond.</p></figcaption>
+        </figure>
+        <figure>
+          <div class="device"><img src="../images/app/rules.webp" width="720" height="1296" loading="lazy" alt="The Links view for the lights: today's schedule as a timeline, the rule that is active now, its ramp times and when it changes next"></div>
+          <figcaption><h3>Rules You Can Read</h3><p>Each output shows the rule in charge, today's timeline, its sunrise ramp and when it changes next.</p></figcaption>
+        </figure>
+      </div>
+      <p class="app-note">The LWV-GCU app is coming soon. Site, room and network names in these screens are changed.</p>
     </div>
   </section>
 
