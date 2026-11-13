@@ -67,6 +67,21 @@
   .product-card .features li { margin-bottom: 6px; }
   .product-card .use-case { font-size: 13px; color: #0f172a; font-weight: 600; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
   .render-note { font-size: 12px; color: var(--muted); margin-top: 8px; }
+  .product-card .img.photo { padding: 0; overflow: hidden; background: #e4e7ec; }
+  .product-card .img.photo img { width: 100%; height: 200px; max-height: none; object-fit: cover; display: block; }
+  .ds-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .ds-links a { font-size: 13px; font-weight: 700; color: #0072a3; text-decoration: none; border: 1px solid #bae6fd; background: #f0f9ff; border-radius: 999px; padding: 6px 12px; }
+  .ds-links a:hover { background: #e0f2fe; }
+  .ds-head { margin: 48px 0 6px; font-size: 22px; color: #0f172a; scroll-margin-top: 90px; }
+  .ds-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; margin-top: 20px; }
+  .ds-card { display: flex; flex-direction: column; text-decoration: none; color: inherit; }
+  .ds-card img { width: 100%; height: auto; border: 1px solid var(--border); border-radius: 8px; box-shadow: 0 8px 24px rgba(2,6,23,.08); background: #fff; }
+  .ds-card:hover img { border-color: #22b9e8; }
+  .ds-name { font-weight: 700; font-size: 14px; color: #0f172a; margin-top: 10px; }
+  .ds-meta { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .ds-get { font-size: 12px; font-weight: 700; color: #0072a3; margin-top: 4px; }
+  @media (max-width: 1000px) { .ds-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 560px) { .ds-grid { grid-template-columns: repeat(2, 1fr); } }
   .badge.new { background: #ccfbf1; color: #0f766e; }
   .badge.soon { background: #fef3c7; color: #92400e; }
   .app-note { margin-top: 28px; padding: 20px 24px; border: 1px solid var(--border); border-left: 4px solid #14b8a6; border-radius: 12px; background: #fff; }
@@ -205,7 +220,7 @@
 
       <div class="product-grid">
         <div class="product-card">
-          <div class="img"><img src="../images/products/gcu-controller.png" alt="GCU controller in its sealed enclosure"></div>
+          <div class="img photo"><img src="../images/products/gcu-v5.webp" alt="LWV GCU V5 controller in its sealed case with one M12 connector" width="800" height="600" loading="lazy"></div>
           <h4>GCU</h4>
           <div class="model">GREENHOUSE CONTROL UNIT</div>
           <ul class="features">
@@ -219,7 +234,7 @@
             <li>Set up on site from the LWV-GCU app over Bluetooth (coming soon)</li>
           </ul>
           <div class="use-case">→ One per room, pod or container</div>
-          <div class="render-note">Engineering render. Product photos and datasheet coming soon.</div>
+          <div class="ds-links"><a href="../datasheets/LWV-GCU-V5-RevB-Datasheet.pdf">GCU V5 datasheet (PDF)</a></div>
         </div>
 
         <div class="product-card">
@@ -246,7 +261,7 @@
         </div>
 
         <div class="product-card">
-          <div class="img"><img src="../images/products/rs485-ir-blaster.png" alt="RS485 IR blaster in its sealed enclosure with clear lid"></div>
+          <div class="img photo"><img src="../images/products/ir-blaster.webp" alt="LWV RS485 IR blaster in its sealed case with a clear lid" width="800" height="600" loading="lazy"></div>
           <h4>RS485 IR Blaster</h4>
           <div class="model">MINI-SPLIT HVAC CONTROL</div>
           <ul class="features">
@@ -257,7 +272,7 @@
             <li>Firmware updates over the same cable</li>
           </ul>
           <div class="use-case">→ One per mini-split head, usually two per container</div>
-          <div class="render-note">Engineering render of the sealed enclosure.</div>
+          <div class="ds-links"><a href="../datasheets/LWV-IR-BLASTER-RevC-Datasheet.pdf">IR blaster datasheet (PDF)</a></div>
         </div>
 
         <div class="product-card">
@@ -284,16 +299,7 @@
         </div>
 
         <div class="product-card">
-          <div class="img">
-            <svg width="200" height="150" viewBox="0 0 200 150" role="img" aria-label="Canopy sensor hanging on its cable above plants">
-              <path d="M100 0 V38" stroke="#334155" stroke-width="5"/>
-              <rect x="88" y="34" width="24" height="12" rx="3" fill="#64748b"/>
-              <rect x="40" y="46" width="120" height="40" rx="14" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
-              <circle cx="70" cy="66" r="8" fill="#14b8a6"/>
-              <g fill="#cbd5e1"><rect x="92" y="60" width="44" height="4" rx="2"/><rect x="92" y="68" width="32" height="4" rx="2"/></g>
-              <g fill="#22c55e"><path d="M30 140 C40 110 60 110 70 140 Z"/><path d="M75 140 C88 105 112 105 125 140 Z"/><path d="M130 140 C140 110 160 110 170 140 Z"/></g>
-            </svg>
-          </div>
+          <div class="img photo"><img src="../images/products/cs-1.webp" alt="LWV CS-1 canopy sensor hanging on its M12 cable" width="800" height="600" loading="lazy"></div>
           <h4>LWV-CS-1 <span class="badge soon">Coming soon</span></h4>
           <div class="model">CANOPY SENSOR</div>
           <ul class="features">
@@ -304,21 +310,11 @@
             <li>Made to be washed down: wash mode, wet detection and self dry-out</li>
           </ul>
           <div class="use-case">→ One per room or pod, on the GCU bus</div>
-          <div class="render-note">Specifications are preliminary until the first units are tested.</div>
+          <div class="ds-links"><a href="../datasheets/LWV-CS-1-RevA-Datasheet.pdf">CS-1 datasheet (PDF)</a></div>
         </div>
 
         <div class="product-card">
-          <div class="img">
-            <svg width="200" height="150" viewBox="0 0 200 150" role="img" aria-label="Fertigation controller and pump modules on a wall">
-              <rect x="8" y="30" width="56" height="80" rx="8" fill="#1e293b"/>
-              <rect x="72" y="30" width="56" height="80" rx="8" fill="#1e293b"/>
-              <rect x="136" y="30" width="56" height="80" rx="8" fill="#1e293b"/>
-              <g fill="#475569"><rect x="16" y="40" width="40" height="28" rx="4"/><rect x="80" y="40" width="40" height="28" rx="4"/><rect x="144" y="40" width="40" height="28" rx="4"/></g>
-              <g fill="#14b8a6"><circle cx="24" cy="84" r="4"/><circle cx="36" cy="84" r="4"/><circle cx="88" cy="84" r="4"/><circle cx="100" cy="84" r="4"/><circle cx="112" cy="84" r="4"/><circle cx="152" cy="84" r="4"/><circle cx="164" cy="84" r="4"/><circle cx="176" cy="84" r="4"/></g>
-              <circle cx="48" cy="84" r="5" fill="#ef4444"/>
-              <g stroke="#94a3b8" stroke-width="4"><path d="M24 110 V132"/><path d="M40 110 V132"/><path d="M88 110 V132"/><path d="M104 110 V132"/><path d="M152 110 V132"/><path d="M168 110 V132"/></g>
-            </svg>
-          </div>
+          <div class="img photo"><img src="../images/products/fio-c.webp" alt="LWV FIO-C fertigation controller in its wall-mount box with a smoked lid" width="800" height="600" loading="lazy"></div>
           <h4>FIO Fertigation <span class="badge soon">Coming soon</span></h4>
           <div class="model">FIO-C · FIO-P4 · FIO-WQ</div>
           <ul class="features">
@@ -329,8 +325,49 @@
             <li>Sealed wall-mount boxes with every plug on the bottom edge, set up from the LWV-GCU app</li>
           </ul>
           <div class="use-case">→ Start with one controller, add modules as you grow</div>
-          <div class="render-note">Specifications are preliminary until the first units are tested.</div>
+          <div class="ds-links"><a href="../datasheets/LWV-FIO-C-RevA-Datasheet.pdf">FIO-C datasheet (PDF)</a><a href="../datasheets/LWV-FIO-P4-RevA-Datasheet.pdf">FIO-P4 (PDF)</a><a href="../datasheets/LWV-FIO-WQ-RevD-Datasheet.pdf">FIO-WQ (PDF)</a></div>
         </div>
+      </div>
+
+      <h3 id="datasheets" class="ds-head">Datasheets</h3>
+      <p class="muted" style="margin:0">Three pages each: what the product does, its specifications, connectors and dimensions. Product images are rendered from the design files.</p>
+      <div class="ds-grid">
+        <a class="ds-card" href="../datasheets/LWV-GCU-V5-RevB-Datasheet.pdf">
+          <img src="../images/datasheets/gcu-v5.webp" alt="First page of the LWV GCU V5 datasheet" width="612" height="792" loading="lazy">
+          <span class="ds-name">LWV GCU V5</span>
+          <span class="ds-meta">Greenhouse control unit · Rev B</span>
+          <span class="ds-get">Download PDF</span>
+        </a>
+        <a class="ds-card" href="../datasheets/LWV-IR-BLASTER-RevC-Datasheet.pdf">
+          <img src="../images/datasheets/ir-blaster.webp" alt="First page of the LWV IR Blaster (RS-485) datasheet" width="612" height="792" loading="lazy">
+          <span class="ds-name">LWV IR Blaster (RS-485)</span>
+          <span class="ds-meta">Mini-split HVAC control · Rev C</span>
+          <span class="ds-get">Download PDF</span>
+        </a>
+        <a class="ds-card" href="../datasheets/LWV-CS-1-RevA-Datasheet.pdf">
+          <img src="../images/datasheets/cs-1.webp" alt="First page of the LWV CS-1 datasheet" width="612" height="792" loading="lazy">
+          <span class="ds-name">LWV CS-1</span>
+          <span class="ds-meta">Canopy sensor · Rev A</span>
+          <span class="ds-get">Download PDF</span>
+        </a>
+        <a class="ds-card" href="../datasheets/LWV-FIO-C-RevA-Datasheet.pdf">
+          <img src="../images/datasheets/fio-c.webp" alt="First page of the LWV FIO-C datasheet" width="612" height="792" loading="lazy">
+          <span class="ds-name">LWV FIO-C</span>
+          <span class="ds-meta">Fertigation controller · Rev A</span>
+          <span class="ds-get">Download PDF</span>
+        </a>
+        <a class="ds-card" href="../datasheets/LWV-FIO-P4-RevA-Datasheet.pdf">
+          <img src="../images/datasheets/fio-p4.webp" alt="First page of the LWV FIO-P4 datasheet" width="612" height="792" loading="lazy">
+          <span class="ds-name">LWV FIO-P4</span>
+          <span class="ds-meta">4-pump module · Rev A</span>
+          <span class="ds-get">Download PDF</span>
+        </a>
+        <a class="ds-card" href="../datasheets/LWV-FIO-WQ-RevD-Datasheet.pdf">
+          <img src="../images/datasheets/fio-wq.webp" alt="First page of the LWV FIO-WQ datasheet" width="612" height="792" loading="lazy">
+          <span class="ds-name">LWV FIO-WQ</span>
+          <span class="ds-meta">Water-quality module · Rev D</span>
+          <span class="ds-get">Download PDF</span>
+        </a>
       </div>
     </div>
   </section>
