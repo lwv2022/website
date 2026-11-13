@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>GCU Cloud — Grow Room Monitoring and Control from Anywhere — Legacy West Ventures</title>
+<title>GCU Cloud — Every Grow Room, Every Reading, Every Reason — Legacy West Ventures</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="GCU Cloud connects to every Greenhouse Control Unit so you can watch, adjust and keep records for your grow rooms from a phone or computer. Grow programs, email alerts, crop photos and nightly AI Insights, hosted by Legacy West Ventures.">
+<meta name="description" content="GCU Cloud shows every grow room you run, live: the air, the equipment and the reason behind every change. Control from your phone with confirmation from the room, grow programs, crop records, alerts and nightly AI Insights. Built and hosted by Legacy West Ventures.">
 <link rel="canonical" href="https://www.legacywestventures.com/solutions/gcu-cloud.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Legacy West Ventures">
-<meta property="og:title" content="GCU Cloud — Grow Room Monitoring and Control from Anywhere">
-<meta property="og:description" content="Watch, adjust and keep records for your grow rooms from a phone or computer. Grow programs, email alerts, crop photos and nightly AI Insights.">
+<meta property="og:title" content="GCU Cloud — Every Grow Room, Every Reading, Every Reason">
+<meta property="og:description" content="See every grow room you run, live, with the reason behind every change. Control from your phone, confirmed by the room. Grow programs, crop records and nightly AI Insights.">
 <meta property="og:url" content="https://www.legacywestventures.com/solutions/gcu-cloud.html">
 <meta property="og:image" content="https://www.legacywestventures.com/images/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -25,6 +25,9 @@
   .hero-solution { background: linear-gradient(100deg, rgba(12,74,110,.95) 0%, rgba(3,105,161,.8) 55%, rgba(12,74,110,.55) 100%), url(../images/grow/lettuce-led-bar.jpg) center/cover no-repeat; color: #fff; padding: 88px 0; }
   .hero-solution .kicker { color: #bae6fd; }
   .hero-solution h1 { font-size: 48px; line-height: 1.1; margin: 0 0 20px; }
+  .hero-solution .tagline { font-size: 26px; font-weight: 800; line-height: 1.25; color: #bae6fd; margin: 0 0 18px; }
+  .hero-solution .tagline span { white-space: nowrap; }
+  @media(max-width:620px) { .hero-solution h1 { font-size: 40px; } .hero-solution .tagline { font-size: 24px; } }
   .hero-solution .lead { font-size: 20px; color: rgba(255,255,255,0.88); max-width: 640px; }
   .hero-solution .btn.ghost { color: #fff; border-color: rgba(255,255,255,0.4); }
   .hero-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: center; }
@@ -64,6 +67,11 @@
   .feature-card .icon { font-size: 24px; }
   .feature-card ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 14px; }
   .feature-card ul li { margin-bottom: 6px; }
+  .feature-card p { margin: 0; color: var(--muted); font-size: 15px; }
+  .why-lead { max-width: 720px; font-size: 18px; }
+  .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 32px; }
+  @media(max-width:900px) { .why-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media(max-width:620px) { .why-grid { grid-template-columns: 1fr; } }
   .callout { background: #fffbeb; border: 1px solid #fcd34d; border-radius: 16px; padding: 24px 28px; margin-top: 32px; }
   .callout h3 { margin: 0 0 8px; color: #92400e; }
   .callout p { margin: 0; color: #78350f; }
@@ -105,8 +113,9 @@
       <div>
         <span class="kicker">Cloud Solution · GCU Platform</span>
         <h1>GCU Cloud</h1>
-        <p class="lead">Where you watch, adjust and keep records for your grow rooms. Your GCU runs each room on site. GCU Cloud connects to every one of them so you and your team can see what is happening, change how it runs and hear about problems, from a phone or a computer, wherever you are.</p>
-        <p style="margin-top:28px"><a class="btn" href="../contact.html" style="background:#fff;color:#0c4a6e">Get Started</a> <a class="btn ghost" href="https://gcu.legacywestventures.com" rel="noopener">Sign in</a></p>
+        <p class="tagline"><span>Every room.</span> <span>Every reading.</span> <span>Every reason.</span></p>
+        <p class="lead">See every grow room you run, live, from wherever you are: what the air is doing, what each light, fan and dehumidifier is doing, and why. Change anything from your phone and the controller in the room confirms it within seconds. And if the internet drops, your rooms keep running, because the control never left the room.</p>
+        <p style="margin-top:28px"><a class="btn" href="../contact.html" style="background:#fff;color:#0c4a6e">See It on Your Rooms</a> <a class="btn ghost" href="https://gcu.legacywestventures.com" rel="noopener">Sign in</a></p>
         <div class="stats-row">
           <div class="stat"><div class="stat-number">0</div><div class="stat-label">Servers to run on site</div></div>
           <div class="stat"><div class="stat-number">5 yr</div><div class="stat-label">History kept for every room</div></div>
@@ -124,26 +133,60 @@
     <div class="container">
       <span class="kicker">On Your Phone</span>
       <h2 class="h2">The Whole Room in Your Pocket</h2>
-      <p class="muted" style="max-width:720px">These are real screens from a GCU Cloud site, taken on a phone running the LWV-GCU app. The same views open in any web browser.</p>
+      <p class="muted" style="max-width:720px">No mock-ups here. These are real screens from a working GCU Cloud site, taken on a phone running the LWV-GCU app. The same views open in any web browser.</p>
       <div class="app-gallery">
         <figure>
           <div class="device"><img src="../images/app/room.webp" width="720" height="1296" loading="lazy" alt="A room's overview in the LWV-GCU app: sensors reporting, live CO2, humidity, temperature and VPD with sparklines, the alarm state, and each light and relay with what is driving it"></div>
-          <figcaption><h3>Each Room in Detail</h3><p>Live readings with their trend, the alarm, and every output with what is driving it right now.</p></figcaption>
+          <figcaption><h3>Each Room, Explained</h3><p>Live readings with their trend, the alarm, and every output with what it is doing and what told it to.</p></figcaption>
         </figure>
         <figure>
           <div class="device"><img src="../images/app/sensors.webp" width="720" height="1296" loading="lazy" alt="The Sensors view: CO2, humidity, temperature and VPD over the last four hours, each with its range, every read good, and a Calibrate link"></div>
-          <figcaption><h3>Sensors You Can Trust</h3><p>Every reading with its last four hours, its range and whether each read was good, with calibration one tap away.</p></figcaption>
+          <figcaption><h3>Sensors You Can Trust</h3><p>Every reading with its last four hours, its range and whether each read was good. Calibration is one tap away.</p></figcaption>
         </figure>
         <figure>
           <div class="device"><img src="../images/app/trend.webp" width="720" height="1296" loading="lazy" alt="The Trend view: CO2, temperature and humidity over 24 hours on one chart, with the lights shaded where they were on"></div>
-          <figcaption><h3>Cause and Effect</h3><p>Sensors and equipment on one chart, so you can see the lights come on and the room respond.</p></figcaption>
+          <figcaption><h3>Cause and Effect</h3><p>Sensors and equipment on one chart. Watch the lights come on and see exactly how the room answers.</p></figcaption>
         </figure>
         <figure>
           <div class="device"><img src="../images/app/rules.webp" width="720" height="1296" loading="lazy" alt="The Links view for the lights: today's schedule as a timeline, the rule that is active now, its ramp times and when it changes next"></div>
-          <figcaption><h3>Rules You Can Read</h3><p>Each output shows the rule in charge, today's timeline, its sunrise ramp and when it changes next.</p></figcaption>
+          <figcaption><h3>Rules You Can Read</h3><p>No codes to decipher. Each output shows the rule in charge, today's timeline, its sunrise ramp and when it changes next.</p></figcaption>
         </figure>
       </div>
-      <p class="app-note">The LWV-GCU app is coming soon. Site, room and network names in these screens are changed.</p>
+      <p class="app-note">The LWV-GCU app is coming soon. Site, room, output and network names in these screens are changed.</p>
+    </div>
+  </section>
+
+  <section class="solution-section">
+    <div class="container">
+      <span class="kicker">Why GCU Cloud</span>
+      <h2 class="h2">We Set Out to Build the Best Grow Control System There Is</h2>
+      <p class="muted why-lead">We think we did. Here is what we built into it, and why each part matters when a crop is on the line.</p>
+      <div class="why-grid">
+        <div class="feature-card">
+          <h3>The room never waits for the cloud</h3>
+          <p>Every control decision is made by the GCU in the room. The schedules, the sensor rules and the grow program live on the controller, so a dropped connection changes nothing for your plants.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Every change is confirmed</h3>
+          <p>Tap Off, On or Auto, or set a light level, and the GCU answers back when it has done it. You are never left wondering whether a command arrived.</p>
+        </div>
+        <div class="feature-card">
+          <h3>It tells you why</h3>
+          <p>Every output shows what is in charge of it right now: a schedule, a sensor rule, a manual hold or the switch on the panel. Every room carries a plain-language status with the reason behind it.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Readings you can trust</h3>
+          <p>Each sensor read is marked good or not. A probe that goes silent is called out, never left showing its last number, and where a backup sensor is fitted it sits beside the primary so drift stands out.</p>
+        </div>
+        <div class="feature-card">
+          <h3>The crop, not just the climate</h3>
+          <p>Grow programs step through the stages on their own. Plantings, harvests and photos are recorded against each room, and AI reviews every room every night, with the evidence behind each finding.</p>
+        </div>
+        <div class="feature-card">
+          <h3>One team behind all of it</h3>
+          <p>We design the controller, write its firmware, run the cloud and build the app. When you need help, you reach the people who made it.</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -178,7 +221,7 @@
         </div>
       </div>
       <div class="callout">
-        <h3>Your rooms keep running even if the internet goes down.</h3>
+        <h3>The internet can go down. Your rooms will not.</h3>
         <p>Every automation decision is made by the GCU on site. GCU Cloud sets up the rules and shows you what is happening. If the connection drops, the GCU carries on with the same schedules, rules and grow program, and the cloud picks up again when it reconnects.</p>
       </div>
     </div>
@@ -301,9 +344,9 @@
 
   <section class="cta-section">
     <div class="container">
-      <h2 class="h2">Put Your Rooms in GCU Cloud</h2>
-      <p>Already have GCUs? We connect them for you. Starting fresh? We will quote the controllers, sensors and connectivity to go with it.</p>
-      <a class="btn" href="../contact.html" style="background:#fff;color:#0c4a6e">Get Started</a>
+      <h2 class="h2">See Your Own Rooms This Way</h2>
+      <p>Already have GCUs? We connect them for you. Starting fresh? Tell us about your rooms and we will quote the controllers, sensors and connectivity to go with it.</p>
+      <a class="btn" href="../contact.html" style="background:#fff;color:#0c4a6e">Talk to Us</a>
     </div>
   </section>
 </main>
